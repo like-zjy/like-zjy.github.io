@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>3.HTML常见表单 | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">3.HTML常见表单</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">三月 28, 2023&nbsp;&nbsp;17:47:12</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><a name="c7QuG"></a></p>
+<h2 id="1-表单的作用"><a href="#1-表单的作用" class="headerlink" title="1. 表单的作用"></a>1. 表单的作用</h2><p>表单在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BD%91%E9%A1%B5/99347">网页</a>中主要负责<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/219239">数据采集</a>功能。一个表单有三个基本组成部分： 表单标签：这里面包含了处理表单数据所用CGI程序的URL以及数据提交到服务器的方法。 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%A1%A8%E5%8D%95%E5%9F%9F/3788809">表单域</a>：包含了<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%96%87%E6%9C%AC%E6%A1%86/7321309">文本框</a>、密码框、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%9A%90%E8%97%8F%E5%9F%9F/249616">隐藏域</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%A4%9A%E8%A1%8C%E6%96%87%E6%9C%AC%E6%A1%86/6388067">多行文本框</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%A4%8D%E9%80%89%E6%A1%86/7431800">复选框</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8D%95%E9%80%89%E6%A1%86/7431782">单选框</a>、下拉选择框和文件上传框等。 表单按钮：包括提交按钮、复位按钮和一般按钮；用于将<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81/500685">数据传送</a>到服务器上的CGI脚本或者取消输入，还可以用表单按钮来控制其他定义了处理脚本的处理工作。</p>
+<ul>
+<li>表单标签</li>
+</ul>
+<p>就像表格一样，需要有一个table标签</p>
+<ul>
+<li>表单域</li>
+</ul>
+<p>输入框、单选框、多选框、下拉框、密码框、文件上传、多行文本输入框</p>
+<ul>
+<li>表单按钮</li>
+</ul>
+<p>提交按钮、重置按钮、一般按钮<br />虽然表单有这么多功能，但是，我们前期学习只学习外观样式。<br><a name="qxAKe"></a></p>
+<h2 id="2-表单标签"><a href="#2-表单标签" class="headerlink" title="2. 表单标签"></a>2. 表单标签</h2><p><a name="ayjgF"></a></p>
+<h3 id="2-1-form标签"><a href="#2-1-form标签" class="headerlink" title="2.1. form标签"></a>2.1. form标签</h3><p>一个表单曾经需要用form包裹，现在因为前端有更好的技术实现数据交互，所以form标签不重要了，用不用form标签包裹，都可以。建议不用。<br><a name="DcQof"></a></p>
+<h3 id="2-2-input"><a href="#2-2-input" class="headerlink" title="2.2. input"></a>2.2. input</h3><p>input标签不代表某一种元素，使用input可以实现很多的效果。<br><a name="sBp0E"></a></p>
+<h4 id="2-2-1-type-x3D-”text”"><a href="#2-2-1-type-x3D-”text”" class="headerlink" title="2.2.1. type&#x3D;”text”"></a>2.2.1. type&#x3D;”text”</h4><p>表示文本输入框，可以输入单行文本</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657071193287-025e16e0-2a9e-4f8e-904b-e8becbb91374.png#clientId=uc32d08c6-8b6c-4&from=paste&height=32&id=u3c93f284&name=image.png&originHeight=32&originWidth=193&originalType=binary&ratio=1&rotation=0&showTitle=false&size=214&status=done&style=none&taskId=ub1b709b4-e256-420a-8b06-4e1ededc028&title=&width=193" alt="image.png"><br><a name="TSSYT"></a></p>
+<h4 id="2-2-2-type-x3D-”password”"><a href="#2-2-2-type-x3D-”password”" class="headerlink" title="2.2.2. type&#x3D;”password”"></a>2.2.2. type&#x3D;”password”</h4><p>表示密码框，可以输入密文，输入的内容用黑点展示。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657071327776-9eef90de-92aa-4ea1-8e7c-847cffeb39f4.png#clientId=uc32d08c6-8b6c-4&from=paste&height=28&id=u17b62f8f&name=image.png&originHeight=28&originWidth=200&originalType=binary&ratio=1&rotation=0&showTitle=false&size=445&status=done&style=none&taskId=uf3f852e1-a999-4344-a85d-ea9af36fb97&title=&width=200" alt="image.png"><br />密码输入框安全吗？自己的电脑上尽量不要用密码保存功能，别人只要修改输入框中的type类型，密码就会显示。<br><a name="yTqIh"></a></p>
+<h5 id="占位-placeholder"><a href="#占位-placeholder" class="headerlink" title="占位 placeholder"></a>占位 placeholder</h5><p>通常我们的输入框中会提示要输入的内容。需要使用placeholder属性</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;xxx&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;占位内容&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>没内容时，占位显示，有内容时占位消失。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657072685234-e194631a-7a47-48e1-841f-4fc87e229370.png#clientId=uc32d08c6-8b6c-4&from=paste&height=38&id=udf4c660e&name=image.png&originHeight=38&originWidth=369&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1855&status=done&style=none&taskId=ue4b5e1b3-b84a-44f6-8f5f-7101b3c7190&title=&width=369" alt="image.png"><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657072690644-9f778122-40d9-4398-b14e-8fa57cfbb858.png#clientId=uc32d08c6-8b6c-4&from=paste&height=35&id=ufcb57f53&name=image.png&originHeight=35&originWidth=378&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1335&status=done&style=none&taskId=ue60063da-0090-4590-aa82-5be16e45e6a&title=&width=378" alt="image.png"><br><a name="f0N0h"></a></p>
+<h4 id="2-2-3-type-x3D-”radio”"><a href="#2-2-3-type-x3D-”radio”" class="headerlink" title="2.2.3. type&#x3D;”radio”"></a>2.2.3. type&#x3D;”radio”</h4><p>单选框，默认情况下，单选框时未选中状态。同时单选框默认不会有单选效果，所有的单选框都会被选中。<br><a name="uvgHa"></a></p>
+<h5 id="name属性"><a href="#name属性" class="headerlink" title="name属性"></a>name属性</h5><p>name属性可以给任意的input添加，对于其他input暂时没有什么作用。但是如果想要让多个radio有单选效果，就必须给对应的单选框添加相同的name属性，值可以为任意值。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;1&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;1&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;1&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;2&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;2&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;2&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657073119781-3cc6deb2-e823-4e7b-86a2-0380653ad7bc.png#clientId=uc32d08c6-8b6c-4&from=paste&height=29&id=ub28fdc7e&name=image.png&originHeight=29&originWidth=162&originalType=binary&ratio=1&rotation=0&showTitle=false&size=651&status=done&style=none&taskId=u1e7ee241-7441-441b-833f-cd3dd34411d&title=&width=162" alt="image.png"><br><a name="AYMMd"></a></p>
+<h5 id="checked属性"><a href="#checked属性" class="headerlink" title="checked属性"></a>checked属性</h5><p>添加给单选或者多选后，可以让对应的选择框默认被选中</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">checked</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.yuque.com/kassing/kbfr3s/kiev19?inner=qVzJ1">只有属性没有属性值</a><br><a name="Ixzjr"></a></p>
+<h4 id="2-2-4-type-x3D-”checkbox”"><a href="#2-2-4-type-x3D-”checkbox”" class="headerlink" title="2.2.4. type&#x3D;”checkbox”"></a>2.2.4. type&#x3D;”checkbox”</h4><p>用来在页面上实现多选框</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657075753137-522a7e14-ef67-443d-b664-b7045e896000.png#clientId=udaffca70-1dce-4&from=paste&height=27&id=ua8c9013f&name=image.png&originHeight=27&originWidth=146&originalType=binary&ratio=1&rotation=0&showTitle=false&size=519&status=done&style=none&taskId=u1c26905d-65ad-4d7e-be0e-e855da1db26&title=&width=146" alt="image.png"><br />多选也能通过<code>checked</code>属性设置默认选中状态。<br><a name="BBFta"></a></p>
+<h5 id="disabled"><a href="#disabled" class="headerlink" title="disabled"></a>disabled</h5><p>这个属性可以任意的表单元素添加，让用户不能对某些表单元素进行操作。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;xxx&quot;</span> <span class="attr">disabled</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657077290678-546afbf8-604b-4682-abbe-1609fcafd598.png#clientId=udaffca70-1dce-4&from=paste&height=33&id=ud1e765ff&name=image.png&originHeight=33&originWidth=310&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1708&status=done&style=none&taskId=u9f82a0e4-980a-4fda-969e-e8ad1f66e16&title=&width=310" alt="image.png"><br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657077296137-a9bea83a-4692-400b-ba5c-4504c40b0be6.png#clientId=udaffca70-1dce-4&from=paste&height=29&id=u3e836911&name=image.png&originHeight=29&originWidth=190&originalType=binary&ratio=1&rotation=0&showTitle=false&size=246&status=done&style=none&taskId=u4c66ab56-d459-4f54-b2e7-199cb59e865&title=&width=190" alt="image.png"><br><a name="tyYBy"></a></p>
+<h5 id="readonly"><a href="#readonly" class="headerlink" title="readonly"></a>readonly</h5><p>只读属性，表示这个输入框没有办法输入内容，只能阅读内部的内容。一般不用。<br><a name="Ba2qb"></a></p>
+<h4 id="2-2-5-type-x3D-”file”"><a href="#2-2-5-type-x3D-”file”" class="headerlink" title="2.2.5. type&#x3D;”file”"></a>2.2.5. type&#x3D;”file”</h4><p>很多时候，我们的网页上需要进行文件的上传操作，比如头像等。就需要使用文件上传组件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>现在我们不能实现真正的上传文件的操作，想要实现还需要结合JS和后台一起，才能实现。<br><a name="T9YCf"></a></p>
+<h4 id="2-2-6-下拉框"><a href="#2-2-6-下拉框" class="headerlink" title="2.2.6. 下拉框"></a>2.2.6. 下拉框</h4><p>下拉框不属于input，是单独的标签。需要多个标签才能实现下拉框操作<br />select + option</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>选项1<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>选项2<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>选项3<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>选项4<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657077816110-4302aa39-13af-4578-bf10-d3f861727ab5.png#clientId=udaffca70-1dce-4&from=paste&height=31&id=ue7cc2725&name=image.png&originHeight=31&originWidth=70&originalType=binary&ratio=1&rotation=0&showTitle=false&size=742&status=done&style=none&taskId=uc8e6d5aa-ffe0-4605-9467-3d23203f90b&title=&width=70" alt="image.png"><br />这个东西在练习时用一用还行，因为样式无法修改，所以未来项目中需要自己模拟select(结合css)<br><a name="Tsl8B"></a></p>
+<h4 id="label标签"><a href="#label标签" class="headerlink" title="label标签"></a>label标签</h4><p>配合表单元素来实现，点击文本也能让对应的表单元素获取焦点的功能。<br />我们要使用label属性，包裹我们input旁边的文本<br />该标签有一个属性，叫<code>for</code>，这个属性的属性值，如果和对应的某个<code>input</code>的<code>id</code>值相同的话，就能实现对应的效果了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;sex&quot;</span> <span class="attr">id</span>=<span class="string">&quot;male&quot;</span>&gt;</span> <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;male&quot;</span>&gt;</span>男<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><a name="shGQq"></a></p>
+<h4 id="textarea标签"><a href="#textarea标签" class="headerlink" title="textarea标签"></a>textarea标签</h4><p>多行文本框</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2023/03/28/3-HTML%E5%B8%B8%E8%A7%81%E8%A1%A8%E5%8D%95/">http://example.com/2023/03/28/3-HTML%E5%B8%B8%E8%A7%81%E8%A1%A8%E5%8D%95/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2023/03/28/4-%E8%A1%8C%E5%9D%97%E6%A0%87%E7%AD%BE/">4.行块标签</a>
+            
+            
+            <a class="next" rel="next" href="/2021/08/28/2-HTML%E5%B8%B8%E8%A7%81%E7%9A%84%E6%A0%87%E7%AD%BE/">2.HTML常见的标签</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
