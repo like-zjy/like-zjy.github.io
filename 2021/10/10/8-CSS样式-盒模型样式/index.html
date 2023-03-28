@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>8.CSS样式--盒模型样式 | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">8.CSS样式--盒模型样式</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十月 10, 2021&nbsp;&nbsp;14:57:12</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><a name="hqnq1"></a></p>
+<h2 id="1-宽度和高度"><a href="#1-宽度和高度" class="headerlink" title="1. 宽度和高度"></a>1. 宽度和高度</h2><p>在我们的网页上，很多元素都有自己的宽高用来限制内部元素的范围。</p>
+<ul>
+<li>width 宽度</li>
+<li>height 高度<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">width</span>: 值;</span><br><span class="line">  <span class="attribute">height</span>: 值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+宽度和高度只能给有块元素特性的元素设置。给行内元素设置时无效。<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">background</span>: darkgoldenrod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">span</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: darkcyan;</span><br><span class="line">  <span class="comment">/* 无效的 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>; </span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657245560573-cc57585d-244f-4e9d-a402-014c3e5ad566.png#clientId=u5908460c-728e-4&from=paste&height=131&id=u018860e9&name=image.png&originHeight=131&originWidth=103&originalType=binary&ratio=1&rotation=0&showTitle=false&size=890&status=done&style=none&taskId=u170601fd-b705-4840-a32b-392506d894b&title=&width=103" alt="image.png"><br />宽高设置的可以是固定值，那么能不能是百分比呢？能用百分比，在哪个元素中，这个元素的百分比就相对于哪个元素计算<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.box2</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">width</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background</span>: red;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.box3</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">width</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">50px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background</span>: darkmagenta;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box2&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box3&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657245890787-0c68dcb4-159c-4550-a51b-e9623768bc00.png#clientId=u5908460c-728e-4&from=paste&height=116&id=u8c11a4e2&name=image.png&originHeight=116&originWidth=946&originalType=binary&ratio=1&rotation=0&showTitle=false&size=812&status=done&style=none&taskId=uc10767ae-758c-4787-aa30-88515b4b584&title=&width=946" alt="image.png"><br />支持em单位，但是用的频率不高。<br />如果文字本身大小为12px，设置宽度为10em，则最终大小为120px。<br><a name="clmNe"></a></li>
+</ul>
+<h3 id="1-1-高度设置百分比会有什么问题"><a href="#1-1-高度设置百分比会有什么问题" class="headerlink" title="1.1. 高度设置百分比会有什么问题"></a>1.1. 高度设置百分比会有什么问题</h3><p>在网页上，给元素设置100%沾满页面，直接写是无法实现的，需要给html和body都设置为宽度百分百</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>, <span class="selector-tag">html</span>, <span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="URrdO"></a></p>
+<h3 id="1-2-最大-x2F-最小-宽度-x2F-高度"><a href="#1-2-最大-x2F-最小-宽度-x2F-高度" class="headerlink" title="1.2. 最大&#x2F;最小 宽度&#x2F;高度"></a>1.2. 最大&#x2F;最小 宽度&#x2F;高度</h3><p>如果我们定义了宽高，那么这个元素就一定是那么宽那么高。<br><a name="ugtZs"></a></p>
+<h2 id="2-边框-border"><a href="#2-边框-border" class="headerlink" title="2. 边框 border"></a>2. 边框 border</h2><p>边框指的是围绕我们的元素四周的线。利用border属性进行设置。可以同时给四个边进行边框的设置，同时也可以单独的定义每个方向上的边框。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">border</span>: 边框宽度 边框样式 颜色;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加边框后，默认情况，边框会在原有宽高基础上往外扩。元素的总的宽高，就是实际设置宽高 + boder<br />如果想要去除边框，我们可以使用属性<code>none</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">border</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="gQAcs"></a></p>
+<h3 id="2-1-边框属性"><a href="#2-1-边框属性" class="headerlink" title="2.1. 边框属性"></a>2.1. 边框属性</h3><p><a name="DBWBM"></a></p>
+<h4 id="2-1-1-边框宽度"><a href="#2-1-1-边框宽度" class="headerlink" title="2.1.1. 边框宽度"></a>2.1.1. 边框宽度</h4><p>通过设置px等单位，一般都是去设置px。来定义边框宽度<br />我们有专门的属性用来单独定义边框<code>border-width</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">border-width</span>: <span class="number">1px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="IEzxf"></a></p>
+<h4 id="2-1-2-边框样式"><a href="#2-1-2-边框样式" class="headerlink" title="2.1.2. 边框样式"></a>2.1.2. 边框样式</h4><ul>
+<li>solid 实线</li>
+<li>dashed 虚线</li>
+<li>dotted 点线</li>
+</ul>
+<p>通过设置<code>border-style</code>可以定义边框样式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">border-style</span>: solid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="cYgbL"></a></p>
+<h4 id="2-1-3-颜色"><a href="#2-1-3-颜色" class="headerlink" title="2.1.3. 颜色"></a>2.1.3. 颜色</h4><p>可以通过填写对应的色值设置颜色。<br />通过定义border-color可以实现颜色单独定义。<br><a name="bYKA4"></a></p>
+<h5 id="一个特殊的颜色"><a href="#一个特殊的颜色" class="headerlink" title="一个特殊的颜色"></a>一个特殊的颜色</h5><p>透明，transparent 是一个关键字，在使用颜色的地方用来表示颜色的。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">border-color</span>: transparent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="GUuoJ"></a></p>
+<h3 id="2-2-边框方向"><a href="#2-2-边框方向" class="headerlink" title="2.2. 边框方向"></a>2.2. 边框方向</h3><p>四边形有上右下左四个方向。</p>
+<ul>
+<li>border-top</li>
+<li>border-right</li>
+<li>border-bottom</li>
+<li>border-left</li>
+</ul>
+<p>这些属性中包含对应的三个值，分别是宽度、样式、颜色<br />和属性拼接后，我们会产生新的12个属性 <code>border-方向-属性名</code><br />例如：</p>
+<ul>
+<li>border-top-color</li>
+<li>border-bottom-width</li>
+<li>border-left-style</li>
+</ul>
+<p>注意！！！！未来更多的我们会使用border属性和单独的方向属性。<br><a name="hJc8H"></a></p>
+<h3 id="2-3-实现三角形"><a href="#2-3-实现三角形" class="headerlink" title="2.3. 实现三角形"></a>2.3. 实现三角形</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">10px</span> solid transparent;</span><br><span class="line">  <span class="attribute">border-right-color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="tbxFD"></a></p>
+<h2 id="扩展属性"><a href="#扩展属性" class="headerlink" title="扩展属性"></a>扩展属性</h2><p><a name="NNCgA"></a></p>
+<h3 id="黑色边框线"><a href="#黑色边框线" class="headerlink" title="黑色边框线"></a>黑色边框线</h3><p>浏览器需要让用户知道，当前的表单元素焦点在哪。所以获取焦点的表单元素会有一个黑色的边框。注意！！！这个边框不是border<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657268584550-2eb2fe4a-df01-4bc2-ab70-0aa29ba1e441.png#clientId=ue48b1745-db1d-4&from=paste&height=81&id=u2912f468&name=image.png&originHeight=81&originWidth=730&originalType=binary&ratio=1&rotation=0&showTitle=false&size=2431&status=done&style=none&taskId=ufac13725-930f-4905-949f-da32274f0ea&title=&width=730" alt="image.png"><br />这个边框叫<code>outline</code>这个东西不占空间。因为会影响到我们的美观度，所以要去除。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span>, <span class="selector-tag">button</span>, select, <span class="selector-tag">textarea</span> &#123;</span><br><span class="line">  <span class="attribute">outline</span>: none;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="h9MJp"></a></p>
+<h3 id="圆角"><a href="#圆角" class="headerlink" title="圆角"></a>圆角</h3><p>在网页上，很多地方都会有圆角，因为好看。元素有四个角，分别为上左、上右、下右、下左。<br />一般定义圆角都是四个叫都定义，如果都定义成相同的圆角，则使用一个值即可。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">border-radius</span>: 值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657269010203-778df9f1-20d7-46c8-ae0a-ccfe805691ed.png#clientId=ue48b1745-db1d-4&from=paste&height=387&id=uf883731f&name=image.png&originHeight=387&originWidth=403&originalType=binary&ratio=1&rotation=0&showTitle=false&size=5538&status=done&style=none&taskId=ua9dde789-8b9f-4bf7-804d-753a9669b2a&title=&width=403" alt="image.png"><br />本质上，圆角的值指的就是对应的⚪的半径。在蓝湖中，我们只需要选择对应的元素，就会提示相关的圆角值。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657269085049-b865e59d-b00a-45ce-b2e2-49f320fbdb0b.png#clientId=ue48b1745-db1d-4&from=paste&height=57&id=u61f3e391&name=image.png&originHeight=57&originWidth=252&originalType=binary&ratio=1&rotation=0&showTitle=false&size=2131&status=done&style=none&taskId=uba4355b1-b86f-411d-ae8b-72e0eb59c90&title=&width=252" alt="image.png"><br />圆角可以写四个值。四个值就代表四个角方向，顺序是上左、上右、下右、下左。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">10px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="bzsVZ"></a></p>
+<h4 id="正圆"><a href="#正圆" class="headerlink" title="正圆"></a>正圆</h4><p>正圆的前提需要是一个正方形，直接设置圆角值为50%时会得到一个正圆。<br />如果时一个长方形，设置了值为50%，则会得到椭圆<br />胶囊形，短边占1半。<br><a name="JO7fk"></a></p>
+<h3 id="对齐"><a href="#对齐" class="headerlink" title="对齐"></a>对齐</h3><p>这里的对齐只表示行内元素对齐的问题。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657270496427-a5be5122-25ef-42b0-a3d9-416e8eae37e5.png#clientId=ue48b1745-db1d-4&from=paste&height=97&id=uce094f67&name=image.png&originHeight=97&originWidth=522&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1438&status=done&style=none&taskId=ud733e308-b510-4580-9972-7973036736e&title=&width=522" alt="image.png"><br />因为默认情况下，是基于基线（baseline）对齐，导致视觉上不齐。<br />如果我们想要让文字对齐，那么就需要给所有参与对齐元素添加<code>vertical-align</code>属性。</p>
+<ul>
+<li>baseline 默认值 基于基线对齐</li>
+<li>top 上对齐</li>
+<li>bottom 下对齐</li>
+<li>middle 居中 最常用</li>
+</ul>
+<p>一般我们会用到这个属性，大部分情况都是在图标+文字的布局中使用。因为现在有flex，所以这个属性用的没有那么的多了。<br><a name="Lk3sx"></a></p>
+<h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><p>行内元素和块元素可以随意的转换。</p>
+<ul>
+<li>inline</li>
+<li>block</li>
+<li>inline-block</li>
+</ul>
+<p>inline 横向排列，无法设置宽高<br />block 独占一行，可以设置宽高<br />inline-block 既能设置宽高，又能横向排列</p>
+<p>在浏览器中，开发者工具中，点击每一个元素都可以看到对应的一个模型<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657503289805-e767daba-8b34-4ad4-a168-ee9fe1b831c8.png#clientId=u47fd1895-ddf2-4&from=paste&height=185&id=u065180a8&name=image.png&originHeight=185&originWidth=205&originalType=binary&ratio=1&rotation=0&showTitle=false&size=6441&status=done&style=none&taskId=ufcb1bf77-1460-4fdb-a82c-13daf806b5c&title=&width=205" alt="image.png"><br />可以看到以下内容</p>
+<ul>
+<li>蓝色 content-box 指的是内容区域</li>
+<li>绿色 padding-box 指的是padding</li>
+<li>黄色 border-box 指的是border</li>
+<li>暗黄色 margin</li>
+</ul>
+<p>padding的目的是让border和内容之间产生间距。<br><a name="oK4kX"></a></p>
+<h2 id="1-内填充"><a href="#1-内填充" class="headerlink" title="1. 内填充"></a>1. 内填充</h2><p>padding属性用于实现元素内部的内容和边框区域之间的距离。<br />添加padding后添加boder一样的效果，会放大元素。<br><a name="i0KVn"></a></p>
+<h3 id="1-1-语法"><a href="#1-1-语法" class="headerlink" title="1.1. 语法"></a>1.1. 语法</h3><p>我们可以使用padding属性来定义内填充，有四种写法</p>
+<ul>
+<li>一个属性值 表示四个边的内填充都是对应的值</li>
+<li>两个属性值 表示 上下 左右 第一个值为上下，第二值为左右</li>
+<li>三个属性值 表示 上 左右 下 第一个值为上 第二个值为左右 第三个值为下</li>
+<li>四个属性值 表示 上 右 下 左<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">20px</span> <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">20px</span> <span class="number">30px</span> <span class="number">40px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+如果已经设置好了宽高，然后在这个基础上添加了padding值，那么我们就需要区减去对应的padding值的宽高值，这个操作很麻烦，后续我们有更好的方法。<br><a name="d1kr0"></a></li>
+</ul>
+<h4 id="1-1-1-单独方向设置"><a href="#1-1-1-单独方向设置" class="headerlink" title="1.1.1. 单独方向设置"></a>1.1.1. 单独方向设置</h4><ul>
+<li>padding-left 左填充</li>
+<li>padding-right 右填充</li>
+<li>padding-top 上填充</li>
+<li>padding-bottom 下填充</li>
+</ul>
+<p>这些属性都只能写一个值，如果写多个，就会出问题。<br><a name="dQfml"></a></p>
+<h3 id="1-2-使用场景"><a href="#1-2-使用场景" class="headerlink" title="1.2. 使用场景"></a>1.2. 使用场景</h3><p><a name="YBUvg"></a></p>
+<h4 id="1-2-1-input输入框"><a href="#1-2-1-input输入框" class="headerlink" title="1.2.1. input输入框"></a>1.2.1. input输入框</h4><p>为了保证对应的效果美观，输入的文字不贴边框，一般设计师会给输入框设置padding值。<br><a name="u1xCP"></a></p>
+<h4 id="1-2-2-元素距离对应的边框有padding"><a href="#1-2-2-元素距离对应的边框有padding" class="headerlink" title="1.2.2. 元素距离对应的边框有padding"></a>1.2.2. 元素距离对应的边框有padding</h4><p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657504726595-720b20c0-0959-4215-bac3-2830477f688a.png#clientId=u47fd1895-ddf2-4&from=paste&height=54&id=ubf2cbab1&name=image.png&originHeight=54&originWidth=250&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1232&status=done&style=none&taskId=u53e7bf6b-3d14-4b71-884a-81dda0db595&title=&width=250" alt="image.png"><br><a name="MZFmN"></a></p>
+<h2 id="2-外填充"><a href="#2-外填充" class="headerlink" title="2. 外填充"></a>2. 外填充</h2><p>外填充指边框外和其他元素之间的距离。<br />外填充叫margin，在我们对应的页面上，元素和元素之间的间距都可以使用外填充实现。<br><a name="we58t"></a></p>
+<h3 id="2-1-语法"><a href="#2-1-语法" class="headerlink" title="2.1. 语法"></a>2.1. 语法</h3><p><a name="kxzvo"></a></p>
+<h4 id="2-1-1-基本使用方法"><a href="#2-1-1-基本使用方法" class="headerlink" title="2.1.1. 基本使用方法"></a>2.1.1. 基本使用方法</h4><p>外填充和内填充一样，可以有多种写法，不同的值的数量代表着不同的方向。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">10px</span> <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">10px</span> <span class="number">20px</span> <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">10px</span> <span class="number">20px</span> <span class="number">30px</span> <span class="number">40px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="Ll7w4"></a></p>
+<h4 id="2-1-2-单个方向设置margin"><a href="#2-1-2-单个方向设置margin" class="headerlink" title="2.1.2. 单个方向设置margin"></a>2.1.2. 单个方向设置margin</h4><p>margin和padding相同支持单个方向的设置</p>
+<ul>
+<li>margin-left</li>
+<li>margin-right</li>
+<li>margin-top</li>
+<li>margin-bottom</li>
+</ul>
+<p>同样要记住，这些属性只能写一个值，不能写多个值。<br><a name="SroKq"></a></p>
+<h3 id="2-2-样式重置"><a href="#2-2-样式重置" class="headerlink" title="2.2. 样式重置"></a>2.2. 样式重置</h3><p>网页上很多元素上都有默认的margin值，比如：<br />p、body、hx、列表，而大部分情况下，我们不需要使用这些margin值，所以我们要清除掉。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">有默认<span class="attribute">margin</span>的标签 &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="pytEL"></a></p>
+<h3 id="2-3-块元素水平居中"><a href="#2-3-块元素水平居中" class="headerlink" title="2.3. 块元素水平居中"></a>2.3. 块元素水平居中</h3><p>当我们有一个固定宽度的块元素时，我们可以让其居中，使用margin操作</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">1000px</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: auto;</span><br><span class="line">  <span class="attribute">margin-right</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>直接设置 <code>margion: 0 auto</code>这种方法也可以，但是要清楚，我们水平居中的核心代码是左右<code>auto</code>和上下无关，所以未来上下设置成多少都无所谓。<br><a name="XQmmU"></a></p>
+<h4 id="2-3-1-版心"><a href="#2-3-1-版心" class="headerlink" title="2.3.1. 版心"></a>2.3.1. 版心</h4><p>为了我们对应的大部分的用户的显示器都能正常访问我们的网站，所以我们会选用一个固定的宽度居中，来作为网页主体内容展示的区域，这个区域叫版心（安全宽度）。<br />京东的安全宽度是1190，和淘宝一样。小米是1226px<br />版心的实现，就是借助我们对应的margin属性居中的特性。<br />一般版心的类名叫<code>container</code>，所以一般我们会给版心设置一个单独的样式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">1226px</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: auto;</span><br><span class="line">  <span class="attribute">margin-right</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="khNuH"></a></p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p><a name="qTAQk"></a></p>
+<h2 id="同胞选择器"><a href="#同胞选择器" class="headerlink" title="同胞选择器"></a>同胞选择器</h2><p>+用于选择到某个元素紧挨着的下一个同胞元素<br />div + p  选中的是p标签</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>当我们的列表中，第一个没有相关属性时，可以使用同胞选择器实现对应的效果</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">列表项 + 列表项 &#123;</span><br><span class="line">  样式</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2021/10/10/8-CSS%E6%A0%B7%E5%BC%8F-%E7%9B%92%E6%A8%A1%E5%9E%8B%E6%A0%B7%E5%BC%8F/">http://example.com/2021/10/10/8-CSS%E6%A0%B7%E5%BC%8F-%E7%9B%92%E6%A8%A1%E5%9E%8B%E6%A0%B7%E5%BC%8F/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/10/15/9-%E6%B5%AE%E5%8A%A8/">9.浮动</a>
+            
+            
+            <a class="next" rel="next" href="/2021/09/30/7-CSS%E6%A0%B7%E5%BC%8F/">7.CSS样式</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

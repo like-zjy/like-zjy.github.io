@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>50.BOM | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">50.BOM</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十月 17, 2022&nbsp;&nbsp;15:05:36</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>全称为浏览器对象模型（BOM）。是用来获取浏览器相关信息的对象，并且可以操纵浏览器<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1663810975005-118ea0a8-dd8b-46fe-a06d-f2707c74d50b.png#clientId=ucbfd4353-4ad7-4&errorMessage=unknown%20error&from=paste&id=ud0ac62b3&name=image.png&originHeight=295&originWidth=496&originalType=url&ratio=1&rotation=0&showTitle=false&size=43520&status=error&style=none&taskId=u9e1d47bc-22f0-4311-97e9-d8986592571&title=" alt="image.png"><br><a name="TJTeF"></a></p>
+<h2 id="Window"><a href="#Window" class="headerlink" title="Window"></a>Window</h2><p>window对象是js中最大的对象，所有的对象都在这个对象中存在。在ES6之前，我们创建的变量会变成window对象的属性，创建的函数，会变成window对象的方法。我们在调用window对象的相关属性和方法时，可以不写<code>window.</code><br><a name="qWvy6"></a></p>
+<h2 id="location"><a href="#location" class="headerlink" title="location"></a>location</h2><p>location包含了浏览器访问的网址的所有信息。网页url的改变会改变location获取到的信息。<br />一般我们会在url中修改的内容就是search和hash<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1663809760840-75c838a0-792b-4b88-9859-f62dc5d0392c.png#clientId=ucbfd4353-4ad7-4&errorMessage=unknown%20error&from=paste&height=192&id=udaedbb7e&name=image.png&originHeight=192&originWidth=853&originalType=binary&ratio=1&rotation=0&showTitle=false&size=12442&status=error&style=none&taskId=u4035a639-03df-400f-a8ca-4283b1231d0&title=&width=853" alt="image.png"><br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1663809834011-ac19c043-19d8-42e8-be74-f74b8c8ca49e.png#clientId=ucbfd4353-4ad7-4&errorMessage=unknown%20error&from=paste&height=143&id=uc4e7f9b6&name=image.png&originHeight=143&originWidth=721&originalType=binary&ratio=1&rotation=0&showTitle=false&size=6974&status=error&style=none&taskId=u75ca21db-3b47-4818-8031-3c45f4a7606&title=&width=721" alt="image.png"><br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1663810042060-7ace85e8-31db-4120-82f6-3f5de1997edf.png#clientId=ucbfd4353-4ad7-4&errorMessage=unknown%20error&from=paste&height=145&id=uc34d1d9f&name=image.png&originHeight=145&originWidth=700&originalType=binary&ratio=1&rotation=0&showTitle=false&size=7046&status=error&style=none&taskId=ucd174a1a-bc51-4205-a1c5-8522809b178&title=&width=700" alt="image.png"></p>
+<ul>
+<li>hash 表示url中”#“后跟着的的内容 hash内容不管怎么改变，访问的网页是不变</li>
+<li>host 域名 和 hostname 一致 </li>
+<li>hostname</li>
+<li>href 当前网页的url</li>
+<li>origin 只包含协议和域名</li>
+<li>pathname 路径</li>
+<li>port 端口</li>
+<li>protocol 协议</li>
+<li>search ?后面的参数<br><a name="bNmIa"></a></li>
+</ul>
+<h3 id="页面跳转"><a href="#页面跳转" class="headerlink" title="页面跳转"></a>页面跳转</h3><p>js可以实现页面的跳转操作。js跳转更灵活。在历史记录中新增一条历史记录</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">location.<span class="property">href</span> = <span class="string">&quot;url&quot;</span></span><br><span class="line">location.<span class="title function_">assign</span>(<span class="string">&quot;url&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><a name="L0umh"></a></p>
+<h3 id="reload"><a href="#reload" class="headerlink" title="reload"></a>reload</h3><p>重新加载（刷新）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location.<span class="title function_">reload</span>()</span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line">location.<span class="property">href</span> = location.<span class="property">href</span></span><br></pre></td></tr></table></figure>
+<p><a name="lskmj"></a></p>
+<h3 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h3><p>跳转页面，替换当前的历史纪录</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">location.<span class="title function_">replace</span>(url)</span><br></pre></td></tr></table></figure>
+<p><a name="INo91"></a></p>
+<h2 id="history"><a href="#history" class="headerlink" title="history"></a>history</h2><p>历史记录，每当一个页面访问，就会在历史记录中新增一条新的历史记录。通过对历史记录的操作，我们可以在历史记录中进行跳转。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1663812366852-a58cae29-13e9-4fa1-8f6a-1e71cd62b279.png#clientId=ucbfd4353-4ad7-4&errorMessage=unknown%20error&from=paste&height=38&id=u7df165cc&name=image.png&originHeight=38&originWidth=98&originalType=binary&ratio=1&rotation=0&showTitle=false&size=571&status=error&style=none&taskId=u38a761fa-1caa-45e3-8145-c2b18c63dd1&title=&width=98" alt="image.png"><br><a name="Z7X8O"></a></p>
+<h3 id="back"><a href="#back" class="headerlink" title="back"></a>back</h3><p>history.back() 在历史记录中返回上一页，前提是上一页得有记录<br><a name="jTQ4U"></a></p>
+<h3 id="forward"><a href="#forward" class="headerlink" title="forward"></a>forward</h3><p>history.forward() 在历史记录中前进下一页，前提是下一页得有记录<br><a name="TlhU3"></a></p>
+<h3 id="go"><a href="#go" class="headerlink" title="go"></a>go</h3><p>history.go() 中写数字，正值表示向下一页跳转，负值是上一页，数字写几，就跳转几页。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1663812636840-b0bcb0be-faf7-40cc-9939-7c11bc430541.png#clientId=ucbfd4353-4ad7-4&errorMessage=unknown%20error&from=paste&height=257&id=u22468ad8&name=image.png&originHeight=257&originWidth=585&originalType=binary&ratio=1&rotation=0&showTitle=false&size=10121&status=error&style=none&taskId=u1914366d-f939-4d1f-8697-0e841265ad3&title=&width=585" alt="image.png"><br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1663812659850-6387777f-b549-4b75-b708-c51e6fcfe401.png#clientId=ucbfd4353-4ad7-4&errorMessage=unknown%20error&from=paste&height=269&id=u2b77675c&name=image.png&originHeight=269&originWidth=603&originalType=binary&ratio=1&rotation=0&showTitle=false&size=10148&status=error&style=none&taskId=u0a83b046-077e-40a4-b5a1-5a673743b80&title=&width=603" alt="image.png"><br />如果使用<code>history.go(0)</code>则刷新页面。<br><a name="I511A"></a></p>
+<h3 id="history中新增方法"><a href="#history中新增方法" class="headerlink" title="history中新增方法"></a>history中新增方法</h3><p>在HTML5中对于historyApi中新增了pushState和replaceState，不跳转页面，然后在历史记录中新增一个历史记录<br><a name="iSY3m"></a></p>
+<h4 id="pushState"><a href="#pushState" class="headerlink" title="pushState"></a>pushState</h4><p>在历史记录中新增一个假的历史记录，可以达到改变url，但是页面不跳转的目的。来模拟历史记录的操作<br><a name="WCK5J"></a></p>
+<h4 id="replaceState"><a href="#replaceState" class="headerlink" title="replaceState"></a>replaceState</h4><p>替换掉当前的历史记录，他不会进行实际页面的跳转，只会改变url</p>
+<p>hash和改新增api在未来的框架中会有应用，但不是我们写，是他们实现框架借助这些api来实现一些新的特性。未来了解了什么是单页面应用后，再去学习一个东西，单面应用路由的实现原理。<br><a name="IHFzb"></a></p>
+<h2 id="navigator"><a href="#navigator" class="headerlink" title="navigator"></a>navigator</h2><p><a name="XTy2f"></a></p>
+<h3 id="userAgent"><a href="#userAgent" class="headerlink" title="userAgent"></a>userAgent</h3><p>获取浏览器信息<br><a name="jEUB6"></a></p>
+<h3 id="appVersion"><a href="#appVersion" class="headerlink" title="appVersion"></a>appVersion</h3><p>获取浏览器版本<br />判断浏览器版本的操作，如果需要，我们可以找到对应的js代码<br><a name="azWfZ"></a></p>
+<h3 id="地理定位"><a href="#地理定位" class="headerlink" title="地理定位"></a>地理定位</h3><p>地理定位涉及到隐私，所以需要询问用户是否同意，当我们调用相关方法时自动出现。<br><a name="J2vrX"></a></p>
+<h4 id="navigator-geolocation"><a href="#navigator-geolocation" class="headerlink" title="navigator.geolocation"></a>navigator.geolocation</h4><p>所有的定位操作，都在这里了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">navigator.<span class="property">geolocation</span>.<span class="title function_">getCurrentPosition</span>(<span class="function">(<span class="params">position</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// position就是我们的位置信息</span></span><br><span class="line">  </span><br><span class="line">&#125;, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;&#125;)</span><br></pre></td></tr></table></figure>
+<p><a name="lpQat"></a></p>
+<h5 id="position中包含哪些信息"><a href="#position中包含哪些信息" class="headerlink" title="position中包含哪些信息"></a>position中包含哪些信息</h5><ul>
+<li>accuracy 精度</li>
+<li>altitude 海拔</li>
+<li>altitudeAccuracy 海拔精度</li>
+<li>heading 方向</li>
+<li>latitude 纬度</li>
+<li>longitude 经度</li>
+<li>speed 速度</li>
+</ul>
+<p>如果我们想要观察位置的变化，可以使用<code>watchPosition</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">navigator.<span class="property">geolocation</span>.<span class="title function_">watchPosition</span>(<span class="function">(<span class="params">position</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// position就是我们的位置信息</span></span><br><span class="line">  </span><br><span class="line">&#125;, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;&#125;)</span><br></pre></td></tr></table></figure>
+<p>注意注意！！！！正常的地理定位需要功能，我们在项目中是借助现成的地图api来解决的。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2022/10/17/50-BOM/">http://example.com/2022/10/17/50-BOM/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/10/27/51-%E5%9C%B0%E5%9B%BE/">51.地图</a>
+            
+            
+            <a class="next" rel="next" href="/2022/09/29/49-%E5%AD%98%E5%82%A8/">49.存储</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

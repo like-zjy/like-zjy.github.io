@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>47.ECharts | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">47.ECharts</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">八月 29, 2022&nbsp;&nbsp;15:04:53</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>EChart是一个图表库，用来进行数据可视化操作，同样的库还有很多：蚂蚁金服的AntV，HightCharts<br><a name="QqrNK"></a></p>
+<h2 id="下载ECharts"><a href="#下载ECharts" class="headerlink" title="下载ECharts"></a>下载ECharts</h2><p>在<a target="_blank" rel="noopener" href="https://echarts.apache.org/zh/download.html">官网下载</a>，进入后，下载对应的版本即可<br /><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2022/js/29411294/1664361416872-2d7dc95e-1e13-4503-b0aa-0edf2909b008.js">echarts.js</a><br><a name="CExig"></a></p>
+<h2 id="使用ECharts"><a href="#使用ECharts" class="headerlink" title="使用ECharts"></a>使用ECharts</h2><p>使用ECharts很简单，我们只需要进行以下操作即可</p>
+<ol>
+<li><p>引入ECharts</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./js/echarts.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在body中添加合适的容器，用于渲染图表</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="keyword">class</span>=<span class="string">&quot;charts&quot;</span> style=<span class="string">&quot;height: 400px&quot;</span>&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>这个元素的大小可以任意的修改</p>
+</li>
+<li><p>生成echarts的对象</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;charts&quot;</span> <span class="attr">style</span>=<span class="string">&quot;height: 400px&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./js/echarts.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// let chart = echarts.init(上面生成的元素的DOM对象)</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">let</span> chart = echarts.<span class="title function_">init</span>(<span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.charts&#x27;</span>))</span></span><br><span class="line"><span class="language-javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>去<a target="_blank" rel="noopener" href="https://echarts.apache.org/examples/zh/index.html">案例中心</a>找到合适的案例打开复制对应的option（当然也可以自己写）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> option = &#123;</span><br><span class="line">  <span class="attr">xAxis</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;category&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>: [<span class="string">&#x27;Mon&#x27;</span>, <span class="string">&#x27;Tue&#x27;</span>, <span class="string">&#x27;Wed&#x27;</span>, <span class="string">&#x27;Thu&#x27;</span>, <span class="string">&#x27;Fri&#x27;</span>, <span class="string">&#x27;Sat&#x27;</span>, <span class="string">&#x27;Sun&#x27;</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">yAxis</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;value&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">series</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">data</span>: [<span class="number">150</span>, <span class="number">230</span>, <span class="number">224</span>, <span class="number">218</span>, <span class="number">135</span>, <span class="number">147</span>, <span class="number">260</span>],</span><br><span class="line">      <span class="attr">type</span>: <span class="string">&#x27;line&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用setOption方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chart.<span class="title function_">setOption</span>(option)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开网页，看效果</p>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1662431605335-188e5da7-42fe-46ca-9c45-3fb7ba05eba1.png#clientId=uad51eafd-12e7-4&errorMessage=unknown%20error&from=paste&height=761&id=u2be7a399&name=image.png&originHeight=761&originWidth=962&originalType=binary&ratio=1&rotation=0&showTitle=false&size=23330&status=error&style=none&taskId=u0b55bb6a-2209-45ff-aae6-87a257638a7&title=&width=962" alt="image.png"><br />我们需要根据我们的需求修改样式。<br><a name="E8LLs"></a></p>
+<h2 id="模拟现有的一些图表提升自己的数据可视化能力"><a href="#模拟现有的一些图表提升自己的数据可视化能力" class="headerlink" title="模拟现有的一些图表提升自己的数据可视化能力"></a>模拟现有的一些图表提升自己的数据可视化能力</h2><p><a name="bcZ9m"></a></p>
+<h2 id="几个常见的配置项"><a href="#几个常见的配置项" class="headerlink" title="几个常见的配置项"></a>几个常见的配置项</h2><p>在option中有几个常用的配置项，我们要熟悉他们是做什么。<a target="_blank" rel="noopener" href="https://echarts.apache.org/zh/option.html#title">所有的配置项看这个网址</a><br><a name="lM5F0"></a></p>
+<h3 id="color"><a href="#color" class="headerlink" title="color"></a>color</h3><p>可以配置一个数组，我们对应的series里的值会循环的从第一个到最后一个，循环使用颜色。当然颜色也可以单独定义。<br><a name="IDIbr"></a></p>
+<h3 id="xAxis-yAxis"><a href="#xAxis-yAxis" class="headerlink" title="xAxis yAxis"></a>xAxis yAxis</h3><p>设置X轴和Y轴的样式</p>
+<ul>
+<li>label 标签</li>
+<li>line 轴线</li>
+<li>tick 刻度<br><a name="X1ThZ"></a></li>
+</ul>
+<h3 id="toolTip"><a href="#toolTip" class="headerlink" title="toolTip"></a>toolTip</h3><p>鼠标移入时的提示信息<br><a name="wBHIt"></a></p>
+<h3 id="grid"><a href="#grid" class="headerlink" title="grid"></a>grid</h3><p>控制图表展示区域的<br><a name="QZPY4"></a></p>
+<h3 id="legend"><a href="#legend" class="headerlink" title="legend"></a>legend</h3><p>图表上的<img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1662445299543-79499a69-181d-47c5-ac9d-a0bb026dbdc7.png#clientId=uad51eafd-12e7-4&errorMessage=unknown%20error&from=paste&height=37&id=uf60cb2cf&name=image.png&originHeight=37&originWidth=507&originalType=binary&ratio=1&rotation=0&showTitle=false&size=3427&status=error&style=none&taskId=uf317d2aa-7752-4393-a61c-a68b1095151&title=&width=507" alt="image.png">图例信息。<br><a name="hYk3Y"></a></p>
+<h3 id="series"><a href="#series" class="headerlink" title="series"></a>series</h3><p>每一个图的数据样式都可以在这里的某个对象中进行定义。这个数据是个数组。可以有多种图表类型。<br />如果我们有多个图表，我们就可以实现多个类型的表在一个坐标系中。<br><a name="FW7tU"></a></p>
+<h2 id="显示地图"><a href="#显示地图" class="headerlink" title="显示地图"></a>显示地图</h2><p>想要在echarts中展示地图，我们需要有对应的地图数据，可以去<a target="_blank" rel="noopener" href="http://datav.aliyun.com/portal/school/atlas/area_selector">阿里dataV下载</a><br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1662451389372-aef41640-7d69-4981-bdd6-0f8c64003acc.png#clientId=uad51eafd-12e7-4&errorMessage=unknown%20error&from=paste&height=878&id=u45f4f00e&name=image.png&originHeight=878&originWidth=1857&originalType=binary&ratio=1&rotation=0&showTitle=false&size=125397&status=error&style=none&taskId=ue10aacb0-e126-41f3-a1fa-1ec21000ead&title=&width=1857" alt="image.png"><br />我们要的数据就是一个对象，我们需要把这个对象下载到本地。<br /><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2022/js/29411294/1664361416875-64cdbcf5-9caa-412f-bb77-6155d5c86880.js">china.js</a><br />在我们的网页中引入china.js，就会有一个变量<code>china</code><br><a name="vWfiM"></a></p>
+<h3 id="使用地图"><a href="#使用地图" class="headerlink" title="使用地图"></a>使用地图</h3><p>想要使用地图，需要在我们的代码中注册地图</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echarts.<span class="title function_">registerMap</span>(<span class="string">&quot;自定义地图名称&quot;</span>, 地图数据)</span><br></pre></td></tr></table></figure>
+<p>在我们的例子里</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echarts.<span class="title function_">registerMap</span>(<span class="string">&quot;china&quot;</span>, china)</span><br></pre></td></tr></table></figure>
+<p>然后初始化echarts，配置对应的option</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> chart = echarts.<span class="title function_">init</span>(dom对象)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> option = &#123;</span><br><span class="line">  <span class="attr">geo</span>: &#123;</span><br><span class="line">    <span class="attr">map</span>: <span class="string">&quot;自定义地图名称&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">chart.<span class="title function_">setOption</span>(option)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1662452466912-291e9d08-f0eb-4905-8367-039dd0a00423.png#clientId=uad51eafd-12e7-4&errorMessage=unknown%20error&from=paste&height=915&id=u167bdc9b&name=image.png&originHeight=915&originWidth=962&originalType=binary&ratio=1&rotation=0&showTitle=false&size=100554&status=error&style=none&taskId=u42a1c80e-5b6c-4393-bb6d-0eed0085974&title=&width=962" alt="image.png"><br />这个地图，其实是我们建立的特殊坐标系——地理坐标系。<br />我们可以通过配置geo.itemStyle改变默认时的样式，配置geo.select配置选中时的样式。配置geo.emphasis配置移入时的样式。<br><a name="EN4GW"></a></p>
+<h3 id="在地图上显示散点图"><a href="#在地图上显示散点图" class="headerlink" title="在地图上显示散点图"></a>在地图上显示散点图</h3><p><a target="_blank" rel="noopener" href="https://echarts.apache.org/examples/zh/editor.html?c=effectScatter-bmap">https://echarts.apache.org/examples/zh/editor.html?c=effectScatter-bmap</a><br />散点图的设置在series中，设置一个对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 坐标系设置成地理坐标系，默认是直角坐标系</span></span><br><span class="line">    <span class="attr">coordinateSystem</span>: <span class="string">&#x27;geo&#x27;</span>,</span><br><span class="line">    <span class="comment">// 地理坐标系中，data比较复杂 [&#123;name:&quot;名字&quot;, value: [经度, 纬度, 值]&#125;]</span></span><br><span class="line">    <span class="attr">data</span>: <span class="title function_">convertData</span>(data),</span><br><span class="line">    <span class="comment">// 散点图</span></span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;scatter&#x27;</span>,</span><br><span class="line">    <span class="comment">// symbolSize: function () &#123;&#125;</span></span><br><span class="line">    <span class="comment">// 散点大小</span></span><br><span class="line">    symbolSize (value) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(value)</span><br><span class="line">      <span class="keyword">return</span> value[<span class="number">2</span>] / <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>这样我们就可以在地图上展示散点图。<br />注意！！！geo只是添加地理坐标系。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2022/08/29/47-ECharts/">http://example.com/2022/08/29/47-ECharts/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/09/15/48-AJAX/">48.AJAX</a>
+            
+            
+            <a class="next" rel="next" href="/2022/08/13/46-FileReader/">46.FileReader</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

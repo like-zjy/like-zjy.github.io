@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>32.内置对象方法 | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">32.内置对象方法</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">四月 10, 2022&nbsp;&nbsp;17:58:20</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><a name="SArO4"></a></p>
+<h2 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h2><p>Math、Array、String、Number、Date<br />内置对象不需要重新声明，最多需要我们new 一下<br><a name="LTPg9"></a></p>
+<h2 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h2><p>Math不需要new，包含了一些常量属性和方法<br><a name="PRYpp"></a></p>
+<h3 id="PI"><a href="#PI" class="headerlink" title="PI"></a>PI</h3><p>圆周率PI，不是一个精确值，用于JS计算已经足够了。<br><a name="gPANz"></a></p>
+<h3 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h3><ul>
+<li>Math.sin()</li>
+<li>Math.cos()</li>
+<li>Math.tan()</li>
+<li>Math.asin()</li>
+<li>Math.acos()</li>
+<li>Math.atan()</li>
+<li>Math.atan2()</li>
+</ul>
+<p>sin cos tan里边写的参数是弧度单位.<br />1弧度 &#x3D; 180 &#x2F; PI 度<br />1度 &#x3D; PI &#x2F; 180 弧度<br />asin acos atan 根据正弦余弦正切值求出对应的角的弧度.<br />atan2(x, y) 指的是对边长度和临边长度.<br><a name="McHIc"></a></p>
+<h3 id="Math-random"><a href="#Math-random" class="headerlink" title="Math.random()"></a>Math.random()</h3><p>随机数生成 0 - 1的随机数，包含0 不包含1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> 变量 = <span class="title class_">Math</span>.<span class="title function_">random</span>()</span><br></pre></td></tr></table></figure>
+<p>如果我们想生成0-n的随机数，可以通过下面的操作</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> 变量 = <span class="title class_">Math</span>.<span class="title function_">random</span>() * n</span><br></pre></td></tr></table></figure>
+<p>如果我们想生成0-n的随机整数数，可以通过下面的操作</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> 变量 = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * n)</span><br><span class="line"><span class="keyword">let</span> 变量 = <span class="built_in">parseInt</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * n)</span><br></pre></td></tr></table></figure>
+<p>如果我们想生成m - n的随机数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> 变量  = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * (n - m + <span class="number">1</span>) + m)</span><br></pre></td></tr></table></figure>
+<p><a name="AZOQG"></a></p>
+<h3 id="Math-max-Math-min"><a href="#Math-max-Math-min" class="headerlink" title="Math.max Math.min"></a>Math.max Math.min</h3><p>可以通过对应的方法获取多个数中的最大值或者最小值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> maxNum = <span class="title class_">Math</span>.<span class="title function_">max</span>(参数<span class="number">1</span>, 参数<span class="number">2</span>, 参数n) <span class="comment">// 返回的值为最大值</span></span><br><span class="line"><span class="keyword">let</span> minNum = <span class="title class_">Math</span>.<span class="title function_">min</span>(参数<span class="number">1</span>, 参数<span class="number">2</span>, 参数n) <span class="comment">// 返回的值为最小值</span></span><br></pre></td></tr></table></figure>
+<p><a name="hzY95"></a></p>
+<h3 id="获取约等数"><a href="#获取约等数" class="headerlink" title="获取约等数"></a>获取约等数</h3><ul>
+<li>Math.round(num) 四舍五入</li>
+<li>Math.floor(num) 去尾取整</li>
+<li>Math.ceil(num) 进一取整<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="number">100</span>) <span class="comment">// 0 - 100 不包含100</span></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="number">100</span> + <span class="number">1</span>) <span class="comment">// 0 - 100 包含100</span></span><br></pre></td></tr></table></figure>
+<a name="bkvEV"></a></li>
+</ul>
+<h3 id="Math-abs-num"><a href="#Math-abs-num" class="headerlink" title="Math.abs(num)"></a>Math.abs(num)</h3><p>获取到一个数的绝对值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Math</span>.<span class="title function_">abs</span>(-<span class="number">1</span>) <span class="comment">// 1</span></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">abs</span>(<span class="number">1</span>) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p><a name="umHg7"></a></p>
+<h3 id="求次方开方"><a href="#求次方开方" class="headerlink" title="求次方开方"></a>求次方开方</h3><ul>
+<li>Math.sqrt</li>
+<li>Math.cbrt</li>
+<li>Math.pow</li>
+<li>Math.hypot<br><a name="McL3H"></a></li>
+</ul>
+<h4 id="Math-pow"><a href="#Math-pow" class="headerlink" title="Math.pow"></a>Math.pow</h4><p>求一个数的几次方</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Math</span>.<span class="title function_">pow</span>(数字, 幂)</span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, <span class="number">2</span>) <span class="comment">// 4</span></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, <span class="number">3</span>) <span class="comment">// 8</span></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, <span class="number">1</span>/<span class="number">2</span>) <span class="comment">// 1.414</span></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, -<span class="number">2</span>) <span class="comment">// 0.25</span></span><br></pre></td></tr></table></figure>
+<p><a name="dTNhD"></a></p>
+<h4 id="Math-sqrt"><a href="#Math-sqrt" class="headerlink" title="Math.sqrt"></a>Math.sqrt</h4><p>求一个数的平方根</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Math</span>.<span class="title function_">sqrt</span>(<span class="number">4</span>) <span class="comment">// 2</span></span><br><span class="line"><span class="title class_">Math</span>.<span class="title function_">sqrt</span>(<span class="number">16</span>) <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+<p><a name="Dnkst"></a></p>
+<h4 id="Math-cbrt"><a href="#Math-cbrt" class="headerlink" title="Math.cbrt"></a>Math.cbrt</h4><p>求一个数的立方根</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Math</span>.<span class="title function_">cbrt</span>(<span class="number">8</span>) <span class="comment">// 2 </span></span><br></pre></td></tr></table></figure>
+<p><a name="Wo3vC"></a></p>
+<h4 id="Math-hypot"><a href="#Math-hypot" class="headerlink" title="Math.hypot"></a>Math.hypot</h4><p>所有参数的平方和求平方根, 勾股定理中,可以直接帮我们计算斜边.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Math</span>.<span class="title function_">hypot</span>(<span class="number">3</span>, <span class="number">4</span>) <span class="comment">// 5  3 * 3 + 4 * 4 = 25  5 * 5 = 25</span></span><br></pre></td></tr></table></figure>
+<p><a name="hfRGh"></a></p>
+<h2 id="Date日期对象"><a href="#Date日期对象" class="headerlink" title="Date日期对象"></a>Date日期对象</h2><p>下面的对象都需要new <br />Date用来获取计算机上时间.使用前需要先生成日期对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> 变量 = <span class="keyword">new</span> <span class="title class_">Date</span>()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1660288870835-2a60658c-6bca-42ff-980e-6032b3b5a855.png#clientId=u4840162c-0084-4&from=paste&height=24&id=u10f63a12&name=image.png&originHeight=24&originWidth=322&originalType=binary&ratio=1&rotation=0&showTitle=false&size=2094&status=done&style=none&taskId=u41814581-5144-4cf3-8dd0-03414f4babb&title=&width=322" alt="image.png"><br />打印出来的这个日期是一个字符串,但实际上是一个对象.想要看到这个对象的原本面目,打印时使用数组包裹.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> date = <span class="keyword">new</span> <span class="title class_">Date</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>([date])</span><br></pre></td></tr></table></figure>
+<p>new Date可以自己生成对应的自定义的时间。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Date</span>(<span class="number">5000</span>) <span class="comment">// 在1970年1月1日0点0分0秒0毫秒 + 5000毫秒 </span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Date</span>(<span class="string">&quot;2000&quot;</span>) <span class="comment">// 2000年</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Date</span>(<span class="string">&quot;2019-12-2&quot;</span>) <span class="comment">// 2019年12月2日</span></span><br></pre></td></tr></table></figure>
+<p><a name="jUKNM"></a></p>
+<h3 id="获取时间"><a href="#获取时间" class="headerlink" title="获取时间"></a>获取时间</h3><p><a name="wG2Gx"></a></p>
+<h4 id="getYear-getFullYear"><a href="#getYear-getFullYear" class="headerlink" title="getYear getFullYear"></a>getYear getFullYear</h4><p>一般用getFullYear获取固定的年份, getYear获取到的是距离1900年的年数.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(date.<span class="title function_">getFullYear</span>()) <span class="comment">// 2022</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(date.<span class="title function_">getYear</span>()) <span class="comment">// 122</span></span><br></pre></td></tr></table></figure>
+<p><a name="UxXve"></a></p>
+<h4 id="getMonth"><a href="#getMonth" class="headerlink" title="getMonth"></a>getMonth</h4><p>获取到的值从0开始,到11结束,0-11分别代表 1-12月.在进行月份的计算时,要+1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> month = date.<span class="title function_">getMonth</span>() + <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><a name="apFji"></a></p>
+<h4 id="getDay"><a href="#getDay" class="headerlink" title="getDay"></a>getDay</h4><p>表示当天是一周中的第几天,从0开始到6结束.0表示周日,其他数字表示对应周一到周六</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> day = date.<span class="title function_">getDay</span>() </span><br></pre></td></tr></table></figure>
+<p><a name="VdFhs"></a></p>
+<h4 id="getDate"><a href="#getDate" class="headerlink" title="getDate"></a>getDate</h4><p>获取到当天的日期,几号</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> d = date.<span class="title function_">getDate</span>() <span class="comment">// 12</span></span><br></pre></td></tr></table></figure>
+<p><a name="ZKriA"></a></p>
+<h4 id="getHours"><a href="#getHours" class="headerlink" title="getHours"></a>getHours</h4><p>获取小时<br><a name="ItCpY"></a></p>
+<h4 id="getMiuntes"><a href="#getMiuntes" class="headerlink" title="getMiuntes"></a>getMiuntes</h4><p>获取分钟<br><a name="agb9q"></a></p>
+<h4 id="getSeconds"><a href="#getSeconds" class="headerlink" title="getSeconds"></a>getSeconds</h4><p>获取秒数<br><a name="W6jvs"></a></p>
+<h4 id="getMilliseconds"><a href="#getMilliseconds" class="headerlink" title="getMilliseconds"></a>getMilliseconds</h4><p>获取毫秒数<br><a name="C6eNR"></a></p>
+<h4 id="getTime"><a href="#getTime" class="headerlink" title="getTime()"></a>getTime()</h4><p>时间戳:严格意义上来讲,时间戳表示当前时间距离1970年1月1日0点0分0秒的秒数.但是,js获取到的是毫秒数.<br />我们可以通过 new Date().getTime() 获取到距离1970年1月1日0点0分0秒的毫秒数.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> date = <span class="keyword">new</span> <span class="title class_">Date</span>()</span><br><span class="line">date.<span class="title function_">getTime</span>()</span><br></pre></td></tr></table></figure>
+<p>我们一般不用它,一般使用新的用法<code>Date.now()</code><br><a name="apPuO"></a></p>
+<h3 id="设置时间"><a href="#设置时间" class="headerlink" title="设置时间"></a>设置时间</h3><p>所有的日期对象中设置时间的方法叫<code>setXXX</code>.设置时，我们可以超出对应的上限，超出后，会跑到下一个时间<br><a name="IbOrU"></a></p>
+<h4 id="setDate"><a href="#setDate" class="headerlink" title="setDate"></a>setDate</h4><p>设置当前日期对象中的date值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> date = <span class="keyword">new</span> <span class="title class_">Date</span>() <span class="comment">// 今天 2022 8 12</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(date.<span class="title function_">getDate</span>()) <span class="comment">// 12</span></span><br><span class="line">date.<span class="title function_">setDate</span>(<span class="number">1</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(date.<span class="title function_">getDate</span>()) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p><a name="Y21Qx"></a></p>
+<h4 id="setFullYear"><a href="#setFullYear" class="headerlink" title="setFullYear"></a>setFullYear</h4><p>设置当前的日期对象的年份</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> date = <span class="keyword">new</span> <span class="title class_">Date</span>()</span><br><span class="line">date.<span class="title function_">setFullYear</span>(<span class="number">2000</span>) <span class="comment">// 这个日期对象的getFullYear就是2000</span></span><br></pre></td></tr></table></figure>
+<p><a name="NIyb0"></a></p>
+<h4 id="setMonth"><a href="#setMonth" class="headerlink" title="setMonth"></a>setMonth</h4><p>设置当前的日期对象的月份</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> date = <span class="keyword">new</span> <span class="title class_">Date</span>()</span><br><span class="line">date.<span class="title function_">setMonth</span>(<span class="number">8</span>) <span class="comment">// 这个日期对象的getMonth就是8</span></span><br><span class="line">date.<span class="title function_">setMonth</span>(<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+<p><a name="HWLf9"></a></p>
+<h4 id="setHours"><a href="#setHours" class="headerlink" title="setHours"></a>setHours</h4><p>设置对应的小时数<br><a name="zPLhN"></a></p>
+<h4 id="setMinutes"><a href="#setMinutes" class="headerlink" title="setMinutes"></a>setMinutes</h4><p>设置对应的分钟数<br><a name="PrYNf"></a></p>
+<h4 id="setSeconds"><a href="#setSeconds" class="headerlink" title="setSeconds"></a>setSeconds</h4><p>设置对应的秒数<br><a name="tnEjT"></a></p>
+<h4 id="setMilliseconds"><a href="#setMilliseconds" class="headerlink" title="setMilliseconds"></a>setMilliseconds</h4><p>设置对应的毫秒数<br><a name="jcGIH"></a></p>
+<h4 id="setTime"><a href="#setTime" class="headerlink" title="setTime"></a>setTime</h4><p>参数为毫秒数，或生成一个1970年过对应毫秒数后的一个时间对象。<br><a name="Vy3Sj"></a></p>
+<h3 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h3><p>GMT 格林尼治时间（世界时）<br />UTC 协调世界时（原子时）这种更精确。后续使用相关的Date方法时也建议使用UTC相关方法<br />&#96;</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2022/04/10/32-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95/">http://example.com/2022/04/10/32-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/04/17/33-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9C%AC%E8%B4%A8/">33.对象的本质</a>
+            
+            
+            <a class="next" rel="next" href="/2022/04/03/31-%E6%95%B0%E7%BB%84%E5%92%8C%E5%AF%B9%E8%B1%A1/">31.数组和对象</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

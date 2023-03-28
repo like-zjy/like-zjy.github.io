@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>31.数组和对象 | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">31.数组和对象</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">四月 3, 2022&nbsp;&nbsp;14:58:01</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><a name="SwObl"></a></p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>当我们要存储很多相似信息时可以使用数组，数组就是<code>[]</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[] <span class="comment">// 空数组</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>] </span><br><span class="line">[<span class="string">&#x27;刘浩然&#x27;</span>, <span class="string">&#x27;张三&#x27;</span>, <span class="string">&#x27;李四&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;张三&#x27;</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">18</span>]</span><br></pre></td></tr></table></figure>
+<p>我们创建出来的数组，需要赋值给一个变量</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> 变量名 = []</span><br><span class="line"><span class="keyword">let</span> 变量名 = [值, 值<span class="number">2</span>, 值n]</span><br></pre></td></tr></table></figure>
+<p>下面创建数组的方式不推荐</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> 变量名 = <span class="keyword">new</span> <span class="title class_">Array</span>()</span><br><span class="line"><span class="keyword">let</span> 变量名 = <span class="keyword">new</span> <span class="title class_">Array</span>(数量) <span class="comment">// 生成一个对应长度的空数组 数量书需要是一个number类型</span></span><br><span class="line"><span class="keyword">let</span> 变量名 = <span class="keyword">new</span> <span class="title class_">Array</span>(非number类型) <span class="comment">// 直接生成一个数组，中间有对应的值</span></span><br><span class="line"><span class="keyword">let</span> 变量名 = <span class="keyword">new</span> <span class="title class_">Array</span>(值, 值<span class="number">2</span>, 值<span class="number">3</span>, 值n) <span class="comment">// [值, 值2, 值3, 值n]</span></span><br></pre></td></tr></table></figure>
+<p><a name="mVhlU"></a></p>
+<h3 id="数组长度"><a href="#数组长度" class="headerlink" title="数组长度"></a>数组长度</h3><p>在数组中，有几个值，长度就是几，获取长度可以通过<code>length</code>来获取</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">数组.属性名</span><br><span class="line"></span><br><span class="line">数组.<span class="property">length</span> <span class="comment">// 获取到数组长度的</span></span><br></pre></td></tr></table></figure>
+<p><a name="OoVEt"></a></p>
+<h3 id="下标"><a href="#下标" class="headerlink" title="下标"></a>下标</h3><p>数组和字符串都有下标的概念，所谓下标就是我们对应的值的顺序，从0开始-&gt;length-1结束，下标我们一般称其为<code>index</code><br />那么如何根据下标找到对应数组中对应的值呢？？？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数组[下标]</span><br></pre></td></tr></table></figure>
+<p><a name="NW7G1"></a></p>
+<h3 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h3><p>遍历数组的目的，是为了拿到数组中的每一个值<br />遍历数组是一个固定的写法：<br />正序遍历	</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; 数组.<span class="property">length</span>; i++) &#123;</span><br><span class="line">  <span class="comment">// 数组[i] 就是每一个值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>倒序遍历</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = 数组.<span class="property">length</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">  <span class="comment">// 数组[i] 就是每一个值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="abcrq"></a></p>
+<h3 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h3><p>数组中包含数组</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[值, 值<span class="number">2</span>, [值, 值<span class="number">2</span>]], [值, 值<span class="number">2</span>, 值<span class="number">3</span>]]</span><br></pre></td></tr></table></figure>
+<p><a name="H8KYp"></a></p>
+<h3 id="设置数组中的值"><a href="#设置数组中的值" class="headerlink" title="设置数组中的值"></a>设置数组中的值</h3><p><code>数组[下标] = 值</code>如果原位置有值，则覆盖对应的值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">arr[<span class="number">1</span>] = <span class="string">&quot;新的值&quot;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr) <span class="comment">// [1, &quot;新的值&quot;, 3]</span></span><br><span class="line"></span><br><span class="line">arr[<span class="number">10</span>] = <span class="string">&quot;新的值&quot;</span> <span class="comment">// 当我们强行添加一个不存在的下标时，会再本身的长度之后到对应的下标之间添加空的值 </span></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1660699634901-34322229-ff87-4d45-83f3-8a711bc9916d.png#clientId=ueda81379-0a93-4&from=paste&height=26&id=u1c456a33&name=image.png&originHeight=26&originWidth=182&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1424&status=done&style=none&taskId=u782fcb2e-3723-479f-883d-136c17b8482&title=&width=182" alt="image.png"><br><a name="Yw4jm"></a></p>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>对象拥有一个比数组更好的一个特性，每个值都有名字。以<code>key: value</code>（姓名: 值）键值对</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  属性名: 属性值,</span><br><span class="line">  属性名<span class="number">2</span>: 属性值<span class="number">2</span>,</span><br><span class="line">  <span class="attr">key</span>: value,</span><br><span class="line">  <span class="attr">key2</span>: value2,</span><br><span class="line">  方法名: <span class="keyword">function</span> (<span class="params">参数</span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们需要把对象赋值给一个变量才能使用，可以把属性名当成一个变量名，按照规范任意定义。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> 变量名 = &#123;</span><br><span class="line">  属性名: 属性值,</span><br><span class="line">  属性名<span class="number">2</span>: 属性值<span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> stu = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">  <span class="attr">sex</span>: <span class="string">&quot;男&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="hXHB2"></a></p>
+<h3 id="获取到对象中对应的属性的属性值"><a href="#获取到对象中对应的属性的属性值" class="headerlink" title="获取到对象中对应的属性的属性值"></a>获取到对象中对应的属性的属性值</h3><p>如果我们想要获取到对应的属性值，可以通过<code>对象.属性名</code>的方式获取</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> stu = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">  <span class="attr">sex</span>: <span class="string">&quot;男&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">stu.<span class="property">name</span> <span class="comment">// 张三</span></span><br></pre></td></tr></table></figure>
+<p>新的标准中，我们可以使用<code>对象[&#39;属性名&#39;]</code>获取对应的值。这种写法前期基本用不到</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stu[<span class="string">&#x27;name&#x27;</span>] <span class="comment">// 张三</span></span><br></pre></td></tr></table></figure>
+<p>我们可以使用变量作为属性名。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n = <span class="string">&quot;name&quot;</span></span><br><span class="line">stu[n] <span class="comment">// 张三</span></span><br></pre></td></tr></table></figure>
+<p>对象最大的作用，是可以写复杂的数据了。对象中的属性值可以是任意类型的值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person1 = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;小明&quot;</span>,</span><br><span class="line">  <span class="attr">sex</span>: <span class="string">&quot;男&quot;</span>,</span><br><span class="line">  <span class="attr">sibbing</span>: [<span class="string">&quot;大明&quot;</span>, <span class="string">&quot;小红&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person2 = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;小花&quot;</span>,</span><br><span class="line">  <span class="attr">sex</span>: <span class="string">&quot;女&quot;</span>,</span><br><span class="line">  <span class="attr">sibbing</span>: [<span class="string">&#x27;小华&#x27;</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 既然写多个对象，不如把多个对象放在一个数组中</span></span><br><span class="line"><span class="keyword">let</span> people = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;小明&quot;</span>,</span><br><span class="line">    <span class="attr">sex</span>: <span class="string">&quot;男&quot;</span>,</span><br><span class="line">    <span class="attr">sibbing</span>: [<span class="string">&quot;大明&quot;</span>, <span class="string">&quot;小红&quot;</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;小花&quot;</span>,</span><br><span class="line">    <span class="attr">sex</span>: <span class="string">&quot;女&quot;</span>,</span><br><span class="line">    <span class="attr">sibbing</span>: [<span class="string">&#x27;小华&#x27;</span>]</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>遇到对象就<code>对象.xxxx</code>遇到数组就<code>数组[下标]</code>。遇到 aaa.xxx 那么aaa一定是个对象。遇到aaa[0] aaa大概率是个数组。<br><a name="N9tMN"></a></p>
+<h3 id="设置对象中的值"><a href="#设置对象中的值" class="headerlink" title="设置对象中的值"></a>设置对象中的值</h3><p>通过<code>对象.属性名 = 值</code>可以给对象添加新的属性，或者覆盖之前的属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">b</span>: <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj.<span class="property">c</span> = <span class="number">3</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj) <span class="comment">// &#123;a: 1, b: 2, c: 3&#125;</span></span><br><span class="line"></span><br><span class="line">obj.<span class="property">a</span> = <span class="number">4</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj) <span class="comment">// &#123;a: 4, b: 2, c: 3&#125;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1660699904787-c80e834c-1164-49a3-86d8-56ebf2d6b857.png#clientId=ueda81379-0a93-4&from=paste&height=174&id=ud0f85753&name=image.png&originHeight=174&originWidth=202&originalType=binary&ratio=1&rotation=0&showTitle=false&size=6888&status=done&style=none&taskId=u71680255-04c9-4150-a2fb-0f9662ff49b&title=&width=202" alt="image.png"><br />虽然上面显示的时a: 1,但是点开后还是a:4，这是浏览器开发者工具的问题，因为点开时会取获取最新的对象状态。<br><a name="pQuhP"></a></p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>对象中可以写函数，对象中的函数叫方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  方法名: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>写在对象中的函数和普通的函数最大的区别在于调用问题。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.方法名()</span><br></pre></td></tr></table></figure>
+<p>对象的作用仅仅是为了添加一个命名空间</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">zhangsan</span> () &#123;&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">zhangsan</span> () &#123;&#125; <span class="comment">// 冲突</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj1 = &#123;</span><br><span class="line">  <span class="attr">zhangsan</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj2 = &#123;</span><br><span class="line">  <span class="attr">zhangsan</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在对象中，函数有新的写法，这种写法更简单</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="comment">// 原写法</span></span><br><span class="line">  方法名: <span class="keyword">function</span> (<span class="params">参数</span>) &#123;</span><br><span class="line">  &#125;,</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 新写法 ES6</span></span><br><span class="line">  方法名 (参数) &#123;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="GXcjg"></a></p>
+<h3 id="对象和数组值获取的问题"><a href="#对象和数组值获取的问题" class="headerlink" title="对象和数组值获取的问题"></a>对象和数组值获取的问题</h3><p>对象中，如果去获取不存在的属性，则会返回undefined</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;张三&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">name</span>) <span class="comment">// 张三</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">age</span>) <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>数组中，如果去获取大于长度的下标的值，会返回undefined</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr[<span class="number">0</span>]) <span class="comment">// 1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr[<span class="number">10</span>]) <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>如果我们对象名写错了，也会报错，提示变量找不到。<br />如果我们的对象是<code>null</code><br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1660266553906-dcaa9afb-3eb6-4685-ada0-62502333f559.png#clientId=uca5e2b04-a899-4&from=paste&height=52&id=u6d1584ab&name=image.png&originHeight=52&originWidth=504&originalType=binary&ratio=1&rotation=0&showTitle=false&size=4587&status=done&style=none&taskId=u58e36923-7ed7-4daf-ba7a-b87326681d9&title=&width=504" alt="image.png"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cannot read properties of undefined或者null (reading &#x27;某个属性名&#x27;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1660266653740-9d62efeb-3fa1-428f-a98e-f95efbc100e8.png#clientId=uca5e2b04-a899-4&from=paste&height=36&id=u02da6026&name=image.png&originHeight=36&originWidth=495&originalType=binary&ratio=1&rotation=0&showTitle=false&size=3977&status=done&style=none&taskId=uaca87e55-21ee-41d4-baee-c988e7f3cb6&title=&width=495" alt="image.png"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cannot set properties of undefined或者null (setting &#x27;某个属性名&#x27;)</span><br></pre></td></tr></table></figure>
+<p>遇到这种问题，先找到对应的行数，然后找到<code>属性名</code>，然后查看属性名前面的对象是否没有正常的获取。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2022/04/03/31-%E6%95%B0%E7%BB%84%E5%92%8C%E5%AF%B9%E8%B1%A1/">http://example.com/2022/04/03/31-%E6%95%B0%E7%BB%84%E5%92%8C%E5%AF%B9%E8%B1%A1/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/04/10/32-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95/">32.内置对象方法</a>
+            
+            
+            <a class="next" rel="next" href="/2022/03/24/29-JavaScript%E5%9F%BA%E7%A1%80/">29.JavaScript基础</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

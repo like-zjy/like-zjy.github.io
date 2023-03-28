@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>19.动画 | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">19.动画</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十二月 23, 2021&nbsp;&nbsp;14:07:27</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>和过渡不同，动画是需要定义规则的，并且可以有多个关键帧，而且动画可以实现自动播放，多次播放的效果。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">animation</span>: 动画规则名 动画时长 动画曲线 动画延迟时间 动画次数 动画方向 动画填充模式 动画的状态;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>想要实现一个动画，我们必须先创建动画的规则</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframs</span> 自定义名字 &#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在规则中，有对应的写法</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframs</span> 自定义名字 &#123;</span><br><span class="line">  <span class="number">0%</span> &#123;&#125;</span><br><span class="line">  n% &#123;&#125;</span><br><span class="line">  <span class="number">100%</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>n代表的是数字，可以有很多个。在百分比后面的大括号中，我们需要写对应的样式。<br />也可以把0%替换成from，把100%替换成to</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframs</span> 自定义名字 &#123;</span><br><span class="line">  <span class="selector-tag">from</span> &#123;&#125;</span><br><span class="line">  n% &#123;&#125;</span><br><span class="line">  <span class="selector-tag">to</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同时规则中支持，对应的某些百分比样式相同的情况下，可以直接写在一起</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframs</span> 自定义名字 &#123;</span><br><span class="line">  <span class="selector-tag">from</span> &#123;&#125;</span><br><span class="line">  <span class="number">10%</span>, <span class="number">80%</span> &#123;&#125;</span><br><span class="line">  <span class="selector-tag">to</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="CBXQz"></a></p>
+<h3 id="animation-name"><a href="#animation-name" class="headerlink" title="animation-name"></a>animation-name</h3><p>表示动画名称，需要通过<code>@keyframs</code>创建<br><a name="sQuNs"></a></p>
+<h3 id="animation-duration"><a href="#animation-duration" class="headerlink" title="animation-duration"></a>animation-duration</h3><p>动画时常，单位为s，定义动画执行的时间<br><a name="uKNz3"></a></p>
+<h3 id="animation-timing-function"><a href="#animation-timing-function" class="headerlink" title="animation-timing-function"></a>animation-timing-function</h3><p>动画曲线，和过渡效果中的曲线一致，可以使用ease ease-in ease-out ease-in-out linear 或者 自定义的贝塞尔曲线。<br><a name="AH5rS"></a></p>
+<h3 id="animation-delay-动画延迟"><a href="#animation-delay-动画延迟" class="headerlink" title="animation-delay 动画延迟"></a>animation-delay 动画延迟</h3><p>一般都为正值，表示等待多少秒后开始执行动画，负值表示跳过对应动画的前n秒执行动画<br />动画延迟可以让我们整个动画更加有节奏性<br><a name="YVgy1"></a></p>
+<h3 id="animation-fill-mode"><a href="#animation-fill-mode" class="headerlink" title="animation-fill-mode"></a>animation-fill-mode</h3><p>默认值为none 有四个值</p>
+<ul>
+<li>none</li>
+<li>forwards 表示当动画结束后，我们对应的元素保持在动画结束时的样式里。</li>
+<li>backwards 表示在开始动画时，如果有延迟时间，不加backwards则会停留在对应的初始样式上等待，开始后，闪到0%的样式，而添加该属性后，动画会从0%的样式开始等待。</li>
+<li>both 一般我们使用both<br><a name="pr5Sz"></a></li>
+</ul>
+<h3 id="animation-iteration-count"><a href="#animation-iteration-count" class="headerlink" title="animation-iteration-count"></a>animation-iteration-count</h3><p>动画次数，写几次就执行几次，如果要无限执行，可以使用 infinite</p>
+<ul>
+<li>数字 表示多少次</li>
+<li>infinite 无限次</li>
+<li>如果是小数，则按照比例执行到对应的动画位置<br><a name="moQDH"></a></li>
+</ul>
+<h3 id="animation-direction"><a href="#animation-direction" class="headerlink" title="animation-direction"></a>animation-direction</h3><p>控制动画方向，正常动画从0% - 100%，如果设置该属性可以控制动画的播放顺序</p>
+<ul>
+<li>alternate 奇数次执行 0%-100% 偶数次执行100%-0%</li>
+<li>alternate-reverse 偶数次次执行 0%-100% 奇数次执行100%-0%</li>
+<li>normal 默认值<br><a name="rfcK8"></a></li>
+</ul>
+<h3 id="animation-play-state"><a href="#animation-play-state" class="headerlink" title="animation-play-state"></a>animation-play-state</h3><ul>
+<li>running</li>
+<li>paused</li>
+</ul>
+<p>这个属性通常是通过js控制，用来控制元素动画的执行和暂停效果的。<br><a name="oangp"></a></p>
+<h2 id="animate-css"><a href="#animate-css" class="headerlink" title="animate.css"></a>animate.css</h2><p>有人用自己的想法完成了一个动画库——animate.css。通过这个动画库，我们可以实现对应的动画效果。<br />本质上这个动画库中是由别人写了很多的动画规则<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658385202335-bf03e647-8d9d-4326-bc85-bdf3884132b7.png#clientId=u108cc21e-c848-4&from=paste&height=821&id=u96ccbf6b&name=image.png&originHeight=821&originWidth=832&originalType=binary&ratio=1&rotation=0&showTitle=false&size=62636&status=done&style=none&taskId=uf63b04c1-512b-46e7-a013-046fc7af57e&title=&width=832" alt="image.png"><br />我们在使用时，只需要添加相关的类名即可让元素产生对应的动画效果。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">标签</span> <span class="attr">class</span>=<span class="string">&quot;animate__animated animate__动画名&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">标签</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://animate.style/#attention_seekers">https://animate.style/#attention_seekers</a><br />动画名可以在上面的网站里找到，比如我们想要产生一个动画<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658385361853-318ff507-eab0-48d5-9cb8-2a165740bdb4.png#clientId=u108cc21e-c848-4&from=paste&height=396&id=uc4ba33d1&name=image.png&originHeight=396&originWidth=216&originalType=binary&ratio=1&rotation=0&showTitle=false&size=21122&status=done&style=none&taskId=ud415c90b-e6fc-4136-94b1-c097a7e42e6&title=&width=216" alt="image.png"><br />复制对应的类名，然后粘贴到对应的位置</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">标签</span> <span class="attr">class</span>=<span class="string">&quot;animate__animated animate__shakeX&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">标签</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们的页面上的元素就会产生动画效果。<br><a name="Y1fJQ"></a></p>
+<h2 id="步进动画"><a href="#步进动画" class="headerlink" title="步进动画"></a>步进动画</h2><p>我们可以通过步进动画实现复杂的动画效果，精灵动画效果。利用精灵图实现的动画效果。<br />我们可以使用steps作为动画曲线的属性值<br />过渡效果和动画都支持步进<br><a name="ZR6P6"></a></p>
+<h3 id="套路"><a href="#套路" class="headerlink" title="套路"></a>套路</h3><p>量一下对应的精灵的图总宽度，除以移动多少张小图片<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658388932089-550d195a-aad3-45e2-abe4-55b8e077d0d7.png#clientId=u108cc21e-c848-4&from=paste&height=312&id=ud8a674aa&name=p%20-%20%E5%89%AF%E6%9C%AC.png&originHeight=312&originWidth=2000&originalType=binary&ratio=1&rotation=0&showTitle=false&size=171302&status=done&style=none&taskId=u47673a34-487a-430e-9ec0-6bf5f6641fc&title=&width=2000" alt="p - 副本.png"><br />总宽度是2000px，一共10张图，那么我们写的时候</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframs</span> 自定义名字 &#123;</span><br><span class="line">  <span class="number">0%</span> &#123;</span><br><span class="line">    <span class="attribute">background-position</span>: <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="number">100%</span> &#123;</span><br><span class="line">    <span class="comment">/*总宽度是多少，就写-多少px*/</span></span><br><span class="line">    <span class="attribute">background-position</span>: -<span class="number">2000px</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后定义对应的动画 一共有多少张图，我们就在steps中写几</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  animationg: 动画名字 动画时常 <span class="built_in">steps</span>(<span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2021/12/23/19-%E5%8A%A8%E7%94%BB/">http://example.com/2021/12/23/19-%E5%8A%A8%E7%94%BB/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/01/20/21-3D%E8%BD%AC%E6%8D%A2/">21.3D转换</a>
+            
+            
+            <a class="next" rel="next" href="/2021/12/15/18-%E8%BF%87%E6%B8%A1/">18.过渡</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

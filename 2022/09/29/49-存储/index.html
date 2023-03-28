@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>49.存储 | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">49.存储</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">九月 29, 2022&nbsp;&nbsp;17:05:28</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>在JS中存储在客户端数据有很多方式：本地存储、会话存储、Cookie、indexedDB<br><a name="FLP8V"></a></p>
+<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><p>Storage分为localStorage和sessionStorage，他们有自己的API可以进行添加、修改、删除、清空操作。</p>
+<ul>
+<li>setItem(key, value)</li>
+<li>removeItem(key)</li>
+<li>getItem(key)</li>
+<li>clear()</li>
+</ul>
+<p>这两个存储的方法一致，是一样的效果。<br />这个中间只能存字符串，引用类型存储时会自动调用toString方法，如果想要存储对象或者数组，可以使用JSON.stringify进行转换，转换为字符串。<br />存储空间约5M<br><a name="c0nWL"></a></p>
+<h3 id="本地存储localStorage"><a href="#本地存储localStorage" class="headerlink" title="本地存储localStorage"></a>本地存储localStorage</h3><p>存储数据到本地，只要你不主动删除，并且电脑浏览器不被卸载，这个数据就永远可以被获取到。<br><a name="Y7dcp"></a></p>
+<h3 id="会话存储sessionStorage"><a href="#会话存储sessionStorage" class="headerlink" title="会话存储sessionStorage"></a>会话存储sessionStorage</h3><p>存储数据在本地，只要浏览器关闭，则会话存储就会被清空<br><a name="cju1n"></a></p>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><p>Cookie也是一种本地存储方案，是在Storage之前流行的一种方案。<br />cookie的缺点：</p>
+<ul>
+<li>存储小。只有4kb</li>
+<li>自动被携带http请求中，导致请求时间变长。</li>
+<li>必须依赖服务器</li>
+<li>cookie比较早，相关api比较老，不好操作。需要人为封装函数。</li>
+</ul>
+<p>cookie中有两种Cookie，一种是会话Cookie，浏览器关闭就消失，一种是持久化cookie，有自己的过期时间。<br><a name="yVuI2"></a></p>
+<h3 id="Cookie获取"><a href="#Cookie获取" class="headerlink" title="Cookie获取"></a>Cookie获取</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="property">cookie</span></span><br></pre></td></tr></table></figure>
+<p>该操作获取到的Cookie是一个字符串，获取到字符串后，我们需要进行筛选获取到我们想要的数据。<img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1663575595126-deaeda4a-7a1b-4794-ad29-3ab65fbb1c41.png#clientId=u24dddfe4-72f8-4&errorMessage=unknown%20error&from=paste&height=26&id=uce41a628&name=image.png&originHeight=26&originWidth=143&originalType=binary&ratio=1&rotation=0&showTitle=false&size=663&status=error&style=none&taskId=uab040d3e-99ed-4010-acab-7ba53157c3b&title=&width=143" alt="image.png"><br><a name="KB2YZ"></a></p>
+<h3 id="Cookie设置"><a href="#Cookie设置" class="headerlink" title="Cookie设置"></a>Cookie设置</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docuemnt.<span class="property">cookie</span> = <span class="string">&quot;key=value; expires=时间对象字符串; path=/; domian=localhost&quot;</span></span><br></pre></td></tr></table></figure>
+<p><a name="o8GCr"></a></p>
+<h3 id="Cookie删除"><a href="#Cookie删除" class="headerlink" title="Cookie删除"></a>Cookie删除</h3><p>删除没有专门的操作，设置一个过去的时间就可以把cookie删除了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docuemnt.<span class="property">cookie</span> = <span class="string">&quot;key=value; expires=过去的一个时间字符串; path=/; domian=localhost&quot;</span></span><br></pre></td></tr></table></figure>
+<p>Cookie的操作需要封装函数，不然操作起来很麻烦。<br><a name="Xixul"></a></p>
+<h2 id="js-cookie"><a href="#js-cookie" class="headerlink" title="js-cookie"></a>js-cookie</h2><p>我们可以借助cookie库<br /><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2022/js/29411294/1664361495429-648f7ecf-c730-46dd-a407-73d298df8280.js">js.cookie.js</a><br><a name="MwhUN"></a></p>
+<h3 id="获取Cookie"><a href="#获取Cookie" class="headerlink" title="获取Cookie"></a>获取Cookie</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Cookies</span>.<span class="title function_">get</span>(key)</span><br></pre></td></tr></table></figure>
+<p><a name="SgFdy"></a></p>
+<h3 id="删除Cookie"><a href="#删除Cookie" class="headerlink" title="删除Cookie"></a>删除Cookie</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Cookies</span>.<span class="title function_">remove</span>(key)</span><br></pre></td></tr></table></figure>
+<p><a name="XL0Fo"></a></p>
+<h3 id="设置Cookie"><a href="#设置Cookie" class="headerlink" title="设置Cookie"></a>设置Cookie</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Cookies</span>.<span class="title function_">set</span>(key, value, &#123;</span><br><span class="line">  <span class="attr">expires</span>: <span class="string">&quot;&quot;</span>, <span class="comment">// 可以是天数，也可以是日期对象</span></span><br><span class="line">  <span class="attr">path</span>: <span class="string">&quot;&quot;</span>, <span class="comment">// 路径</span></span><br><span class="line">  <span class="attr">domain</span>: <span class="string">&quot;&quot;</span> <span class="comment">// 域名</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><a name="I1s6k"></a></p>
+<h2 id="面试问题"><a href="#面试问题" class="headerlink" title="面试问题"></a>面试问题</h2><p><a name="NZtXM"></a></p>
+<h3 id="Cookie、localStorage、SessionStorage的区别？"><a href="#Cookie、localStorage、SessionStorage的区别？" class="headerlink" title="Cookie、localStorage、SessionStorage的区别？"></a>Cookie、localStorage、SessionStorage的区别？</h3><p>Cookie需要借助http，而Storage不需要<br />Cookie存储空间小4kb，Storage 空间大5Mb<br /><del>Cookie的操作比较麻烦，Storage有相应的api帮助我们快速操作。</del><br />Cookie可以设置过期时间，Storage不能，localStorage没有过期时间，SessionStorage浏览器关闭就消失。<br />Cookie还可以给不同的path和域名设置cookie，storage不能。<br />localStorage设置后，整个域名共享，SessionStorage只有对应的页面可以使用，其他页面无法使用。<br />他们可以实现的功能大致相同。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2022/09/29/49-%E5%AD%98%E5%82%A8/">http://example.com/2022/09/29/49-%E5%AD%98%E5%82%A8/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/10/17/50-BOM/">50.BOM</a>
+            
+            
+            <a class="next" rel="next" href="/2022/09/15/48-AJAX/">48.AJAX</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

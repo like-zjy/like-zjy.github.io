@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>10.定位属性 | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">10.定位属性</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十月 19, 2021&nbsp;&nbsp;18:04:01</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>定位在网页布局的应用中很重要，在我们使用这个属性时，不要滥用。定位分为四类定位：相对定位、绝对定位、固定定位、粘性定位。<br />我们可以使用<code>position</code>属性来定义我们对应的元素的定位模式，使用了该属性后，我们将拥有五个其他的属性</p>
+<ul>
+<li>top</li>
+<li>right</li>
+<li>bottom</li>
+<li>left</li>
+<li>z-index<br><a name="nxoww"></a></li>
+</ul>
+<h2 id="1-相对定位"><a href="#1-相对定位" class="headerlink" title="1. 相对定位"></a>1. 相对定位</h2><p>未来很常用，但是用它只是为了更好的进行绝对定位，一般情况，几乎上我们不适用相对定位的特性（只会设置成相对定位，但是不会去使用top、right、bottom、left这些属性）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>相对定位不会脱离文档流。<br />设置完这个属性后，我们就可以定义top\right\bottom\left四个值，这四个值可以去控制我们元素距离初始位置的距离。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657679325957-c34eb913-49e5-4d7a-ae40-8c759f2077d0.png#clientId=u574cc0d1-c6d2-4&from=paste&height=362&id=uddb09035&name=image.png&originHeight=362&originWidth=378&originalType=binary&ratio=1&rotation=0&showTitle=false&size=2078&status=done&style=none&taskId=u75b58ad1-e21b-45f8-8f5f-5b8f1a58571&title=&width=378" alt="image.png"><br />如果上下同时设置了对应的值，上优先，下不生效，同理，左右也是。因此，如果我们想要设置右边和下面，我们只能写right和bottom不能出现top和left。<br />注意！！！我们的位置虽然改变了，但是他不会影响其他元素的布局。原位置依旧占据位置。<br><a name="GaOMa"></a></p>
+<h2 id="2-绝对定位"><a href="#2-绝对定位" class="headerlink" title="2. 绝对定位"></a>2. 绝对定位</h2><p>绝对定位实行会让元素脱离文档流。脱离文档流后，他会保持在添加绝对定位属性之前的位置上，我们可以利用两个位置属性将元素放置在他的定位父元素的任意位置上。<br />默认情况，绝对定位是基于网页本身进行定位的。可以改变它的定位父元素（offsetParent）。只要我们当前定位元素到html元素之间，有一个元素有定位属性，那个这个元素就是绝对定位元素的定位父元素。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="c5u69"></a></p>
+<h3 id="2-1-基于哪个元素定位"><a href="#2-1-基于哪个元素定位" class="headerlink" title="2.1. 基于哪个元素定位"></a>2.1. 基于哪个元素定位</h3><p>基于HTML，因为是默认情况下定位<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657680040055-25378b5f-6d00-4f64-94ea-7803cda46ef5.png#clientId=u574cc0d1-c6d2-4&from=paste&height=582&id=u28b0a05d&name=image.png&originHeight=582&originWidth=635&originalType=binary&ratio=1&rotation=0&showTitle=false&size=5920&status=done&style=none&taskId=ud895bb91-d3d5-475a-8cfe-5b792fcc753&title=&width=635" alt="image.png"><br />基于div1<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657680085335-3d3cb211-4414-4cbd-a39c-2360c8012536.png#clientId=u574cc0d1-c6d2-4&from=paste&height=579&id=u31031a8b&name=image.png&originHeight=579&originWidth=627&originalType=binary&ratio=1&rotation=0&showTitle=false&size=6717&status=done&style=none&taskId=ua07eb2c2-727b-488c-abe9-a00c7216a69&title=&width=627" alt="image.png"><br />基于div2，绝对定位元素会找到离他最近的祖先元素中，有定位属性。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657680171658-b8d8b21c-8197-411b-a7fb-71b60c97b0d0.png#clientId=u574cc0d1-c6d2-4&from=paste&height=583&id=u62c80bc3&name=image.png&originHeight=583&originWidth=647&originalType=binary&ratio=1&rotation=0&showTitle=false&size=7207&status=done&style=none&taskId=u8792bf0d-9d58-4f2c-a6fc-98fd4c26e20&title=&width=647" alt="image.png"><br />子绝父相<br />添加了绝对定位后的元素，表现的是块元素的效果。<br><a name="EhAPy"></a></p>
+<h3 id="元素垂直居中"><a href="#元素垂直居中" class="headerlink" title="元素垂直居中"></a>元素垂直居中</h3><p>前提是已知元素宽高的情况。<br />使用绝对定位，可以让元素在一个块元素中垂直水平居中<br />设置top为50%，然后设置对应元素margin-top 负高度的一半<br />设置left为50%，然后设置对应元素margin-left 负宽度的一半<br><a name="XFp3R"></a></p>
+<h2 id="3-固定定位"><a href="#3-固定定位" class="headerlink" title="3. 固定定位"></a>3. 固定定位</h2><p>绝对定位的元素会随着滚动条的滚动而滚动出屏幕。固定定位解决了这个问题。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">position</span>: fixed;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用法和absolute一致，只不过参照的物体不同。fixed参照的是我们的浏览器窗口<br><a name="WCFVq"></a></p>
+<h2 id="定位元素的层级问题"><a href="#定位元素的层级问题" class="headerlink" title="定位元素的层级问题"></a>定位元素的层级问题</h2><p>当我们给元素进行定位时，元素和元素之间就又可能会重叠，重叠时就涉及到了对应的层级问题。<br />默认情况下，后定位元素靠上，层级高 。所谓的先后，指的是HTML上的顺序。<br />默认层级大家都是<code>0</code><br />想要强行修改对应的层级，我们可以调整元素的z-index属性。这个属性的值越大，则层级越高，越小层级越低。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2021/10/19/10-%E5%AE%9A%E4%BD%8D%E5%B1%9E%E6%80%A7/">http://example.com/2021/10/19/10-%E5%AE%9A%E4%BD%8D%E5%B1%9E%E6%80%A7/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/10/28/11-%E5%AD%97%E4%BD%93%E5%9B%BE%E6%A0%87/">11.字体图标</a>
+            
+            
+            <a class="next" rel="next" href="/2021/10/15/9-%E6%B5%AE%E5%8A%A8/">9.浮动</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

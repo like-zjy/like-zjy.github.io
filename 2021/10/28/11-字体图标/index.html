@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>11.字体图标 | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">11.字体图标</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十月 28, 2021&nbsp;&nbsp;17:04:22</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>网站上有很多的图标<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657700007244-f1d08fef-5181-4fff-89c9-2b99a752e049.png#clientId=uc0969791-84e4-4&from=paste&height=74&id=ub3a3cdb5&name=image.png&originHeight=74&originWidth=73&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1033&status=done&style=none&taskId=uec821f99-301e-455a-95c3-c088a570616&title=&width=73" alt="image.png"><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657700014700-bccf0525-1642-4942-9c2e-7fe8c032c886.png#clientId=uc0969791-84e4-4&from=paste&height=24&id=uc959c014&name=image.png&originHeight=24&originWidth=31&originalType=binary&ratio=1&rotation=0&showTitle=false&size=608&status=done&style=none&taskId=ue8fc39c2-9506-4391-9c8b-c7ee1ce676b&title=&width=31" alt="image.png"><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657700027542-f3f97d4f-5b08-45e9-8a30-9ec77ea1536e.png#clientId=uc0969791-84e4-4&from=paste&height=476&id=uf4cb0eee&name=image.png&originHeight=476&originWidth=114&originalType=binary&ratio=1&rotation=0&showTitle=false&size=8335&status=done&style=none&taskId=ud722c803-a637-4b0f-95ed-57488fbc054&title=&width=114" alt="image.png"><br />随着时代的发展，字体图标慢慢的替代了图片图标，字体图标有以下几个特性</p>
+<ul>
+<li>方便设置大小（本质上就是文字，无论如何放大都不失真。）</li>
+<li>方便设置颜色（本质上是文字，设置color就可以改变颜色了）</li>
+<li>扁平化设计潮流出现</li>
+</ul>
+<p>问题，字体图标最开始，仅支持单色图标。后来iconfont想到了另外一种方式（兼容性不好）实现多色图标。<br><a name="AcqQQ"></a></p>
+<h2 id="阿里巴巴字体图标库"><a href="#阿里巴巴字体图标库" class="headerlink" title="阿里巴巴字体图标库"></a>阿里巴巴字体图标库</h2><p>这是阿里巴巴当年内部一个工具，然后后来开发给所有人使用了。<br><a name="IbLK7"></a></p>
+<h3 id="如何使用阿里巴巴字体图标库"><a href="#如何使用阿里巴巴字体图标库" class="headerlink" title="如何使用阿里巴巴字体图标库"></a>如何使用阿里巴巴字体图标库</h3><p>进入到首页<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657700536464-774f956e-f69a-420f-acbf-dc05d35afdbb.png#clientId=uc0969791-84e4-4&from=paste&height=552&id=ufed46bbd&name=image.png&originHeight=552&originWidth=1249&originalType=binary&ratio=1&rotation=0&showTitle=false&size=176942&status=done&style=none&taskId=u8958c1d1-86ca-4964-ba6d-1df4d6bbf8a&title=&width=1249" alt="image.png"><br />搜索我们想要的图标<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657700550742-c871efa5-13e7-433b-9528-d8d7f363ab1d.png#clientId=uc0969791-84e4-4&from=paste&height=97&id=u49b5e8e6&name=image.png&originHeight=97&originWidth=795&originalType=binary&ratio=1&rotation=0&showTitle=false&size=6044&status=done&style=none&taskId=ubdb2b33e-750c-4342-aae6-083066195f0&title=&width=795" alt="image.png"><br />鼠标移入图标，然后添加入库<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657700588668-1bcf4fb2-79a9-4aa8-a7fd-f5b6efaeb7de.png#clientId=uc0969791-84e4-4&from=paste&height=676&id=ue020fc9d&name=image.png&originHeight=676&originWidth=1137&originalType=binary&ratio=1&rotation=0&showTitle=false&size=48437&status=done&style=none&taskId=ub15eccf1-c5fc-4165-801e-40ed13b928e&title=&width=1137" alt="image.png"><br />添加后，对应的位置就会有入库的数量。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657700613396-77df6524-38c6-4250-a282-3c709ba7a9ce.png#clientId=uc0969791-84e4-4&from=paste&height=53&id=u47626dd9&name=image.png&originHeight=53&originWidth=681&originalType=binary&ratio=1&rotation=0&showTitle=false&size=8100&status=done&style=none&taskId=ud557e51c-25e2-4c7b-ab01-84864df82dd&title=&width=681" alt="image.png"><br />点击后，可以看到我们添加到库里的所有的图标<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657700767069-c534c51d-0f74-4791-ba1e-07865943e54c.png#clientId=uc0969791-84e4-4&from=paste&height=691&id=u5544cc8b&name=image.png&originHeight=691&originWidth=526&originalType=binary&ratio=1&rotation=0&showTitle=false&size=28065&status=done&style=none&taskId=u4f8eca4d-7f81-40b1-ad07-600dcf7680c&title=&width=526" alt="image.png"><br />点击添加至项目，第一次添加需要创建一个项目，创建后添加，之后再添加新的图标，我们可以选择对应的项目即可。<br />进入到项目中<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657700959445-daa1d0a2-aa8e-4979-bae6-467646f325b0.png#clientId=uc0969791-84e4-4&from=paste&height=466&id=ub3efdbfe&name=image.png&originHeight=466&originWidth=1012&originalType=binary&ratio=1&rotation=0&showTitle=false&size=36011&status=done&style=none&taskId=u7babdab7-fb18-4abe-875c-f1773d362f3&title=&width=1012" alt="image.png"><br />下载至本地<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657700976003-3b3517bb-68a2-4f86-af47-d5ad45739dae.png#clientId=uc0969791-84e4-4&from=paste&height=85&id=u04100799&name=image.png&originHeight=85&originWidth=355&originalType=binary&ratio=1&rotation=0&showTitle=false&size=4995&status=done&style=none&taskId=u678b3cf3-bea7-43b8-b4be-f06a23570c1&title=&width=355" alt="image.png"><br />下载后，解压对应的文件<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657701003246-5d8842ba-136f-4724-9f1a-3c6a223f8a4e.png#clientId=uc0969791-84e4-4&from=paste&height=471&id=u1bb3d8f0&name=image.png&originHeight=471&originWidth=638&originalType=binary&ratio=1&rotation=0&showTitle=false&size=48369&status=done&style=none&taskId=ub431d9c8-75dd-4edc-b8c2-0a2679b65db&title=&width=638" alt="image.png"><br />解压后，进入最内层文件夹<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657701049436-f79f5cd1-3b2c-4634-8572-960652b3f207.png#clientId=uc0969791-84e4-4&from=paste&height=282&id=u1bb6dec8&name=image.png&originHeight=282&originWidth=647&originalType=binary&ratio=1&rotation=0&showTitle=false&size=24854&status=done&style=none&taskId=u4f29bc3b-1bc9-469d-812d-57cb9f014a1&title=&width=647" alt="image.png"><br />把所有文件复制到项目中的font文件夹中。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657701094165-28c77cbf-ce3a-48e4-8e11-1a2cd1942bcc.png#clientId=uc0969791-84e4-4&from=paste&height=359&id=ub20f4ba9&name=image.png&originHeight=359&originWidth=670&originalType=binary&ratio=1&rotation=0&showTitle=false&size=35372&status=done&style=none&taskId=u4f0363db-4b44-47b4-a9d1-0a5937b50b2&title=&width=670" alt="image.png"><br><a name="Nu19p"></a></p>
+<h3 id="在项目中使用"><a href="#在项目中使用" class="headerlink" title="在项目中使用"></a>在项目中使用</h3><p>进入到我们项目的网页代码，引入font中iconfont.css</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2021/10/28/11-%E5%AD%97%E4%BD%93%E5%9B%BE%E6%A0%87/">http://example.com/2021/10/28/11-%E5%AD%97%E4%BD%93%E5%9B%BE%E6%A0%87/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/11/05/12-%E4%BC%AA%E7%B1%BB/">12.伪类</a>
+            
+            
+            <a class="next" rel="next" href="/2021/10/19/10-%E5%AE%9A%E4%BD%8D%E5%B1%9E%E6%80%A7/">10.定位属性</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

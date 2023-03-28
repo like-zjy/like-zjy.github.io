@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>41.蓝湖的使用 | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">41.蓝湖的使用</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">六月 15, 2022&nbsp;&nbsp;16:02:25</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>蓝湖是一个解决方案：解决了前端开发和UI设置之间的沟通的方案。<br />随着UI设计师的设计工具越来越繁杂，我们不能再像传统的合作模式一样。为了解决这个问题，蓝湖应运而生。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657252441995-6c5c0b74-4fe3-4a05-83bc-8052023949e9.png#clientId=u11501071-8737-4&from=paste&height=492&id=u4b274a63&name=image.png&originHeight=492&originWidth=1916&originalType=binary&ratio=1&rotation=0&showTitle=false&size=78424&status=done&style=none&taskId=udf36a07e-e3bf-423f-a0a2-2682e85333d&title=&width=1916" alt="image.png"><br />不管设计师用的是什么设计软件，上传到蓝湖上表现都一样。<br><a name="EoEC3"></a></p>
+<h2 id="弊端"><a href="#弊端" class="headerlink" title="弊端"></a>弊端</h2><p>蓝湖有免费的人数限制，但是咱们人比较多，没办法进入到同一个项目里。所以在下面的学习中，我们需要了解一个设计工具-masterGO<br><a name="A0J9s"></a></p>
+<h3 id="设计工具"><a href="#设计工具" class="headerlink" title="设计工具"></a>设计工具</h3><ul>
+<li>PS</li>
+<li>Sketch</li>
+<li>Figma</li>
+<li><a target="_blank" rel="noopener" href="http://www.baidu.com/baidu.php?url=a00000KEJeCxDFezEElHokOPkxdD2D5eJJerB8z0YE5RprmazN0BDb5P_XIN9k9kU1t_Oss6XxyDoN8tBRaSWYCV9lnE7QZJXbgYDIpjBKVceTBs7DOwsSfSKVWvhJ4cMl33PUDfmPaxC34L_i6V3VoIYirTMnoYGy8iMnRuXA6oZlrGFgHW8uHXeC0rBTrnnP0BPHUNs6zvkhJcYZhVdOeddGOf.DR_NR2Ar5Od66kElcLTbjPvx0O5ThPSJ2jE6CpXyPvap7Q7erQKdsRP5QGHTOKGm9ksqT7jHzs_lTUQqRHZ4ESKMOvxEd4mphmCbYXy9n1jvtEpMfkSC1tE1O-SWto-2s1f_UVS1mC0.U1Yk0ZDqTA-3Tvt0TA-W5H00TZPGuv3qmhR4Phw9PvfsnvfznAcdnARYuHRzPj7-PhnLnW01rAR0Ijdspg91UsKGUHYznWR0u1dEuZCk0ZNG5yF9pywd0ZKGujYkP0KWpyfqn1cz0AdY5HDsnH-xnH0kPdtznjRkg1csPWFxrH0dn7t1PW0k0AVG5H00TMfqrjm40AFG5HDdr7tznjwxPH010AdW5HDsnH-xnH0kPdtznjRkg1cvPHR1nWRdPHDsg1cLrjf1PW0kPjm4g100TgKGujYs0Z7Wpyfqn0KzuLw9u1Ys0A7B5HKxn0K-ThTqn0KsTjYs0A4vTjYsQW0snj0snj0s0AdYTjYs0AwbUL0qn0KzpWYs0Aw-IWdsmsKhIjYs0ZKC5H00ULnqn0KBI1Ykn0K8IjYs0ZPl5fK9TdqGuAnqTZnVmhwbX0KGuAnqiDFK0ZKCIZbq0Zw9ThI-IjYvndtsg1Ddn0KYIgnqPH0znjf1PWn1njnsnHDdP1T1n6Kzug7Y5HDvPHTzPHcLPjf1P100Tv-b5yuWnW9hnHwbnj0sn1IWnH00mLPV5RmYPjTzfH0zP1cvwWD1wDR0mynqnfKsUWYs0Z7VIjYs0Z7VT1Ys0ZGY5H00UyPxuMFEUHYsg1Kxn7tsg1Kxn0Kbmy4dmhNxTAk9Uh-bT1Ysg1Kxn7tsg1Kxn0Ksmgwxuhk9u1Ys0AwWpyfqn0K-IA-b5iYk0A71TAPW5H00IgKGUhPW5H00Tydh5H00uhPdIjYs0A-1mvsqn0K9uAu_myTqnfK_uhnqn0KbmvPb5fKYTh7buHYs0AFbpyfqnbn1rjfLrRcYfHN7fRmvwj0vP1KKrD7arHcYPHDLnYn0UvnqnfKBIjYs0Aq9IZTqn0KEIjYs0AqzTZfqnanscznsc10WnansQW0snj0snanscYwANansczYWna3snj0snj0Wni3snj0knj00XZPYIHY1PWm1nHm4PsKkgLmqna3zrNtsQW0sg108njKxna3YnNtsQWRLg1D8njKxna3sndts0AF1gLKzUvwGujYs0ZFEpyu_myTqn0KWIWY0pgPxmLK95H00mL0qn0K-TLfqn0KWThnqPWfzP1R&us=newvui&xst=mWYzf1n3PjT4fWwKPRNKwWuDnjmLnDD3fRc4nWfdnHT1fs715HD3nHTsnjn3nj04PWfknWTsnW63g1czPNts0gTqTA-3TvtKTHdspg91Us7d5HnvPWnkPWbL0gfqnHmdP1cdnWTYP07VTHYs0W0aQf7Wpjdhmdqsms7_IHYs0yP85yF9pywd0Hc4rH6vrHTdPjR&word=&ck=0.0.0.0.0.0.0.0&shh=www.baidu.com&sht=baidu&wd=">pixso</a></li>
+<li>即时设计</li>
+<li>MasterGO</li>
+</ul>
+<p>我们选用MasterGO作为我们未来往蓝湖上传设计图的工具。<br><a name="ui8qh"></a></p>
+<h2 id="MasterGo"><a href="#MasterGo" class="headerlink" title="MasterGo"></a>MasterGo</h2><p>进入到蓝湖后，右上角有一个masterGo的图标<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657252970317-5f456be6-7f60-42e5-9d68-74427f9aab38.png#clientId=u11501071-8737-4&from=paste&height=72&id=ud5504d90&name=image.png&originHeight=72&originWidth=346&originalType=binary&ratio=1&rotation=0&showTitle=false&size=6906&status=done&style=none&taskId=u8735b82f-de0b-4def-b50d-c4492e72d9d&title=&width=346" alt="image.png"><br />第一次点击时，会到注册页，直接用蓝湖账号注册即可。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253049803-529ce7f8-556a-4245-9aa0-9cea5e5370ec.png#clientId=u11501071-8737-4&from=paste&height=974&id=u21f185bf&name=image.png&originHeight=974&originWidth=1919&originalType=binary&ratio=1&rotation=0&showTitle=false&size=239197&status=done&style=none&taskId=ua55029d0-047c-49cc-98ae-f5f198df591&title=&width=1919" alt="image.png"></p>
+<p>进入到mastergo中看到的界面。<br><a name="MGM0g"></a></p>
+<h3 id="导入设计图"><a href="#导入设计图" class="headerlink" title="导入设计图"></a>导入设计图</h3><p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253208999-ce9213d5-0fe2-4a7e-b9b1-0d7c73ed3211.png#clientId=u11501071-8737-4&from=paste&height=233&id=u22c09d7c&name=image.png&originHeight=233&originWidth=350&originalType=binary&ratio=1&rotation=0&showTitle=false&size=16521&status=done&style=none&taskId=u37d528db-0912-47f7-ba6a-fefe0bb1ecb&title=&width=350" alt="image.png"><br />在MasterGo的右上角有个导入文件，点击后，选择我给大家的设计图，然后导入即可。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253278421-083bc99d-8956-46ee-9808-693e661de046.png#clientId=u11501071-8737-4&from=paste&height=388&id=u64e17b4e&name=image.png&originHeight=388&originWidth=512&originalType=binary&ratio=1&rotation=0&showTitle=false&size=28949&status=done&style=none&taskId=u3af44e9d-07be-4aa2-a0f3-e6ce6fa79b2&title=&width=512" alt="image.png"><br />点击“选择或拖拽文件到此处”，在打开问文件选择器中，找到我们的设计图。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253278873-122dc623-be16-4191-8668-3a9a08fc035f.png#clientId=u11501071-8737-4&from=paste&height=532&id=ub175be6f&name=image.png&originHeight=532&originWidth=942&originalType=binary&ratio=1&rotation=0&showTitle=false&size=36287&status=done&style=none&taskId=uadfc7a5b-89c3-4240-aed1-a618f3d8590&title=&width=942" alt="image.png"><br />等到导入完成<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253278837-f145390a-19e6-4b41-9517-eb48c78f0f55.png#clientId=u11501071-8737-4&from=paste&height=200&id=u05723b24&name=image.png&originHeight=200&originWidth=445&originalType=binary&ratio=1&rotation=0&showTitle=false&size=17262&status=done&style=none&taskId=u9db7c3de-d5ac-4d60-b24c-1e83e16fbf3&title=&width=445" alt="image.png"><br />导入完成，点击导入结束即可。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253295157-25587d57-fec6-4222-916c-178330660cfd.png#clientId=u11501071-8737-4&from=paste&height=194&id=u72964df0&name=image.png&originHeight=194&originWidth=425&originalType=binary&ratio=1&rotation=0&showTitle=false&size=13642&status=done&style=none&taskId=u54891d5f-7f4f-4907-a4b6-705d79270de&title=&width=425" alt="image.png"><br />在我们的列表中，就可以看到我们导入的内容。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253311922-b8bc86d5-9223-4043-84ca-c8ccda2dba86.png#clientId=u11501071-8737-4&from=paste&height=270&id=u6a892330&name=image.png&originHeight=270&originWidth=337&originalType=binary&ratio=1&rotation=0&showTitle=false&size=2818&status=done&style=none&taskId=u44e74424-baec-434c-824d-1c732d0daa7&title=&width=337" alt="image.png"><br><a name="z2su7"></a></p>
+<h3 id="打开设计图"><a href="#打开设计图" class="headerlink" title="打开设计图"></a>打开设计图</h3><p>双击导入的设计图打开。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253414874-d6cfe18e-0bef-44e4-bbd7-3d8d00ae4167.png#clientId=u11501071-8737-4&from=paste&height=728&id=u3639ac63&name=image.png&originHeight=728&originWidth=400&originalType=binary&ratio=1&rotation=0&showTitle=false&size=123072&status=done&style=none&taskId=u165c8351-65ee-4915-9df0-9fe1eb78227&title=&width=400" alt="image.png"><br><a name="Tee1k"></a></p>
+<h3 id="安装蓝湖插件"><a href="#安装蓝湖插件" class="headerlink" title="安装蓝湖插件"></a>安装蓝湖插件</h3><p>注意，这个插件第一次装好，之后就不需要再次安装。<br />在打开的设计图上点击右键，选择插件，然后点击前往插件社区。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253487331-c8f392c0-550e-4983-9948-7c5279a0f25b.png#clientId=u11501071-8737-4&from=paste&height=203&id=u62c1f72a&name=image.png&originHeight=203&originWidth=344&originalType=binary&ratio=1&rotation=0&showTitle=false&size=11395&status=done&style=none&taskId=u9c33d79b-37d3-4608-b01a-a2fdde660ed&title=&width=344" alt="image.png"><br />在插件社区上，找到蓝湖。点击安装<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253571660-a3e0df89-1eda-459a-b25e-69d0e07ac00e.png#clientId=u11501071-8737-4&from=paste&height=492&id=uf26ae9f9&name=image.png&originHeight=492&originWidth=416&originalType=binary&ratio=1&rotation=0&showTitle=false&size=63946&status=done&style=none&taskId=u13f0600d-833c-4d53-99bd-fcd92c1eb5f&title=&width=416" alt="image.png"><br />点击安装后会变成已安装<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253595318-4c104725-9431-4e51-b445-223596cdcdb9.png#clientId=u11501071-8737-4&from=paste&height=443&id=ub1725fa0&name=image.png&originHeight=443&originWidth=410&originalType=binary&ratio=1&rotation=0&showTitle=false&size=69997&status=done&style=none&taskId=u187644e2-7c2c-40bc-8bbe-88242a743d1&title=&width=410" alt="image.png"><br />再次回到MasterGo界面。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253615324-e24e7ff6-bcaf-47cc-a918-e74ffbf603d1.png#clientId=u11501071-8737-4&from=paste&height=1008&id=u85121d43&name=image.png&originHeight=1008&originWidth=1920&originalType=binary&ratio=1&rotation=0&showTitle=false&size=262892&status=done&style=none&taskId=u0b23434e-af32-40e8-a845-65def75f5cc&title=&width=1920" alt="image.png"><br />在空白处点击右键，<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253636772-8ece431f-1595-49aa-bb0d-096edaf81046.png#clientId=u11501071-8737-4&from=paste&height=234&id=u3f709712&name=image.png&originHeight=234&originWidth=332&originalType=binary&ratio=1&rotation=0&showTitle=false&size=17086&status=done&style=none&taskId=u3ed198ea-f75f-452a-9076-0c6e50da7c7&title=&width=332" alt="image.png"><br />选择蓝湖，第一次选择需要登录蓝湖。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253672788-9b377d64-ec2b-4ea8-990c-ba2b238b02a2.png#clientId=u11501071-8737-4&from=paste&height=416&id=u3a232eb9&name=image.png&originHeight=416&originWidth=317&originalType=binary&ratio=1&rotation=0&showTitle=false&size=8858&status=done&style=none&taskId=ud312ebe2-f853-4116-9b26-1a76df11996&title=&width=317" alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253689721-b753bee4-6665-47f5-bbbe-e3937b0b46e8.png#clientId=u11501071-8737-4&from=paste&height=487&id=uec7fc630&name=image.png&originHeight=487&originWidth=458&originalType=binary&ratio=1&rotation=0&showTitle=false&size=17537&status=done&style=none&taskId=u7f1d1b65-9179-416f-9c18-aa0eeb3f4d7&title=&width=458" alt="image.png"><br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253722462-0020ac69-3992-468a-a521-42ece2a77951.png#clientId=u11501071-8737-4&from=paste&height=480&id=u2d27dc0f&name=image.png&originHeight=480&originWidth=448&originalType=binary&ratio=1&rotation=0&showTitle=false&size=18214&status=done&style=none&taskId=u1ec4ef08-ba57-41e6-87cd-6d3d5882f2f&title=&width=448" alt="image.png"><br />登陆完成后，返回Master就可以继续使用了<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253746628-e234b8c8-8030-4f67-b15e-b9532f24b1ac.png#clientId=u11501071-8737-4&from=paste&height=416&id=u89823c67&name=image.png&originHeight=416&originWidth=321&originalType=binary&ratio=1&rotation=0&showTitle=false&size=16008&status=done&style=none&taskId=u65ce50aa-dea9-421f-8e7b-c1b170175c3&title=&width=321" alt="image.png"><br />搞定后，自动出现对应的界面。<br />然后选择我们的团队，创建对应的项目，上传设计图<br />按要求配置后，点击上传即可，第一次上传，建议上传全部画板。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253849070-6503e911-fe4f-436f-91ef-7c3f5ddd6670.png#clientId=u11501071-8737-4&from=paste&height=423&id=ua650d98e&name=image.png&originHeight=423&originWidth=322&originalType=binary&ratio=1&rotation=0&showTitle=false&size=6565&status=done&style=none&taskId=u1d2b3152-8f44-4dcd-9ba8-db71cd90eec&title=&width=322" alt="image.png"><br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253859081-9614e990-0466-4ae6-a5da-01fbcef01262.png#clientId=u11501071-8737-4&from=paste&height=419&id=u775f8ce8&name=image.png&originHeight=419&originWidth=318&originalType=binary&ratio=1&rotation=0&showTitle=false&size=10612&status=done&style=none&taskId=ub7a2a735-af23-45db-9dca-77143b11e8a&title=&width=318" alt="image.png"><br />上传完成后，即可查看项目。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657253902787-5168f6d3-c1aa-4be1-a599-b88812bf217a.png#clientId=u11501071-8737-4&from=paste&height=351&id=u9ecdff98&name=image.png&originHeight=351&originWidth=274&originalType=binary&ratio=1&rotation=0&showTitle=false&size=36169&status=done&style=none&taskId=u066ab73b-c946-466a-aafc-ec7df36b43f&title=&width=274" alt="image.png"><br />蓝湖方便前端开发实现对应的工作</p>
+<ul>
+<li>标注工作，方便查看每个元素的相关属性</li>
+<li>方便切图</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2022/06/15/41-%E8%93%9D%E6%B9%96%E7%9A%84%E4%BD%BF%E7%94%A8/">http://example.com/2022/06/15/41-%E8%93%9D%E6%B9%96%E7%9A%84%E4%BD%BF%E7%94%A8/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/06/23/42-DOM%E8%8A%82%E7%82%B9%E6%93%8D%E4%BD%9C/">42.DOM节点操作</a>
+            
+            
+            <a class="next" rel="next" href="/2022/06/05/40-%E4%BA%8B%E4%BB%B6/">40.事件</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

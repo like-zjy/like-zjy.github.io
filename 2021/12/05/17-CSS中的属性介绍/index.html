@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>17.CSS中的属性介绍 | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">17.CSS中的属性介绍</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十二月 5, 2021&nbsp;&nbsp;9:06:54</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><a name="RRXLm"></a></p>
+<h2 id="圆角属性"><a href="#圆角属性" class="headerlink" title="圆角属性"></a>圆角属性</h2><p>以前在CSS3出现之前，我们如果想要在页面上实现圆角效果，需要使用对应的背景图来实现。在修改圆角时需要设计师修改对应的图片发给我们，沟通成本很高，所以在CSS3中才有圆角概念。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">border-radius</span>: 半径值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658297284475-0f803e96-b11c-480e-b0b8-31980374a390.png#clientId=uad4ad482-2c00-4&from=paste&height=202&id=u46c825f9&name=image.png&originHeight=202&originWidth=199&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1887&status=done&style=none&taskId=ue9362013-d923-4c08-8f73-a5fd356e35a&title=&width=199" alt="image.png"><br />实际上的圆角，就是一个半径为设置的圆角值的圆形放在对应边角的效果。<br />设置圆角如果使用的是一个值，则表示四个角都是圆角，如果设置四个值分别代表左上，右上，右下，左下四个方向。<br />如果是两个值，则表示（左上 右下）   （右上 左下）<br />如果我们要给元素的一个角设置两个值，则会是一个椭圆效果</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">border-radius</span>: 左上横向半径 右上横向半径 右下横向半径 左下横向半径 / 左上纵向半径 右上纵向半径 右下纵向半径 左下纵向半径</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658298098944-c4e3997f-2aab-444d-be54-6c901d8d57df.png#clientId=uad4ad482-2c00-4&from=paste&height=179&id=u219e4c95&name=image.png&originHeight=179&originWidth=137&originalType=binary&ratio=1&rotation=0&showTitle=false&size=2007&status=done&style=none&taskId=u0177504a-70e0-4940-a583-3235c5afb58&title=&width=137" alt="image.png"><br><a name="Ow5JP"></a></p>
+<h3 id="单独定义角"><a href="#单独定义角" class="headerlink" title="单独定义角"></a>单独定义角</h3><ul>
+<li>border-top-left-radius</li>
+<li>border-top-right-radius</li>
+<li>border-bottom-left-radius</li>
+<li>border-bottom-right-radius</li>
+</ul>
+<p>定义一个值是普通圆角，两个值是椭圆圆角<br><a name="qYbhz"></a></p>
+<h2 id="阴影"><a href="#阴影" class="headerlink" title="阴影"></a>阴影</h2><p>阴影指元素上的阴影效果，分别为box-shadow和text-shadow<br><a name="w9S6H"></a></p>
+<h3 id="box-shadow"><a href="#box-shadow" class="headerlink" title="box-shadow"></a>box-shadow</h3><p>我们只需要会设置即可</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">box-shadow</span>: x y 模糊程度 阴影大小 阴影颜色 内外阴影;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>x值的作用实现阴影x轴偏移，为正值时向右偏移，为负值时向左偏移<br />y值的作用实现阴影y轴偏移，为正值时像下偏移，为负值时向上偏移<br />模糊程度 表示阴影的模糊效果，一般使用阴影都会使用模糊，因为模糊更好看<br />阴影大小 默认阴影大小和我们对应的元素一样大，设置大小，会让阴影变得更大。<br />inset 添加内阴影 写不写inset<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658298669037-f12171ed-96d1-4c34-ab6f-3fd3f1549147.png#clientId=uad4ad482-2c00-4&from=paste&height=134&id=u60bfb309&name=image.png&originHeight=134&originWidth=138&originalType=binary&ratio=1&rotation=0&showTitle=false&size=2531&status=done&style=none&taskId=uad783aea-c72c-4f14-b811-18d445d10cb&title=&width=138" alt="image.png"><br />外阴影<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658298680689-a232442c-22dd-48ce-a8fb-3d41ceee356c.png#clientId=uad4ad482-2c00-4&from=paste&height=115&id=ueff74340&name=image.png&originHeight=115&originWidth=123&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1941&status=done&style=none&taskId=u9f4afa7f-2dc5-4004-9c71-1344bda3f46&title=&width=123" alt="image.png"><br />内阴影<br><a name="pa8iK"></a></p>
+<h4 id="写多个阴影"><a href="#写多个阴影" class="headerlink" title="写多个阴影"></a>写多个阴影</h4><p>如果我们想要实现多个阴影怎么办，使用逗号隔开每个阴影的属性即可。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">box-shadow</span>: <span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span> red, <span class="number">2px</span> <span class="number">2px</span> <span class="number">2px</span> <span class="number">2px</span> green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>0 8px 16px rgb(0 0 0 &#x2F; 18%)<br><a name="tqCXv"></a></p>
+<h3 id="text-shadow"><a href="#text-shadow" class="headerlink" title="text-shadow"></a>text-shadow</h3><p>没有内阴影，也没有模糊大小，只有x y 模糊程度 颜色 四个值</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">text-shadow</span>: x y 模糊程度 颜色;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658303158383-d2e406a3-ad0d-4cf9-8744-dbdeeec1cf30.png#clientId=uad4ad482-2c00-4&from=paste&height=148&id=u609cb71a&name=image.png&originHeight=148&originWidth=342&originalType=binary&ratio=1&rotation=0&showTitle=false&size=33052&status=done&style=none&taskId=u35a5997c-f19b-4b9f-b764-4eeff28844e&title=&width=342" alt="image.png"><br><a name="SICLa"></a></p>
+<h2 id="背景渐变色"><a href="#背景渐变色" class="headerlink" title="背景渐变色"></a>背景渐变色</h2><p>CSS中渐变色不属于颜色概念，属于图片概念。所以渐变色需要使用<code>background-image</code>属性进行设置而不是background-color</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: 渐变色属性;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="iCcuW"></a></p>
+<h3 id="线性渐变"><a href="#线性渐变" class="headerlink" title="线性渐变"></a>线性渐变</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(方向, 颜色<span class="number">1</span> 占据的大小, 颜色<span class="number">2</span>, 颜色<span class="number">3</span>, 颜色<span class="number">4</span>, 颜色n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="sY2ho"></a></p>
+<h4 id="方向"><a href="#方向" class="headerlink" title="方向"></a>方向</h4><ul>
+<li>to 方向</li>
+</ul>
+<p>top \ right \ bottom \ left \ top right \ top left \ bottom right \ bottom left</p>
+<ul>
+<li>角度</li>
+</ul>
+<p>角度单位是deg <br />0度指to top，正角度顺时针旋转，负角度逆时针旋转<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658304078675-753830ec-6d74-4699-b768-631b5d352caf.png#clientId=uad4ad482-2c00-4&from=paste&height=103&id=u0480fbb9&name=image.png&originHeight=103&originWidth=105&originalType=binary&ratio=1&rotation=0&showTitle=false&size=7747&status=done&style=none&taskId=u0b5cb2dd-43d4-411e-bd76-76dfed2f41c&title=&width=105" alt="image.png"><br><a name="yU74j"></a></p>
+<h4 id="颜色及宽度的设置"><a href="#颜色及宽度的设置" class="headerlink" title="颜色及宽度的设置"></a>颜色及宽度的设置</h4><p>在线性渐变中，我们可以写很多很多很多的颜色<br />linear-gradient(方向, 颜色1, 颜色2, 颜色3, 颜色4, 颜色n)<br />并且可以在颜色的后面设置这个颜色占据的空间<br />linear-gradient(方向, 颜色1 值, 颜色2 值, 颜色3 值, 颜色4 值, 颜色n 值)<br />值可以是固定值也可以是百分比，表示对应的元素从哪个位置开始到下一个颜色的位置结束进行渐变。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to right, red <span class="number">0%</span>, orange <span class="number">100px</span>, green <span class="number">60%</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658304691857-cbe386d1-8887-41fa-991b-228034eee111.png#clientId=uad4ad482-2c00-4&from=paste&height=113&id=u22dd36c0&name=image.png&originHeight=113&originWidth=951&originalType=binary&ratio=1&rotation=0&showTitle=false&size=24154&status=done&style=none&taskId=u3051a436-7cb1-4ab0-8bae-2c7384a2cc5&title=&width=951" alt="image.png"><br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658304646875-b34786fe-62eb-45b9-8a82-5994bd83407d.png#clientId=uad4ad482-2c00-4&from=paste&height=110&id=u5f6f4174&name=image.png&originHeight=110&originWidth=947&originalType=binary&ratio=1&rotation=0&showTitle=false&size=15059&status=done&style=none&taskId=u90c4df43-bc87-425a-9bc8-b5a45205eb3&title=&width=947" alt="image.png"><br><a name="Yyc6i"></a></p>
+<h4 id="重复线性渐变"><a href="#重复线性渐变" class="headerlink" title="重复线性渐变"></a>重复线性渐变</h4><p>在我们添加了渐变宽度的基础上，实现重复效果</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">repeating-linear-gradient</span>(to right, red <span class="number">0%</span>, orange <span class="number">100px</span>, green <span class="number">60%</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="wAsOV"></a></p>
+<h3 id="径向渐变"><a href="#径向渐变" class="headerlink" title="径向渐变"></a>径向渐变</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">radial-gradient</span>(shape size at position, start-color, ..., last-color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>shape</li>
+</ul>
+<p>ellipse (默认): 指定椭圆形的径向渐变。<br />circle ：指定圆形的径向渐变</p>
+<ul>
+<li>size</li>
+</ul>
+<p>farthest-corner (默认) : 指定径向渐变的半径长度为从圆心到离圆心最远的角<br />closest-corner ： 指定径向渐变的半径长度为从圆心到离圆心最近的角<br />farthest-side ：指定径向渐变的半径长度为从圆心到离圆心最远的边<br />closest-side ：指定径向渐变的半径长度为从圆心到离圆心最近的边</p>
+<ul>
+<li>size</li>
+</ul>
+<p>表示圆心位置 可以设置两个值分别是x和y的值 50% 50% 表示正中心。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE <span class="selector-tag">html</span>&gt;</span><br><span class="line">&lt;<span class="selector-tag">html</span> lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-<span class="number">8</span>&quot;&gt;</span><br><span class="line">  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; <span class="attribute">content</span>=&quot;IE=edge&quot;&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; <span class="attribute">content</span>=&quot;<span class="attribute">width</span>=device-<span class="attribute">width</span>, initial-scale=<span class="number">1.0</span>&quot;&gt;</span><br><span class="line">  &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">  &lt;style&gt;</span><br><span class="line">    <span class="selector-class">.box</span> &#123;</span><br><span class="line">      <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">      <span class="attribute">height</span>: <span class="number">150px</span>;</span><br><span class="line">      <span class="attribute">margin-bottom</span>: <span class="number">20px</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-class">.box1</span> &#123;</span><br><span class="line">      <span class="attribute">background-image</span>: <span class="built_in">radial-gradient</span>(circle farthest-corner at <span class="number">20%</span> <span class="number">50%</span>, red, green);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-class">.box2</span> &#123;</span><br><span class="line">      <span class="attribute">background-image</span>: <span class="built_in">radial-gradient</span>(circle closest-corner at <span class="number">20%</span> <span class="number">50%</span>, red, green);</span><br><span class="line">      </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-class">.box3</span> &#123;</span><br><span class="line">      <span class="attribute">background-image</span>: <span class="built_in">radial-gradient</span>(circle farthest-side at <span class="number">20%</span> <span class="number">50%</span>, red, green);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.box4</span> &#123;</span><br><span class="line">      <span class="attribute">background-image</span>: <span class="built_in">radial-gradient</span>(circle closest-side at <span class="number">20%</span> <span class="number">50%</span>, red, green);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;<span class="selector-tag">body</span>&gt;</span><br><span class="line">  &lt;<span class="selector-tag">div</span> class=&quot;box box1&quot;&gt;&lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">  &lt;<span class="selector-tag">div</span> class=&quot;box box2&quot;&gt;&lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">  &lt;<span class="selector-tag">div</span> class=&quot;box box3&quot;&gt;&lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">  &lt;<span class="selector-tag">div</span> class=&quot;box box4&quot;&gt;&lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;/<span class="selector-tag">body</span>&gt;</span><br><span class="line">&lt;/<span class="selector-tag">html</span>&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658306433763-4ca24cf7-098d-465b-8df6-498836d3b0c1.png#clientId=uad4ad482-2c00-4&from=paste&height=678&id=u1b47c359&name=image.png&originHeight=678&originWidth=319&originalType=binary&ratio=1&rotation=0&showTitle=false&size=62874&status=done&style=none&taskId=u1bff1d8e-c8b7-4cb7-9fa6-719afcd95f0&title=&width=319" alt="image.png"><br><a name="j7yV0"></a></p>
+<h4 id="重复径向渐变"><a href="#重复径向渐变" class="headerlink" title="重复径向渐变"></a>重复径向渐变</h4>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2021/12/05/17-CSS%E4%B8%AD%E7%9A%84%E5%B1%9E%E6%80%A7%E4%BB%8B%E7%BB%8D/">http://example.com/2021/12/05/17-CSS%E4%B8%AD%E7%9A%84%E5%B1%9E%E6%80%A7%E4%BB%8B%E7%BB%8D/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/12/15/18-%E8%BF%87%E6%B8%A1/">18.过渡</a>
+            
+            
+            <a class="next" rel="next" href="/2021/12/01/16-%E5%BC%B9%E6%80%A7%E7%9B%92%E5%AD%90/">16.弹性盒子</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

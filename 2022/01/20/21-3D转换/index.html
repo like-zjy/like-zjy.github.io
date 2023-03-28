@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>21.3D转换 | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">21.3D转换</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">一月 20, 2022&nbsp;&nbsp;18:32:51</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>3d的坐标系长什么样子，x轴 y轴以及z轴<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658902628766-cc498ae6-2799-4b0e-a8ee-56cd7aaf16e7.png#clientId=u5f5cb6da-62ff-4&from=paste&height=602&id=u9989ada4&name=image.png&originHeight=602&originWidth=765&originalType=binary&ratio=1&rotation=0&showTitle=false&size=5174&status=done&style=none&taskId=u7ad07dbd-dbc2-4102-8903-4db172fe6aa&title=&width=765" alt="image.png"><br />3D场景和场景中的元素。所谓的3D场景就是3D元素的父元素。<br />3d转化的属性，只是多了空间的3d效果，属性基本不变。想要产生3D效果，至少需要两个属性给3D场景加上去<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658902776581-9b6efb89-875d-40b6-b53f-9102fe8288dc.png#clientId=u5f5cb6da-62ff-4&from=paste&height=283&id=uc829e0fd&name=image.png&originHeight=283&originWidth=716&originalType=binary&ratio=1&rotation=0&showTitle=false&size=334144&status=done&style=none&taskId=u5373d7ad-709e-460b-9cef-80626bdf796&title=&width=716" alt="image.png"></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">舞台 &#123;</span><br><span class="line">  <span class="attribute">transform-style</span>: preserve-<span class="number">3</span>d;</span><br><span class="line">  <span class="attribute">perspective</span>: 视距;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当我们添加了这样的属性后，舞台内的元素有3d效果，舞台没有3d效果。想要让舞台有3D效果，需要舞台的父元素再加对应的属性。<br />注意！！！！！在网页上所有的3d属性，都会触发GPU渲染，过渡和动画效果的性能更好<br><a name="zxrZ6"></a></p>
+<h2 id="视距"><a href="#视距" class="headerlink" title="视距"></a>视距</h2><p>两种视距的设置方式，一种可以给整个父元素设置，那么在父元素中不同位置的相同属性的元素，我们所看到的效果不同，另外一种单独给每一个子元素设置视距，使其展现出相同的效果</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">perspective</span>: 视距;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658912653563-2331744a-67d6-4019-ba6b-d0b3b563f51a.png#clientId=u5f5cb6da-62ff-4&from=paste&height=428&id=uf28c46b2&name=image.png&originHeight=428&originWidth=1036&originalType=binary&ratio=1&rotation=0&showTitle=false&size=6474&status=done&style=none&taskId=ude9de346-d192-4b48-a4f1-4fce6be0df7&title=&width=1036" alt="image.png"></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">子元素 &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">perspective</span>(<span class="number">1000px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658912719764-6487f8ad-ca7f-42e0-bbab-b8e4e0a6bf7c.png#clientId=u5f5cb6da-62ff-4&from=paste&height=519&id=u6aec9ebe&name=image.png&originHeight=519&originWidth=989&originalType=binary&ratio=1&rotation=0&showTitle=false&size=6638&status=done&style=none&taskId=u9f0ef4c4-4248-4be2-8195-7372a1df04a&title=&width=989" alt="image.png"><br><a name="AmDHe"></a></p>
+<h2 id="调整视角"><a href="#调整视角" class="headerlink" title="调整视角"></a>调整视角</h2><p>perspective-origin可以控制视角</p>
+<ul>
+<li>x left center right</li>
+<li>y top center bottom</li>
+</ul>
+<p>还可以使用固定值和百分比<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658913008907-7d4ed908-5d36-4c29-8069-dff4cfca3c1c.png#clientId=u5f5cb6da-62ff-4&from=paste&height=255&id=ub584ae81&name=image.png&originHeight=255&originWidth=1389&originalType=binary&ratio=1&rotation=0&showTitle=false&size=5595&status=done&style=none&taskId=ubbc72029-efbf-45a5-9f2b-41eb264f753&title=&width=1389" alt="image.png"><br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1658913026380-21b3ebc4-3d6f-40ad-bfc2-6152413beb97.png#clientId=u5f5cb6da-62ff-4&from=paste&height=245&id=u82dd000e&name=image.png&originHeight=245&originWidth=1389&originalType=binary&ratio=1&rotation=0&showTitle=false&size=6171&status=done&style=none&taskId=uf749b757-c0f2-418d-9609-279ed7558e2&title=&width=1389" alt="image.png"><br><a name="qzhCr"></a></p>
+<h2 id="平移"><a href="#平移" class="headerlink" title="平移"></a>平移</h2><p>平移在3d效果上，只是加了z轴的平移</p>
+<ul>
+<li>translateX()</li>
+<li>translateY()</li>
+<li>translateZ()</li>
+<li>translate3d()<br><a name="eZa3q"></a></li>
+</ul>
+<h2 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h2><ul>
+<li>rotateX(旋转角度)</li>
+<li>rotateY(旋转角度)</li>
+<li>rotateZ(旋转角度) 和 rotate表现相同</li>
+<li>rotate3d()</li>
+</ul>
+<p>需要设置对应的3d效果才能看到对应的旋转效果。<br />当角度为正值时，顺时针旋转，反之逆时针旋转。<br />rotate3d不是简单的把三个轴的角度进行复合，而是一个新的属性<br />rotate3d(x, y, z, 角度)<br />通过x y z三个矢量，然后确定一个方向，这个方向就是元素旋转的轴。<br><a name="QxjCm"></a></p>
+<h3 id="旋转的背面"><a href="#旋转的背面" class="headerlink" title="旋转的背面"></a>旋转的背面</h3><p>默认情况下， 我们可以看到旋转后的背面的效果，如果我们不想看到，可以使用</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">backface-visibility</span>: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="bv5LM"></a></p>
+<h2 id="缩放"><a href="#缩放" class="headerlink" title="缩放"></a>缩放</h2><p>scaleZ，这个属性可以缩放z轴距离，不能给元素本身加，要给3D元素的父元素加。<br />scale3d(x, y, z) 三者的缩放的比例。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2022/01/20/21-3D%E8%BD%AC%E6%8D%A2/">http://example.com/2022/01/20/21-3D%E8%BD%AC%E6%8D%A2/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/01/28/22-BFC/">22.BFC</a>
+            
+            
+            <a class="next" rel="next" href="/2021/12/23/19-%E5%8A%A8%E7%94%BB/">19.动画</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

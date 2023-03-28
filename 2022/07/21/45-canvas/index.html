@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>45.canvas | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">45.canvas</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">七月 21, 2022&nbsp;&nbsp;15:03:59</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>在HTML5新增新的标签，名为画布，可以使用JS在上面完成对应的画的操作。正常情况我们可以把它当成一个img看待。<br><a name="waiqp"></a></p>
+<h2 id="如何使用canvas"><a href="#如何使用canvas" class="headerlink" title="如何使用canvas"></a>如何使用canvas</h2><p><a name="p8Roi"></a></p>
+<h3 id="HTML中使用canvas标签"><a href="#HTML中使用canvas标签" class="headerlink" title="HTML中使用canvas标签"></a>HTML中使用canvas标签</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>canvas默认的宽高是300x150的尺寸，如果想要修改这个值，不能使用css修改，需要直接设置对应的width和height属性，这个是html属性，不是css属性</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">width</span>=<span class="string">&quot;500&quot;</span> <span class="attr">height</span>=<span class="string">&quot;300&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果我们想要设置要给全屏的canvas，需要使用js进行设置，设置为全屏的宽高</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> canvas = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;canvas&#x27;</span>)</span><br><span class="line">canvas.<span class="property">width</span> = <span class="variable language_">window</span>.<span class="property">innerWidth</span></span><br><span class="line">canvas.<span class="property">height</span> = <span class="variable language_">window</span>.<span class="property">innerHeight</span></span><br></pre></td></tr></table></figure>
+<p>当我们设置了全屏后，会有滚动条，原因和img标签一样，行内块元素默认下方会有空白。一定要记得去掉body的margin值</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">canvas</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 或者 */</span></span><br><span class="line"><span class="selector-tag">canvas</span> &#123;</span><br><span class="line">  <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="v9hls"></a></p>
+<h3 id="JavaScript中进行绘图"><a href="#JavaScript中进行绘图" class="headerlink" title="JavaScript中进行绘图"></a>JavaScript中进行绘图</h3><p>在画布上进行绘制需要使用canvas的方法获取一个值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> canvas = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;canvas&#x27;</span>)</span><br><span class="line"><span class="comment">// 获取ctx</span></span><br><span class="line"><span class="keyword">let</span> ctx = canvas.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>上面两行代码是固定写法。几乎上所有的绘图操作，都是在ctx对象中的。<br><a name="fMXy4"></a></p>
+<h2 id="如何画"><a href="#如何画" class="headerlink" title="如何画"></a>如何画</h2><p><a name="N3C3y"></a></p>
+<h3 id="坐标"><a href="#坐标" class="headerlink" title="坐标"></a>坐标</h3><p>画布的左上角是0， 0的位置，x轴向右为正方向，y轴向下为正方向。<br><a name="c0Tpu"></a></p>
+<h3 id="描边"><a href="#描边" class="headerlink" title="描边"></a>描边</h3><p>我们在绘制好路径后，可以通过<code>ctx.stroke()</code>进行描边操作<br><a name="tOlXp"></a></p>
+<h3 id="填充"><a href="#填充" class="headerlink" title="填充"></a>填充</h3><p>我们在绘制好路径后，可以通过<code>ctx.fill()</code>进行填充操作<br><a name="GDoI2"></a></p>
+<h3 id="画线"><a href="#画线" class="headerlink" title="画线"></a>画线</h3><p>可以使用moveTo和lineTo进行划线操作.<br /><code>ctx.moveTo(x, y)</code>指起始点，参数分别指起始点坐标<br /><code>ctx.lineTo(x, y)</code>指终点，参数为终点坐标。<br />设置后，我们还需要通过<code>ctx.stroke()</code>进行描边。<br />线可以跟着画很多条。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ctx.<span class="title function_">moveTo</span>(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">ctx.<span class="title function_">lineTo</span>(<span class="number">100</span>, <span class="number">100</span>)</span><br><span class="line">ctx.<span class="title function_">stroke</span>()</span><br></pre></td></tr></table></figure>
+<p><a name="nixCY"></a></p>
+<h3 id="画矩形"><a href="#画矩形" class="headerlink" title="画矩形"></a>画矩形</h3><p>画矩形有很多方法</p>
+<ul>
+<li>ctx.fillRect()</li>
+<li>ctx.strokeRect()</li>
+<li>ctx.rect() 再进行描边或者填充</li>
+<li>clearRect()</li>
+</ul>
+<p>四个方法参数一致，都有四个参数，分别为<code>x, y, w, h</code><br />x, y表示矩形左上角点的坐标。w, h表示宽高</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ctx.<span class="title function_">fillRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">50</span>) <span class="comment">// 填充</span></span><br><span class="line">ctx.<span class="title function_">strokeRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">50</span>) <span class="comment">// 描边</span></span><br><span class="line"></span><br><span class="line">ctx.<span class="title function_">rect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">50</span>)</span><br><span class="line">ctx.<span class="title function_">fill</span>()</span><br><span class="line"><span class="comment">// 或者 </span></span><br><span class="line">ctx.<span class="title function_">rect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">50</span>)</span><br><span class="line">ctx.<span class="title function_">stroke</span>()</span><br></pre></td></tr></table></figure>
+<p>最后一个方法，是清除掉一块矩形区域</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.<span class="title function_">clearRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<p>清除画布在动画阶段有用。<br />坐标系<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1661998891509-9b5153e2-e353-4d22-a8d7-eda5de42a56e.png#clientId=u564888cd-c8cf-4&errorMessage=unknown%20error&from=paste&height=539&id=u0c982c0e&name=image.png&originHeight=539&originWidth=1122&originalType=binary&ratio=1&rotation=0&showTitle=false&size=20275&status=error&style=none&taskId=u65ddc924-0563-444c-aace-fd5c0ff26df&title=&width=1122" alt="image.png"><br><a name="Cih6w"></a></p>
+<h3 id="画圆弧"><a href="#画圆弧" class="headerlink" title="画圆弧"></a>画圆弧</h3><p>弧度单位 180deg &#x3D; Math.PI rad<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1662003986138-2e19b8a0-c370-48be-a2dc-d328652d41f4.png#clientId=u564888cd-c8cf-4&errorMessage=unknown%20error&from=paste&height=189&id=u030dfaef&name=image.png&originHeight=189&originWidth=203&originalType=binary&ratio=1&rotation=0&showTitle=false&size=4355&status=error&style=none&taskId=uc51de5a0-d041-43df-840f-7e5c1777a81&title=&width=203" alt="image.png"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ctx.<span class="title function_">arc</span>(x, y, 半径, 开始弧度, 结束弧度, 是否逆时针)</span><br><span class="line"></span><br><span class="line">ctx.<span class="title function_">stroke</span>() <span class="comment">// 描边</span></span><br><span class="line">ctx.<span class="title function_">fill</span>() <span class="comment">// 填充</span></span><br></pre></td></tr></table></figure>
+
+<p><a name="tn893"></a></p>
+<h2 id="画图"><a href="#画图" class="headerlink" title="画图"></a>画图</h2><p>把一个图片或者视频的一帧绘制到canvas上</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.<span class="title function_">drawImage</span>(img或者video的dom对象, 很多参数)</span><br></pre></td></tr></table></figure>
+<p>该方法有三种用法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.<span class="title function_">drawImage</span>(对象, cx, cy)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1662105980949-8acee0c2-1059-40ef-8544-eaf71b7b6f51.png#clientId=u3a5663ea-f4fd-4&errorMessage=unknown%20error&from=paste&height=662&id=u3f26fb59&name=image.png&originHeight=662&originWidth=887&originalType=binary&ratio=1&rotation=0&showTitle=false&size=4795&status=error&style=none&taskId=u6021637a-5bdc-4645-8866-9dc0e1ee3db&title=&width=887" alt="image.png"><br />该操作不会对图片进行缩放，直接把原尺寸放在canvas对应的位置上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.<span class="title function_">drawImage</span>(image, cx, cy, cw, ch)</span><br></pre></td></tr></table></figure>
+<p>cx、cy表示canvas上的位置<br />cw表示在canvas上绘制的图片宽度<br />ch表示在canvas上绘制的图片高度<br />这个操作会把图片完整绘制，进行缩放，如果canvas不够大，就只显示canvas的大小</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">drawImage</span>(image, sx, sy, sw, sh, cx, cy, cw, ch)</span><br></pre></td></tr></table></figure>
+<p>这个操作，可以把图片上某个区域裁切，然后画到canvas上。</p>
+<p><a name="xqS8R"></a></p>
+<h2 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h2><p><a name="j9NH6"></a></p>
+<h3 id="描边颜色"><a href="#描边颜色" class="headerlink" title="描边颜色"></a>描边颜色</h3><p>通过设置<code>ctx.strokStyle = &quot;颜色色值&quot;</code>就可以把当前path中的描边颜色修改<br><a name="fdrr6"></a></p>
+<h3 id="填充颜色"><a href="#填充颜色" class="headerlink" title="填充颜色"></a>填充颜色</h3><p>通过设置<code>ctx.fillStyle = &quot;颜色色值&quot;</code>就可以把当前path中的填充颜色修改<br><a name="ebwLI"></a></p>
+<h2 id="canvas中动画的原理是什么"><a href="#canvas中动画的原理是什么" class="headerlink" title="canvas中动画的原理是什么"></a>canvas中动画的原理是什么</h2><p>canvas中的动画原理和dom动画原理不一样，DOM动画是改变位置或者属性即可，canvas需要先清除画布内容再重新绘制。<br><a name="G2Pr1"></a></p>
+<h2 id="QRCode-js"><a href="#QRCode-js" class="headerlink" title="QRCode.js"></a>QRCode.js</h2><p>利用一定的规则，把文本变成二维码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">QRCode</span>(要生成到哪个元素中, <span class="string">&quot;文本&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2022/07/21/45-canvas/">http://example.com/2022/07/21/45-canvas/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/08/13/46-FileReader/">46.FileReader</a>
+            
+            
+            <a class="next" rel="next" href="/2022/07/10/44-%E4%BF%AE%E6%94%B9this%E6%8C%87%E5%90%91call%20apply%20bind/">44.修改this指向 call apply bind</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

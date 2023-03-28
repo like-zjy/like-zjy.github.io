@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>5.CSS历史 | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">5.CSS历史</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">九月 10, 2021&nbsp;&nbsp;13:49:17</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>层叠样式表(英文全称：Cascading Style Sheets)是一种用来表现<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/HTML">HTML</a>（<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%A0%87%E5%87%86%E9%80%9A%E7%94%A8%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80/6805073">标准通用标记语言</a>的一个应用）或<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/XML">XML</a>（标准通用标记语言的一个子集）等文件样式的计算机语言。CSS不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化。<br />CSS用来美化我们的HTML。<br><a name="mLRcb"></a></p>
+<h2 id="发展历程"><a href="#发展历程" class="headerlink" title="发展历程"></a>发展历程</h2><p>1990年，Tim Berners-Lee和Robert Cailliau共同发明了Web。1994年，Web真正走出实验室。<br />从HTML被发明开始，样式就以各种形式存在。不同的浏览器结合它们各自的样式语言为用户提供页面效果的控制。最初的HTML只包含很少的显示属性。<br />随着HTML的成长，为了满足页面设计者的要求，HTML添加了很多显示功能。但是随着这些功能的增加，HTML变的越来越杂乱，而且HTML页面也越来越臃肿。于是CSS便诞生了。<br />1994年哈坤·利提出了CSS的最初建议。而当时伯特·波斯（Bert Bos）正在设计一个名为Argo的浏览器，于是他们决定一起设计CSS。<br />其实当时在互联网界已经有过一些统一样式表语言的建议了，但CSS是第一个含有“层叠”丰意的样式表语言。在CSS中，一个文件的样式可以从其他的样式表中继承。读者在有些地方可以使用他自己更喜欢的样式，在其他地方则继承或“层叠”作者的样式。这种层叠的方式使作者和读者都可以灵活地加入自己的设计，混合每个人的爱好。<br />哈坤于1994年在芝加哥的一次会议上第一次提出了CSS的建议，1995年的www网络会议上CSS又一次被提出，博斯演示了Argo浏览器支持CSS的例子，哈肯也展示了支持CSS的Arena浏览器。<br />同年，W3C组织（World WideWeb Consortium）成立，CSS的创作成员全部成为了W3C的工作小组并且全力以赴负责研发CSS标准，层叠样式表的开发终于走上正轨。有越来越多的成员参与其中，例如微软公司的托马斯·莱尔顿(Thomas Reaxdon)，他的努力最终令Internet Explorer浏览器支持CSS标准。哈坤、波斯和其他一些人是这个项目的主要技术负责人。1996年底，CSS初稿已经完成，同年12月，层叠样式表的第一份正式标准（Cascading style Sheets Level 1）完成，成为w3c的推荐标准。<br />1997年初，W3C组织负责CSS的工作组开始讨论第一版中没有涉及到的问题。其讨论结果组成了1998年5月出版的CSS规范第二版。<br><a name="xKZbE"></a></p>
+<h2 id="先了解一个网站"><a href="#先了解一个网站" class="headerlink" title="先了解一个网站"></a>先了解一个网站</h2><p><a target="_blank" rel="noopener" href="https://www.caniuse.com/">www.caniuse.com</a><br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657095858325-9f4e1b0e-2dde-4090-b788-2238838e3c6e.png#clientId=u419fe81c-69aa-4&from=paste&height=487&id=u5bb10ea3&name=image.png&originHeight=487&originWidth=1382&originalType=binary&ratio=1&rotation=0&showTitle=false&size=102441&status=done&style=none&taskId=ua77d1d65-04d5-47ca-a9ea-d34a7985417&title=&width=1382" alt="image.png"><br />可以让我们了解浏览器对于web属性的兼容性。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657096047953-7f26c97c-99e4-4ff3-9e0c-00cecdcad8bd.png#clientId=u419fe81c-69aa-4&from=paste&height=701&id=u60edddcc&name=image.png&originHeight=701&originWidth=1378&originalType=binary&ratio=1&rotation=0&showTitle=false&size=103102&status=done&style=none&taskId=u91792378-5f1e-493b-89e2-73128810324&title=&width=1378" alt="image.png"><br />绿色表示兼容，红色表示不兼容，黄色表示需要不同的写法去兼容。数字表示浏览器版本。<br><a name="wVt2I"></a></p>
+<h2 id="开发者工具"><a href="#开发者工具" class="headerlink" title="开发者工具"></a>开发者工具</h2><p>在网页中按f12，或者右键选检查。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657096159728-b0533d93-6fcc-44ec-9141-6d8d98927934.png#clientId=u419fe81c-69aa-4&from=paste&height=978&id=u5674d54b&name=image.png&originHeight=978&originWidth=760&originalType=binary&ratio=1&rotation=0&showTitle=false&size=193769&status=done&style=none&taskId=u9bce0f7d-fe2a-40af-affd-4564990e817&title=&width=760" alt="image.png"><br />不同浏览器的F12工具长得不一样，功能相似。<br />开发者工具中有以下分类</p>
+<ul>
+<li>元素</li>
+<li>控制台</li>
+<li>源代码</li>
+<li>网络</li>
+<li>性能 等</li>
+</ul>
+<p>在元素的界面中，有以下几个部分<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657096485250-5ec7ae2a-7312-4aa0-9959-9d0ba3ddfd62.png#clientId=u419fe81c-69aa-4&from=paste&height=943&id=u96d5503e&name=image.png&originHeight=943&originWidth=758&originalType=binary&ratio=1&rotation=0&showTitle=false&size=198624&status=done&style=none&taskId=u2eecb024-1741-46c0-a1d8-53a36297f2c&title=&width=758" alt="image.png"><br />我们点击左侧的HTML结构，就可以在对应的位置找到这个HTML标签的样式。<br><a name="YLV8m"></a></p>
+<h2 id="CSS的使用方法"><a href="#CSS的使用方法" class="headerlink" title="CSS的使用方法"></a>CSS的使用方法</h2><p>color: red<br><a name="tbtK3"></a></p>
+<h3 id="行内式"><a href="#行内式" class="headerlink" title="行内式"></a>行内式</h3><p>利用标签的<code>style</code>属性，把css代码，写在属性值的位置上。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">&quot;color: red;&quot;</span>&gt;</span>这是一个段落<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1657097550690-bc61b063-7c1a-4137-bd00-69fe5291fc95.png#clientId=u419fe81c-69aa-4&from=paste&height=33&id=uc9097c44&name=image.png&originHeight=33&originWidth=112&originalType=binary&ratio=1&rotation=0&showTitle=false&size=967&status=done&style=none&taskId=u4a6e41dd-3cec-4f9d-afc2-4bdbd860576&title=&width=112" alt="image.png"><br><a name="bmFMj"></a></p>
+<h3 id="内联式"><a href="#内联式" class="headerlink" title="内联式"></a>内联式</h3><p>内联式需要借助我们的标签<code>style</code>标签，style标签可以写在任何位置，但是需要我们写在head里。用户体验更好。如果放在HTML下面，则用户访问网页，先看到没有CSS的效果，然后一瞬间CSS出现，看到CSS的效果。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">  <span class="comment">/* 在这里写CSS代码 */</span></span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><a name="emPg0"></a></p>
+<h3 id="外联式"><a href="#外联式" class="headerlink" title="外联式"></a>外联式</h3><p>项目中推荐使用的方式，因为CSS和HTML分离<br />使用<code>link</code>标签引入外部的css文件。<br />需要在外部新建对应的CSS文件，需要先新建<code>.txt</code>文件，然后重命名为<code>.css</code>文件。<br />在HTML上，使用link引入</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;css路径&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>只要目录正确，我们直接写<code>./</code>剩下的提示交给VSCode<br><a name="IxztE"></a></p>
+<h2 id="CSS语法"><a href="#CSS语法" class="headerlink" title="CSS语法"></a>CSS语法</h2><p>CSS的作用找到标签，然后设置样式。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">张三 &#123;</span><br><span class="line">  身高: <span class="number">2</span>米;</span><br><span class="line">  体重: <span class="number">200</span>斤;</span><br><span class="line">  衣服颜色: 黑色;</span><br><span class="line">  智商: <span class="number">100</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个语法其实就是CSS的语法，在CSS中有以下概念：选择器、属性、属性值</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  属性: 属性值单位;</span><br><span class="line">  第二个属性: 属性值;</span><br><span class="line">  第n个属性: 属性值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>先了解选择器，然后学习属性和属性值。<br />在CSS中，存在大量的上面的语法</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  属性: 属性值单位;</span><br><span class="line">  第二个属性: 属性值;</span><br><span class="line">  第n个属性: 属性值;</span><br><span class="line">&#125;</span><br><span class="line">选择器 &#123;</span><br><span class="line">  属性: 属性值单位;</span><br><span class="line">  第二个属性: 属性值;</span><br><span class="line">  第n个属性: 属性值;</span><br><span class="line">&#125;</span><br><span class="line">选择器 &#123;</span><br><span class="line">  属性: 属性值单位;</span><br><span class="line">  第二个属性: 属性值;</span><br><span class="line">  第n个属性: 属性值;</span><br><span class="line">&#125;</span><br><span class="line">选择器 &#123;</span><br><span class="line">  属性: 属性值单位;</span><br><span class="line">  第二个属性: 属性值;</span><br><span class="line">  第n个属性: 属性值;</span><br><span class="line">&#125;</span><br><span class="line">选择器 &#123;</span><br><span class="line">  属性: 属性值单位;</span><br><span class="line">  第二个属性: 属性值;</span><br><span class="line">  第n个属性: 属性值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2021/09/10/5-CSS%E5%8E%86%E5%8F%B2/">http://example.com/2021/09/10/5-CSS%E5%8E%86%E5%8F%B2/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/09/20/6-CSS%E9%80%89%E6%8B%A9%E5%99%A8/">6.CSS选择器</a>
+            
+            
+            <a class="next" rel="next" href="/2021/09/05/4-%E8%A1%8C%E5%9D%97%E6%A0%87%E7%AD%BE/">4.行块标签</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>28.Sass | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">28.Sass</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">三月 18, 2022&nbsp;&nbsp;20:53:13</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><a target="_blank" rel="noopener" href="https://www.sass.hk/docs/">https://www.sass.hk/docs/</a><br />是CSS的预处理语言，它可以转换成CSS供HTML使用。<br />市面上主流的CSS的预处理语言，有</p>
+<ul>
+<li>Less</li>
+<li>Sass</li>
+<li>stylus</li>
+</ul>
+<p>不管是哪种，语法类似，思路相通，在我们的课程中学习的Sass<br><a name="xXFvL"></a></p>
+<h2 id="Sass文件格式"><a href="#Sass文件格式" class="headerlink" title="Sass文件格式"></a>Sass文件格式</h2><p>文件格式有两种，<code>.sass</code>和<code>.scss</code>在后续的教程中，我们使用<code>.scss</code><br />最早Sass出现时只有sass格式文件，省略了很多的代码，比如大括号，导致一些人学习时不适应。随着sass更新，更新了很多新的特性，而这些新的特性只有<code>.scss</code>支持，并且scss整体语法和css一致，所以学习起来更简单。</p>
+<ul>
+<li>scss支持更多的新特性</li>
+<li>scss语法和css相同，更易于过渡</li>
+</ul>
+<p>所以我们使用<code>.scss</code><br><a name="BKdiC"></a></p>
+<h3 id="sass"><a href="#sass" class="headerlink" title="sass"></a>sass</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> </span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span></span><br></pre></td></tr></table></figure>
+<p><a name="HuzYf"></a></p>
+<h3 id="scss"><a href="#scss" class="headerlink" title="scss"></a>scss</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="HYsfe"></a></p>
+<h2 id="Sass的转换"><a href="#Sass的转换" class="headerlink" title="Sass的转换"></a>Sass的转换</h2><p><a name="zPoZl"></a></p>
+<h3 id="插件的安装"><a href="#插件的安装" class="headerlink" title="插件的安装"></a>插件的安装</h3><p>VSCode支持直接编译Sass文件，可以安装<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1659575816155-4f6d1dcb-d69f-4f2d-b8eb-942547714997.png#clientId=u575611b7-cd4c-4&from=paste&height=66&id=u3bf0486e&name=image.png&originHeight=66&originWidth=419&originalType=binary&ratio=1&rotation=0&showTitle=false&size=6814&status=done&style=none&taskId=u4d0d38b3-2143-4975-aaf7-83cfc49314e&title=&width=419" alt="image.png"><br />安装后，在Sass文件打开后，sass文件打开底部会有对应的提示<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1659575849506-4d41676f-6953-403f-bc36-375ff87af1d9.png#clientId=u575611b7-cd4c-4&from=paste&height=25&id=ud21e4c2f&name=image.png&originHeight=25&originWidth=426&originalType=binary&ratio=1&rotation=0&showTitle=false&size=6078&status=done&style=none&taskId=ufb29c63c-3400-4da3-8ee5-3f2f82974e2&title=&width=426" alt="image.png"><br />点击之后，就能监听并实时编译Sass文件。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1659575872895-1998600f-c42c-4e76-876b-12cb676ec44e.png#clientId=u575611b7-cd4c-4&from=paste&height=48&id=uebe490f9&name=image.png&originHeight=48&originWidth=440&originalType=binary&ratio=1&rotation=0&showTitle=false&size=9118&status=done&style=none&taskId=u6ceba2dc-4951-4880-a85d-d04fe4e1cb5&title=&width=440" alt="image.png"><br><a name="WQIKj"></a></p>
+<h4 id="插件配置"><a href="#插件配置" class="headerlink" title="插件配置"></a>插件配置</h4><p>为了让css输出到css目录中，我们需要配置一下插件<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1659580919139-e1fa645b-eae3-405e-bba3-a9bae63a6444.png#clientId=u575611b7-cd4c-4&from=paste&height=299&id=u521d42aa&name=image.png&originHeight=299&originWidth=491&originalType=binary&ratio=1&rotation=0&showTitle=false&size=31425&status=done&style=none&taskId=ud8948ef9-ce1a-475e-9fc9-1115e887a16&title=&width=491" alt="image.png"><br />进入后，找到<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1659580942601-a608c0ad-0948-429f-921c-0aee9802bf3a.png#clientId=u575611b7-cd4c-4&from=paste&height=113&id=uc586ea31&name=image.png&originHeight=113&originWidth=371&originalType=binary&ratio=1&rotation=0&showTitle=false&size=8677&status=done&style=none&taskId=u761b3e9a-da42-4e94-97a9-6b26b156403&title=&width=371" alt="image.png"><br />点击在setting.json中编辑<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1659580964417-2a1cdccf-63e0-42f4-8560-766ee65b405e.png#clientId=u575611b7-cd4c-4&from=paste&height=203&id=u1e689f94&name=image.png&originHeight=203&originWidth=535&originalType=binary&ratio=1&rotation=0&showTitle=false&size=11923&status=done&style=none&taskId=u573c75a6-5d0e-4fb8-a2ad-b61f4bf9fcd&title=&width=535" alt="image.png"></p>
+<ul>
+<li>format代表输出的格式 “expanded”平时写的css格式 “compressed”压缩格式</li>
+<li>extendsionName 后缀名 一般的expanded .css compressed .min.css</li>
+<li>savePath 保存的路径 我们可以设置 .&#x2F;css 就会导出到css文件夹中<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;liveSassCompile.settings.formats&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">  <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;format&quot;</span><span class="punctuation">:</span> <span class="string">&quot;expanded&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;extensionName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;.css&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;savePath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;./css&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;savePathReplacementPairs&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line">  <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;format&quot;</span><span class="punctuation">:</span> <span class="string">&quot;compressed&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;extensionName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;.min.css&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;savePath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;./css&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;savePathReplacementPairs&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<a name="hyVRY"></a></li>
+</ul>
+<h3 id="map文件是什么"><a href="#map文件是什么" class="headerlink" title="map文件是什么"></a>map文件是什么</h3><p>使用Sass写样式，我们的源码是Sass文件，而不是css文件，所以我们修改样式应该Sass文件中修改，而不是CSS中修改，因为我们在CSS中修改后，Sass重新编译，CSS文件会恢复。<br />怎么样才能快速的找到对应的Sass文件中的样式位置？利用map文件可以解决这个问题。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1659575662970-0dcc0588-40a6-4f95-b9c1-0437b5f41ba0.png#clientId=u575611b7-cd4c-4&from=paste&height=55&id=u05911044&name=image.png&originHeight=55&originWidth=357&originalType=binary&ratio=1&rotation=0&showTitle=false&size=2733&status=done&style=none&taskId=u90788b5d-1ed0-4249-9673-df776cd0d15&title=&width=357" alt="image.png"><br />删除map文件后，提示css<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1659575678260-b5ddddaf-e083-4460-9173-0de947c5478d.png#clientId=u575611b7-cd4c-4&from=paste&height=52&id=u54c80ed1&name=image.png&originHeight=52&originWidth=360&originalType=binary&ratio=1&rotation=0&showTitle=false&size=2624&status=done&style=none&taskId=u6bac242e-3374-4eb6-a814-f9b0e650bfa&title=&width=360" alt="image.png"><br><a name="KMJ0O"></a></p>
+<h2 id="Sass语法"><a href="#Sass语法" class="headerlink" title="Sass语法"></a>Sass语法</h2><p><a name="s2CZ0"></a></p>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>在Sass中支持两种注释方式<br />单行注释</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// 注释内容</span><br></pre></td></tr></table></figure>
+<p>多行注释</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  多行注释</span></span><br><span class="line"><span class="comment">  多行注释</span></span><br><span class="line"><span class="comment">  多行注释</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>只有多行注释才能被编译到CSS文件中。<br><a name="XNmps"></a></p>
+<h3 id="嵌套"><a href="#嵌套" class="headerlink" title="嵌套"></a>嵌套</h3><p>嵌套可以极大的提高我们CSS的编码速度，解决了选择器重复使用的问题。<br><a name="Mxn4X"></a></p>
+<h4 id="选择器嵌套"><a href="#选择器嵌套" class="headerlink" title="选择器嵌套"></a>选择器嵌套</h4><p>选择器嵌套可以在一个选择器中嵌套另外的选择器，组成祖先后代关系，具体还要使用的选择器是什么<br><a name="G3FnX"></a></p>
+<h5 id="后代选择器"><a href="#后代选择器" class="headerlink" title="后代选择器"></a>后代选择器</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">background</span>: red;</span><br><span class="line">  <span class="selector-class">.item</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">background</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span> <span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="mKoJZ"></a></p>
+<h5 id="兄弟选择器"><a href="#兄弟选择器" class="headerlink" title="兄弟选择器"></a>兄弟选择器</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  + <span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> + <span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="xKbRd"></a></p>
+<h5 id="子代选择器"><a href="#子代选择器" class="headerlink" title="子代选择器"></a>子代选择器</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  &gt; <span class="selector-tag">span</span> &#123;</span><br><span class="line">     <span class="attribute">color</span>: green;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &gt; <span class="selector-tag">span</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="qbtME"></a></p>
+<h5 id="在选择器中，想要使用父选择器-amp"><a href="#在选择器中，想要使用父选择器-amp" class="headerlink" title="在选择器中，想要使用父选择器 &amp;"></a>在选择器中，想要使用父选择器 &amp;</h5><p>在样式中突然要给对应的选择器添加hover伪类</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="selector-class">.box</span> &#123;</span><br><span class="line">    &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">      <span class="attribute">color</span>: red;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> <span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果要鼠标放在父元素上，子元素的变化</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="selector-class">.box</span> &#123;</span><br><span class="line">    &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">      <span class="attribute">color</span>: red;</span><br><span class="line">      <span class="selector-tag">span</span> &#123;</span><br><span class="line">        <span class="attribute">color</span>: yellow;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> <span class="selector-class">.box</span><span class="selector-pseudo">:hover</span> <span class="selector-tag">span</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果正在写某个元素样式需要限制选择范文，可以使用&amp;</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="selector-class">.a</span> &amp; &#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.a</span> <span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>支持将父选择器作为一个公共值</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;product&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;product-header&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;product-body&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;product-footer&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.product</span> &#123;</span><br><span class="line">  &amp;-<span class="selector-tag">header</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.product-header</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="mlZeT"></a></p>
+<h3 id="属性嵌套"><a href="#属性嵌套" class="headerlink" title="属性嵌套"></a>属性嵌套</h3><p>在一些复合属性上，属性嵌套可以解决一些问题</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">1px</span>;</span><br><span class="line">    style: solid;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#000</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">border-width</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">border-style</span>: solid;</span><br><span class="line">  <span class="attribute">border-color</span>: <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也支持有属性的嵌套</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">10px</span> solid transparent &#123;</span><br><span class="line">    <span class="attribute">top</span>-<span class="attribute">color</span>: <span class="number">#000</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">10px</span> solid transparent;</span><br><span class="line">  <span class="attribute">border-top-color</span>: <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="TixDo"></a></p>
+<h3 id="占位选择器"><a href="#占位选择器" class="headerlink" title="占位选择器"></a>占位选择器</h3><p>在Sass中可以有占位选择器，不会在css中编译出来对应的选择器，又可以生成一些公共样式让其他选择器使用（继承）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%自定义名称 &#123;</span><br><span class="line">  // 各种样式</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="CKGQv"></a></p>
+<h3 id="继承-extend"><a href="#继承-extend" class="headerlink" title="继承@extend"></a>继承@extend</h3><p>继承既可以继承普通选择器，也可以继承 占位选择器</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="keyword">@extend</span> 其他选择器;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用的方法</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.error</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.serror</span> &#123;</span><br><span class="line">  <span class="keyword">@extend</span> .error;</span><br><span class="line">  // 其他样式</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.error</span>, <span class="selector-class">.serror</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.serror</span> &#123;</span><br><span class="line">  // 其他样式</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>利用占位选择器不生成没有用的选择器</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">%error &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.serror</span> &#123;</span><br><span class="line">  <span class="keyword">@extend</span> %error;</span><br><span class="line">  // 其他样式</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.serror</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.serror</span> &#123;</span><br><span class="line">  // 其他样式</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="qG3pL"></a></p>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>在Sass中支持变量，变量的优势在于，可以统一管理，大家都使用同一个变量时，我们修改变量值会统一改变。<br><a name="ZCpk9"></a></p>
+<h4 id="声明变量"><a href="#声明变量" class="headerlink" title="声明变量"></a>声明变量</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$自定义的名字: 值;</span><br></pre></td></tr></table></figure>
+<p>在对应的属性中使用变量</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  属性名: $自定义的名字;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="ifSKc"></a></p>
+<h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><p>变量在哪声明，能使用的范围是不同的。<br />直接在Sass文件中定义的变量是全局变量，一般放在最前面。<br />我们也可以直接在选择器的大括号中定义变量，只有大括号中才能使用这个变量。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$变量名: 值; // 全都能用</span><br><span class="line"></span><br><span class="line">选择器 &#123;</span><br><span class="line">  $变量名: 值; // 只有在这个大括号中才能使用。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="hqcfU"></a></p>
+<h5 id="全局变量转换"><a href="#全局变量转换" class="headerlink" title="全局变量转换"></a>全局变量转换</h5><p>如果我们在某个选择器中定义的变量想要变成全局变量，可以变量后面添加 <code>!global</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  $变量: 值 !global;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">color</span>: $变量;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="SiGVb"></a></p>
+<h3 id="值类型"><a href="#值类型" class="headerlink" title="值类型"></a>值类型</h3><p>在变量中可以定义不同的值</p>
+<ul>
+<li>数字 1 2 3 10px </li>
+<li>字符串 solid “字符串” </li>
+<li>布尔值 true false</li>
+<li>数组</li>
+<li>maps<br><a name="hMdPp"></a></li>
+</ul>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>在Sass中，<code>1px 2px 3px</code>或者 <code>1px, 2px, 3px</code>这两种形式，在Sass中都叫数组。<br />数组可以有二维数组<br /><code>(xs 0px) (sm 768px) (md 1200px)</code><br><a name="hmE34"></a></p>
+<h5 id="nth-获取到某一个值"><a href="#nth-获取到某一个值" class="headerlink" title="nth 获取到某一个值"></a>nth 获取到某一个值</h5><p>下标指值的顺序，从<code>1</code>开始</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  属性: <span class="built_in">nth</span>($数组, 下标);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$数组: color width style;</span><br><span class="line">选择器 &#123;</span><br><span class="line">  属性: <span class="built_in">nth</span>($数组, <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="MZ3nd"></a></p>
+<h5 id="append-向数组中添加新的值"><a href="#append-向数组中添加新的值" class="headerlink" title="append 向数组中添加新的值"></a>append 向数组中添加新的值</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  属性: <span class="built_in">append</span>($数组, 新的值);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="Pnq2W"></a></p>
+<h5 id="length-获取数组的长度"><a href="#length-获取数组的长度" class="headerlink" title="length 获取数组的长度"></a>length 获取数组的长度</h5><p>数组中值的数量</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  属性: <span class="built_in">length</span>($数组);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">@for</span> $i from <span class="number">1</span> through length($数组) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="LvOsS"></a></p>
+<h5 id="index-根据值获取下标"><a href="#index-根据值获取下标" class="headerlink" title="index 根据值获取下标"></a>index 根据值获取下标</h5><p>获取到值的下标，如果不存在，获取到null</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index($数组, 值); </span><br></pre></td></tr></table></figure>
+<p><a name="GrfKj"></a></p>
+<h4 id="maps"><a href="#maps" class="headerlink" title="maps"></a>maps</h4><p>由key: value组成，数据更直观，我们知道哪个数据代表什么意思。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">张三 18 男</span><br><span class="line"></span><br><span class="line">姓名: 张三, 年龄: 18, 性别: 男</span><br></pre></td></tr></table></figure>
+<p>maps语法</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$变量: (key1: value1, key2: value2, key3: value3)</span><br></pre></td></tr></table></figure>
+<p><a name="NXaxT"></a></p>
+<h5 id="map-get"><a href="#map-get" class="headerlink" title="map-get"></a>map-get</h5><p>可以根据属性（key）来获取maps中的值</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$maps: (key: value, key2: value2);</span><br><span class="line"></span><br><span class="line">map-get($maps, key);</span><br></pre></td></tr></table></figure>
+<p><a name="nReAj"></a></p>
+<h5 id="has-key"><a href="#has-key" class="headerlink" title="has-key"></a>has-key</h5><p>可以判断maps中有没有某个属性</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map-has-key($map, $key, $keys...) // 有则返回 true 没有 返回 false</span><br></pre></td></tr></table></figure>
+<p><a name="GZi12"></a></p>
+<h5 id="map-keys"><a href="#map-keys" class="headerlink" title="map-keys"></a>map-keys</h5><p>获取到maps中所有的key<br><a name="KcDJ7"></a></p>
+<h5 id="map-values"><a href="#map-values" class="headerlink" title="map-values"></a>map-values</h5><p>获取到values中所有的value</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$maps: (key: value, key2: value2, key3: value3);</span><br><span class="line"></span><br><span class="line">map-keys($maps); // key key2 key3 数组</span><br><span class="line">map-values($maps); // value value2 value3 数组</span><br></pre></td></tr></table></figure>
+<p><a name="gl386"></a></p>
+<h3 id="值运算"><a href="#值运算" class="headerlink" title="值运算"></a>值运算</h3><p>在Sass中进行运算更方便一些。<br />加 + 减 - 乘 * 除 &#x2F; 取模%<br />乘除优先于加减运算。括号可以提高优先级<br />因为 &#x2F; 在CSS中有自己的语法规则，例如</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">选择器 &#123;</span><br><span class="line">  <span class="attribute">font</span>: <span class="number">12px</span> / <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">background</span>: center center / cover;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&#x2F; 只在特定情况进入对应计算操作。<br />以下三种情况 &#x2F; 将被视为除法运算符号：</p>
+<ul>
+<li>如果值，或值的一部分，是变量或者函数的返回值</li>
+<li>如果值被圆括号包裹</li>
+<li>如果值是算数表达式的一部分<br><a name="fpysB"></a></li>
+</ul>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><p><code>@for</code>可以用来进行循环操作，当我们需要生成一些有规律的、固定的相关属性时，可以使用循环操作。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@for</span> $自定义变量名 from <span class="number">1</span> through <span class="number">10</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>其中的1表示开始的值，10表示结束值，可以是任意值。<br />如果我们想要在选择器中使用变量我们需要使用<code>#&#123;$变量名&#125;</code>，如果想要属性值中使用变量名，直接写<code>$变量名</code>即可。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@for</span> $自定义变量 from <span class="number">1</span> through <span class="number">100</span> &#123;</span><br><span class="line">  <span class="selector-class">.item-</span>#&#123;$自定义变量&#125; &#123;</span><br><span class="line">    <span class="attribute">left</span>: $自定义变量 * <span class="number">100</span> + px;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="OkwCe"></a></p>
+<h3 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h3><p><code>@if``@else if``@else</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@if</span> 条件 &#123;</span><br><span class="line">  // 代码</span><br><span class="line">&#125; <span class="keyword">@else</span> if 条件 &#123;</span><br><span class="line">  // 代码</span><br><span class="line">&#125; <span class="keyword">@else</span> if 条件 &#123;</span><br><span class="line">  // 代码</span><br><span class="line">&#125; <span class="keyword">@else</span> &#123;</span><br><span class="line">  // 代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="jaKKv"></a></p>
+<h3 id="mixin"><a href="#mixin" class="headerlink" title="@mixin"></a>@mixin</h3><p>定义一个混合需要使用<code>@mixin</code>进行操作，我们可以使用<code>@include</code>去使用对应mixin</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> 自定义名字 &#123;</span><br><span class="line">  样式</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">选择器 &#123;</span><br><span class="line">  <span class="keyword">@include</span> 自定义名字;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>mixin中的样式就会出现在对应的选择中，实现的效果类似<code>@extend</code>但是没有<code>@extend</code>代码简洁<br><a name="Y8TY6"></a></p>
+<h4 id="mixin参数"><a href="#mixin参数" class="headerlink" title="mixin参数"></a>mixin参数</h4><p>使用了参数的mixin会有新的使用场景，当我们对应的元素有很多相同的属性，但是属性值不同时，可以使用mixin来解决对应的问题。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> 自定义名($自定义变量, $自定义变量<span class="number">2</span>, $自定义变量<span class="number">3</span>, $自定义变量n) &#123;</span><br><span class="line">  属性<span class="number">1</span>: 值$自定义变量;</span><br><span class="line">  属性<span class="number">2</span>: 值$自定义变量<span class="number">2</span>;</span><br><span class="line">  属性<span class="number">3</span>: 值$自定义变量<span class="number">3</span>;</span><br><span class="line">  属性n: 值$自定义变量n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">选择器 &#123;</span><br><span class="line">  <span class="keyword">@include</span> 自定义名(值<span class="number">1</span>, 值<span class="number">2</span>, 值<span class="number">3</span>, 值n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="QNi3b"></a></p>
+<h4 id="参数默认值"><a href="#参数默认值" class="headerlink" title="参数默认值"></a>参数默认值</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> 自定义名($自定义变量, $自定义变量<span class="number">2</span>, $自定义变量<span class="number">3</span>, $自定义变量<span class="attribute">n</span>: <span class="number">10px</span>) &#123;</span><br><span class="line">  属性<span class="number">1</span>: 值$自定义变量;</span><br><span class="line">  属性<span class="number">2</span>: 值$自定义变量<span class="number">2</span>;</span><br><span class="line">  属性<span class="number">3</span>: 值$自定义变量<span class="number">3</span>;</span><br><span class="line">  属性n: 值$自定义变量n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">选择器 &#123;</span><br><span class="line">  <span class="keyword">@include</span> 自定义名(值<span class="number">1</span>, 值<span class="number">2</span>, 值<span class="number">3</span>)</span><br><span class="line">  // 如果最后一个值不传，则默认是<span class="number">10px</span>，如果传，则是传递的值</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><a name="ykyFR"></a></p>
+<h3 id="fuction"><a href="#fuction" class="headerlink" title="@fuction"></a>@fuction</h3><p>类似mixin，mixin得到是一堆样式，函数得到是按照一定规则生成的值。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@function</span> 自定义名字($参数变量, $参数变量<span class="number">2</span>, $参数变量n) &#123;</span><br><span class="line">  <span class="keyword">@return</span> 值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用函数直接写函数名()即可</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">自定义名字(实际值<span class="number">1</span>, 实际值<span class="number">2</span>, 实际值n)</span><br></pre></td></tr></table></figure>
+<p><a name="EKkCc"></a></p>
+<h3 id="warn"><a href="#warn" class="headerlink" title="@warn"></a>@warn</h3><p>在页面上输出警告信息，不会影响编译过程</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@warn</span> <span class="string">&quot;信息&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p><a name="eDERr"></a></p>
+<h3 id="error"><a href="#error" class="headerlink" title="@error"></a>@error</h3><p>在页面上输出错误信息，会结束编译过程</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@error</span> <span class="string">&quot;错误信息&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p><a name="khmM8"></a></p>
+<h3 id="debug"><a href="#debug" class="headerlink" title="@debug"></a>@debug</h3><p>在控制台输出普通的信息，测试用。<br><a name="r9WJV"></a></p>
+<h3 id="at-root"><a href="#at-root" class="headerlink" title="@at-root"></a>@at-root</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="selector-class">.item</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="selector-tag">span</span> &#123;</span><br><span class="line">      <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">      <span class="keyword">@at-root</span> a &#123;</span><br><span class="line">        <span class="attribute">color</span>: red;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>直接让对应的选择器跳出到最外层</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span> <span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span> <span class="selector-class">.item</span> <span class="selector-tag">span</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="XDWtV"></a></p>
+<h2 id="Sass模块化操作"><a href="#Sass模块化操作" class="headerlink" title="Sass模块化操作"></a>Sass模块化操作</h2><p><a name="bfUlY"></a></p>
+<h3 id="import"><a href="#import" class="headerlink" title="@import"></a>@import</h3><p>css中支持@import <br /><a target="_blank" rel="noopener" href="https://blog.csdn.net/Kiruthika/article/details/125166009">https://blog.csdn.net/Kiruthika/article/details/125166009</a><br />下面要说的是Sass中的@import，和css中的机制是不同的。<br />我们可以把一些公共的样式，单独的写在一个scss文件中，写好后，我们可以利用这些文件在主文件中引入，复用样式。<br />我们的模块样式命名时可以添加<code>_文件名.scss</code>这样的话，就不会被编译工具编译成新的文件。但是可以被其他scss文件引入。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&quot;文件夹名/文件名&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>模块化操作是一个需要经验的过程，慢慢来。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2022/03/18/28-Sass/">http://example.com/2022/03/18/28-Sass/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/03/24/29-JavaScript%E5%9F%BA%E7%A1%80/">29.JavaScript基础</a>
+            
+            
+            <a class="next" rel="next" href="/2022/03/05/27-BootStrap/">27.BootStrap</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

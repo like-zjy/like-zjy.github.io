@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>54.node | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">54.node</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十二月 18, 2022&nbsp;&nbsp;19:10:47</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>Node.js发布于2009年5月，由Ryan Dahl开发，是一个基于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Chrome/5633839?fromModule=lemma_inlink">Chrome</a> <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/V8/6178125?fromModule=lemma_inlink">V8</a>引擎的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/JavaScript/321142?fromModule=lemma_inlink">JavaScript</a>运行环境，使用了一个<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8/9597519?fromModule=lemma_inlink">事件驱动</a>、非阻塞式I&#x2F;O模型，让JavaScript 运行在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E7%AB%AF/6492316?fromModule=lemma_inlink">服务端</a>的开发平台，它让JavaScript成为与<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/PHP/9337?fromModule=lemma_inlink">PHP</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Python/407313?fromModule=lemma_inlink">Python</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Perl/851577?fromModule=lemma_inlink">Perl</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Ruby/11419?fromModule=lemma_inlink">Ruby</a>等服务端语言平起平坐的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/1379708?fromModule=lemma_inlink">脚本语言</a>。 <br />Node.js对一些特殊用例进行优化，提供替代的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/API/10154?fromModule=lemma_inlink">API</a>，使得V8在非浏览器环境下运行得更好，V8引擎执行Javascript的速度非常快，性能非常好，基于Chrome JavaScript运行时建立的平台， 用于方便地搭建响应速度快、易于扩展的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/2196523?fromModule=lemma_inlink">网络应用</a>。<br />NodeJS是一个JS运行环境，不是新的语言<br><a name="GpH8l"></a></p>
+<h2 id="必备知识-终端"><a href="#必备知识-终端" class="headerlink" title="必备知识-终端"></a>必备知识-终端</h2><p>每个系统都有<code>终端</code>，以windows系统为例，windows7之后默认有两个终端<code>cmd</code>和<code>powershell</code>，在我们日常使用中，cmd不容易报错。对于前端来讲没有任何区别<br />我们安装Git时自带了<code>git bash</code>这也是个终端。<br />所以咱们的电脑有三个终端<code>cmd``powsershell``bash</code>，用哪个都行。<br><a name="n8c7r"></a></p>
+<h3 id="打开终端"><a href="#打开终端" class="headerlink" title="打开终端"></a>打开终端</h3><p><a name="OZJnO"></a></p>
+<h4 id="cmd"><a href="#cmd" class="headerlink" title="cmd"></a>cmd</h4><p><code>windows+R</code>打开运行，然后输入cmd<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1664346343021-193563ba-591b-490e-9256-4d72d45d944f.png#clientId=uf24dd2cb-c769-4&errorMessage=unknown%20error&from=paste&height=230&id=u13d685f0&name=image.png&originHeight=230&originWidth=399&originalType=binary&ratio=1&rotation=0&showTitle=false&size=11082&status=error&style=none&taskId=u16626e32-156a-4e09-af2f-962742b3545&title=&width=399" alt="image.png"><br />回车即可<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1664346359098-7315e744-feff-4fd7-a6e1-be19d314b748.png#clientId=uf24dd2cb-c769-4&errorMessage=unknown%20error&from=paste&height=512&id=u8083dbf2&name=image.png&originHeight=512&originWidth=979&originalType=binary&ratio=1&rotation=0&showTitle=false&size=7813&status=error&style=none&taskId=u73837195-c2fe-4400-8d5c-8e4e7069ef0&title=&width=979" alt="image.png"><br><a name="ccVWq"></a></p>
+<h4 id="powershell"><a href="#powershell" class="headerlink" title="powershell"></a>powershell</h4><p>同样的方法，把<code>cmd</code>更改成<code>powershell</code><br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1664346403260-24930a19-2e7e-4ad6-a650-613857e328e1.png#clientId=uf24dd2cb-c769-4&errorMessage=unknown%20error&from=paste&height=372&id=u04539e3e&name=image.png&originHeight=372&originWidth=734&originalType=binary&ratio=1&rotation=0&showTitle=false&size=15687&status=error&style=none&taskId=u8f85e438-63e0-4082-b102-50ae3dc036b&title=&width=734" alt="image.png"><br><a name="F0PKC"></a></p>
+<h4 id="怎么从powershell跳转到cmd"><a href="#怎么从powershell跳转到cmd" class="headerlink" title="怎么从powershell跳转到cmd"></a>怎么从powershell跳转到cmd</h4><p>在powershell的界面 输入<code>cmd</code>回车即可<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1664346479110-9677387f-448a-4b09-9d65-11c20b5c7095.png#clientId=uf24dd2cb-c769-4&errorMessage=unknown%20error&from=paste&height=372&id=ud9706a20&name=image.png&originHeight=372&originWidth=734&originalType=binary&ratio=1&rotation=0&showTitle=false&size=23926&status=error&style=none&taskId=udfbc0cda-bd7b-4085-b010-d608259fa9d&title=&width=734" alt="image.png"><br />为什么会有这样的需求，前端的一些命令在powershell默认禁止执行，需要配置解开进制的操作。<br />可以在这里解决powsershell默认禁用的操作。<br /><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/028f93c338c1">https://www.jianshu.com/p/028f93c338c1</a><br><a name="WfDb1"></a></p>
+<h3 id="终端路径"><a href="#终端路径" class="headerlink" title="终端路径"></a>终端路径</h3><p>我们打开的终端，都是自动打开的路径的。未来我们需要用终端时，都是要在我们的项目中用的。我们在运行中打开的cmd，路径不是我们的项目。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1664346863263-26d64766-64eb-4bb0-9eba-282e75048286.png#clientId=uf24dd2cb-c769-4&errorMessage=unknown%20error&from=paste&height=512&id=uf6caff29&name=image.png&originHeight=512&originWidth=979&originalType=binary&ratio=1&rotation=0&showTitle=false&size=7857&status=error&style=none&taskId=u830dc999-0473-4eb2-a331-2ff0784dc11&title=&width=979" alt="image.png"><br />我们想要跳转到我们的项目目录。如果能够直接打开就跳转到对应的目录最好。<br><a name="CX7DU"></a></p>
+<h4 id="如何在对应的目录中打开终端"><a href="#如何在对应的目录中打开终端" class="headerlink" title="如何在对应的目录中打开终端"></a>如何在对应的目录中打开终端</h4><p>终端中显示的路径需要是我们对应的目录的路径<br />在资源管理器中，打开项目目录，然后在地址栏里输入<code>cmd</code>回车<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1664347004947-3a2caf5f-0a64-47e6-a30b-08fa8690c380.png#clientId=uf24dd2cb-c769-4&errorMessage=unknown%20error&from=paste&height=580&id=u1cdc73ef&name=image.png&originHeight=580&originWidth=674&originalType=binary&ratio=1&rotation=0&showTitle=false&size=86218&status=error&style=none&taskId=u1c1d25c8-809d-4887-aedf-f37fd5df3ec&title=&width=674" alt="image.png"><br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1664347030139-92693ecf-5e8e-4cb0-a759-fd4f3cecb864.png#clientId=uf24dd2cb-c769-4&errorMessage=unknown%20error&from=paste&height=253&id=uf222e650&name=image.png&originHeight=253&originWidth=539&originalType=binary&ratio=1&rotation=0&showTitle=false&size=6899&status=error&style=none&taskId=u392672a5-1f66-4bf9-af24-acc23667bb9&title=&width=539" alt="image.png"><br />路径就是我们的项目路径。<br />注意！！！！打开终端一定要确认路径是否正确，再操作代码<br><a name="xTeSg"></a></p>
+<h3 id="掌握几个终端的基本命令"><a href="#掌握几个终端的基本命令" class="headerlink" title="掌握几个终端的基本命令"></a>掌握几个终端的基本命令</h3><p>终端可以输入命令，在输入命令前，你得确保是终端环境。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1664347280416-9e750827-4c65-4128-9564-16e883944c39.png#clientId=uf24dd2cb-c769-4&errorMessage=unknown%20error&from=paste&height=319&id=u64d98212&name=image.png&originHeight=319&originWidth=515&originalType=binary&ratio=1&rotation=0&showTitle=false&size=5701&status=error&style=none&taskId=ub1ad3e06-5320-4563-b5ec-61811474199&title=&width=515" alt="image.png"><br><a name="sk5os"></a></p>
+<h4 id="dir"><a href="#dir" class="headerlink" title="dir"></a>dir</h4><p>查看当前目录中所有的文件和文件夹<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1664347389148-03d24aa5-590e-45d7-976f-5d5c4c112192.png#clientId=uf24dd2cb-c769-4&errorMessage=unknown%20error&from=paste&height=754&id=u56e78574&name=image.png&originHeight=754&originWidth=445&originalType=binary&ratio=1&rotation=0&showTitle=false&size=22266&status=error&style=none&taskId=ue063b97a-69c2-40f3-8048-dc9654cb13e&title=&width=445" alt="image.png"><br><a name="jpLzI"></a></p>
+<h4 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h4><p>进入到某个路径下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ./文件夹名字</span><br><span class="line"><span class="built_in">cd</span> 绝对路径（需要是当前盘符路径）</span><br></pre></td></tr></table></figure>
+<p><a name="xRvGT"></a></p>
+<h4 id="跳转到某个盘符"><a href="#跳转到某个盘符" class="headerlink" title="跳转到某个盘符"></a>跳转到某个盘符</h4><p>直接输入<code>盘符:</code>回车</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d:</span><br></pre></td></tr></table></figure>
+<p><a name="aWQqu"></a></p>
+<h4 id="执行记录中的命令"><a href="#执行记录中的命令" class="headerlink" title="执行记录中的命令"></a>执行记录中的命令</h4><p>我们在终端执行过的命令都会被记录，按方向键 上 下 可以切换记录。<br><a name="AKVcZ"></a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1664345561346-c713dc1e-1a34-4901-8b23-bb8a656bf9e4.png#clientId=uf24dd2cb-c769-4&errorMessage=unknown%20error&from=paste&height=493&id=ucb55909f&name=image.png&originHeight=493&originWidth=650&originalType=binary&ratio=1&rotation=0&showTitle=false&size=48589&status=error&style=none&taskId=u1355c424-a36c-46ee-833e-5141c55a28d&title=&width=650" alt="image.png"><br />下载后一直下一步安装即可。最后一步勾选，安装python等工具，一般都会失败。如果失败，自己手动安装python。<br><a name="uJCr6"></a></p>
+<h3 id="是否安装成功"><a href="#是否安装成功" class="headerlink" title="是否安装成功"></a>是否安装成功</h3><p>打开<code>终端</code>，输入<code>node -v</code>回车，如果能正常看到版本，则表示安装成功。<br />继续尝试输入<code>npm -v</code>回车，可以看到版本，表示npm安装成功<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1664345767512-c246965d-390d-42ef-b818-734ac5fb0811.png#clientId=uf24dd2cb-c769-4&errorMessage=unknown%20error&from=paste&height=126&id=uee4a8f6d&name=image.png&originHeight=126&originWidth=282&originalType=binary&ratio=1&rotation=0&showTitle=false&size=2374&status=error&style=none&taskId=u4d33d0dc-6255-4d90-bc7c-26c890f200a&title=&width=282" alt="image.png"><br><a name="JpTxu"></a></p>
+<h3 id="使用nodejs运行js文件"><a href="#使用nodejs运行js文件" class="headerlink" title="使用nodejs运行js文件"></a>使用nodejs运行js文件</h3><p>nodejs只有 ECMASCript + NodeJSApi 没有DOM和BOM</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node xxx.js <span class="comment"># 可以运行我们的js代码</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2022/12/18/54-node/">http://example.com/2022/12/18/54-node/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/12/28/55-ES6/">55.ES6</a>
+            
+            
+            <a class="next" rel="next" href="/2022/11/30/53-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">53.正则表达式</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

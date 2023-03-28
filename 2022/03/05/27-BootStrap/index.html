@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zjy">
+
+
+
+
+
+<title>27.BootStrap | Note</title>
+
+
+
+    <link rel="icon" href="/icon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <!-- <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script> -->
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小小洋</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小小洋</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">27.BootStrap</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">zjy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">三月 5, 2022&nbsp;&nbsp;13:52:50</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><a target="_blank" rel="noopener" href="https://v3.bootcss.com/">https://v3.bootcss.com/</a><br />由推特公司最早推出的UI框架，是UI框架的鼻祖。现在公司使用不多，但是我们要学习的BootStrap的思想。<br><a name="c7D5P"></a></p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>我们使用的是V3版本，现在已经到V5版本。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1659406183862-053029db-a4be-4aa0-8869-4417af64383c.png#clientId=ufc2eb581-d33d-4&from=paste&height=488&id=u40cc6fb0&name=image.png&originHeight=488&originWidth=995&originalType=binary&ratio=1&rotation=0&showTitle=false&size=64655&status=done&style=none&taskId=u8b858ee5-4b82-4494-9b70-77c0890c084&title=&width=995" alt="image.png"><br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1659406198921-56116691-a3b6-461a-bfbc-52c4e96c5db1.png#clientId=ufc2eb581-d33d-4&from=paste&height=380&id=uf769f2bf&name=image.png&originHeight=380&originWidth=872&originalType=binary&ratio=1&rotation=0&showTitle=false&size=64775&status=done&style=none&taskId=uce953321-0ae9-453d-bb61-ea0b7fa28de&title=&width=872" alt="image.png"><br />因为网络的问题，我们可以使用我下载好的。<br /><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2022/zip/29411294/1660043982067-299d7c11-1f88-4bf7-8251-e46fd08e6663.zip">bootstrap-3.4.1-dist.zip</a><br><a name="nnFD4"></a></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>解压对应的压缩包，解压后得到三个文件夹<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1659406276793-7a4e8708-4cab-4321-8ca8-75a3f6a49f00.png#clientId=ufc2eb581-d33d-4&from=paste&height=139&id=uf386dd1c&name=image.png&originHeight=139&originWidth=341&originalType=binary&ratio=1&rotation=0&showTitle=false&size=11670&status=done&style=none&taskId=u1568468b-9849-4c65-8b5d-aaff70eb9a1&title=&width=341" alt="image.png"><br />如果我们的项目中想要使用BootStrap可以直接把这三个文件夹复制到我们的项目目录中。然后新建一个网页文件<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1659406369072-ad279c2d-1c69-458f-a63b-94bef1b49d33.png#clientId=ufc2eb581-d33d-4&from=paste&height=94&id=uebfbfe07&name=image.png&originHeight=94&originWidth=144&originalType=binary&ratio=1&rotation=0&showTitle=false&size=2276&status=done&style=none&taskId=ufc5bd12c-a4d5-4073-8f37-2d9d0e11f62&title=&width=144" alt="image.png"><br />打开网页，引入相关资源。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./css/bootstrap.min.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 下面这些代码，如果不适用js可以不引入 --&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 因为bootstrap中的js代码是基于jQuery，所以需要在前面引入jQuery --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./js/jquery.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 如果我们需要使用到相关JS效果，还需要引入JS --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./js/bootstrap.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可以点击下面链接下载jQuery<br /><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2022/js/29411294/1660043982074-78d58d90-2a6e-4fa0-88b5-55dcb4c9998c.js?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2022/js/29411294/1660043982074-78d58d90-2a6e-4fa0-88b5-55dcb4c9998c.js%22,%22name%22:%22jquery.js%22,%22size%22:288580,%22type%22:%22text/javascript%22,%22ext%22:%22js%22,%22source%22:%22%22,%22status%22:%22done%22,%22download%22:false,%22taskId%22:%22u083234cb-2a26-4b4d-a72e-4d44f498469%22,%22taskType%22:%22transfer%22,%22id%22:%22u9b08078f%22,%22card%22:%22file%22%7D">jquery.js</a></p>
+<p>资源引入完成后，去官方文档中，找到我们想要使用的组件，然后复制代码到我们的html中，然后显示到页面上即可。<br><a name="TSDEg"></a></p>
+<h2 id="资源介绍"><a href="#资源介绍" class="headerlink" title="资源介绍"></a>资源介绍</h2><p><a name="TjB2F"></a></p>
+<h3 id="CSS资源"><a href="#CSS资源" class="headerlink" title="CSS资源"></a>CSS资源</h3><p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1659406414241-f8f86e1d-8f91-42b8-8438-cc4ced5fc272.png#clientId=ufc2eb581-d33d-4&from=paste&height=180&id=uf9f01605&name=image.png&originHeight=180&originWidth=630&originalType=binary&ratio=1&rotation=0&showTitle=false&size=21631&status=done&style=none&taskId=ub7a8037c-7bd0-4f72-bce5-2ec7ab85e77&title=&width=630" alt="image.png"><br />核心的样式是<code>bootstrap.css</code>和<code>bootstrap.min.css</code>，这两个css是一样的东西，后者是压缩后的样式。<br />bootstrap.min.css.map可以告知我们对应的样式出现在第几行<br />bootstrap.theme.*这些文件是bootstrap为了满足喜欢boostrap2的用户提供的主题样式。一般不用。<br><a name="qgkEN"></a></p>
+<h3 id="font资源"><a href="#font资源" class="headerlink" title="font资源"></a>font资源</h3><p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1659406722936-f9e407eb-1c90-46fc-8cf0-3de6258b586f.png#clientId=ufc2eb581-d33d-4&from=paste&height=124&id=u6c050010&name=image.png&originHeight=124&originWidth=615&originalType=binary&ratio=1&rotation=0&showTitle=false&size=16294&status=done&style=none&taskId=uab2d11a5-2785-401b-9018-a351074c957&title=&width=615" alt="image.png"><br />bootstrap中内置了字体图标。如果我们想要使用，font文件夹一定放在项目里。<br><a name="OPrLI"></a></p>
+<h3 id="js资源"><a href="#js资源" class="headerlink" title="js资源"></a>js资源</h3><p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1659406820686-0ef6ce79-8885-4ada-a9b7-778d28288abc.png#clientId=ufc2eb581-d33d-4&from=paste&height=80&id=u375e8b7c&name=image.png&originHeight=80&originWidth=158&originalType=binary&ratio=1&rotation=0&showTitle=false&size=2048&status=done&style=none&taskId=u01adecee-410a-45ad-a5b2-a58de271387&title=&width=158" alt="image.png"><br />引入js可以使用对应的相关的BoostrapJS插件。<br><a name="GUGuq"></a></p>
+<h2 id="栅格系统"><a href="#栅格系统" class="headerlink" title="栅格系统"></a>栅格系统</h2><p>基本上所有的UI框架中都有栅格系统，栅格系统的意思就是将父元素分成对应的份数（bootstrap是12份，现在主流的是24份）<br />栅格系统是已容器中包裹row元素生成的</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">    /* 这个row就会被分成12份 */</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们可以在对应的位置上通过定义不同的数字，来让我们元素站不同份数</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">    /* 这个row就会被分成12份 */</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xx-数字&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>xx</code>可以是xs\sm\md\lg，这几个取值分别代表了浏览器在不同宽度下元素的样式。<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1659424378006-d0c5fa32-1d21-4886-aa0e-1d321468eae4.png#clientId=ufc2eb581-d33d-4&from=paste&height=381&id=u7895d0f7&name=image.png&originHeight=381&originWidth=853&originalType=binary&ratio=1&rotation=0&showTitle=false&size=31358&status=done&style=none&taskId=ua668c04a-c287-42a3-a149-ed5a9555fdb&title=&width=853" alt="image.png"></p>
+<ul>
+<li>xs 在全分辨率下都生效</li>
+<li>sm 在&gt;&#x3D;768px的分辨率生效</li>
+<li>md 在&gt;&#x3D;992px的分辨率生效</li>
+<li>lg 在&gt;&#x3D;1200px的分辨率生效</li>
+</ul>
+<p>为什么要这样设置？如果在多个相邻的分辨率下表现效果一致，我们只需要写小的即可。<br />col-md-4 col-lg-4 就可以只写 col-md-4<br><a name="PAAPE"></a></p>
+<h3 id="栅格系统支持嵌套"><a href="#栅格系统支持嵌套" class="headerlink" title="栅格系统支持嵌套"></a>栅格系统支持嵌套</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-8&quot;</span>&gt;</span></span><br><span class="line">      8</span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-1&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-1&quot;</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-1&quot;</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-1&quot;</span>&gt;</span>4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-1&quot;</span>&gt;</span>5<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-1&quot;</span>&gt;</span>6<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-1&quot;</span>&gt;</span>7<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-1&quot;</span>&gt;</span>8<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-1&quot;</span>&gt;</span>9<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-1&quot;</span>&gt;</span>10<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-1&quot;</span>&gt;</span>11<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-1&quot;</span>&gt;</span>12<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-4&quot;</span>&gt;</span>4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在一个col中，再继续写对应的row即可实现栅格系统的嵌套。<br><a name="KmuTR"></a></p>
+<h2 id="响应式工具"><a href="#响应式工具" class="headerlink" title="响应式工具"></a>响应式工具</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/203294/1659429405467-5e81427d-2352-41e9-9763-4c27e24a550d.png#clientId=ufc2eb581-d33d-4&from=paste&height=365&id=u547fbb17&name=image.png&originHeight=365&originWidth=852&originalType=binary&ratio=1&rotation=0&showTitle=false&size=27969&status=done&style=none&taskId=uf44681e8-e9bd-44a7-9f6c-a5287bb2408&title=&width=852" alt="image.png"><br><a name="CSmLw"></a></p>
+<h2 id="组件介绍"><a href="#组件介绍" class="headerlink" title="组件介绍"></a>组件介绍</h2><p><a name="lHzIk"></a></p>
+<h3 id="字体图标"><a href="#字体图标" class="headerlink" title="字体图标"></a>字体图标</h3><p>BootStrap中内置了一个收费的字体图标Glyphicons。<a target="_blank" rel="noopener" href="https://www.glyphicons.com/">Glyphicons</a> Halflings 一般是收费的，但是他们的作者允许 Bootstrap 免费使用。<br />这些字体图标库是早期使用字体图标的方式，他们提供好很多的字体图标，然后我们引入，有一个弊端：会引入我们不需要的字体图标，所以建议使用阿里巴巴字体图标库。<br />出于性能的考虑，所有图标都需要一个基类和对应每个图标的类。把下面的代码放在任何地方都可以正常使用。注意，为了设置正确的内补（padding），务必在图标和文本之间添加一个空格。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;glyphicon glyphicon-th-list&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><a name="yGfk3"></a></p>
+<h3 id="模态框"><a href="#模态框" class="headerlink" title="模态框"></a>模态框</h3><p>想要使用需要引入JS，模态框单独的结构</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal fade&quot;</span> <span class="attr">id</span>=<span class="string">&quot;aaa&quot;</span> &gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-dialog&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-content&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-header&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;close&quot;</span> <span class="attr">data-dismiss</span>=<span class="string">&quot;modal&quot;</span> &gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="symbol">&amp;times;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h4</span> <span class="attr">class</span>=<span class="string">&quot;modal-title&quot;</span> <span class="attr">id</span>=<span class="string">&quot;myModalLabel&quot;</span>&gt;</span>Modal title<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-body&quot;</span>&gt;</span></span><br><span class="line">        这里的内容会显示在模态框的中间区域</span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-footer&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-default&quot;</span> <span class="attr">data-dismiss</span>=<span class="string">&quot;modal&quot;</span>&gt;</span>Close<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary&quot;</span>&gt;</span>Save changes<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>模态框上有个id，这个id需要绑定到让模态框出现的元素上的<code>data-target</code>。打开模态框的元素上必须添加固定属性<code>data-toggle=&quot;modal&quot;</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span> <span class="attr">data-toggle</span>=<span class="string">&quot;modal&quot;</span> <span class="attr">data-target</span>=<span class="string">&quot;#aaa&quot;</span>&gt;</span>打开模态框<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>想要关闭模态框，需要给关闭模态框的元素上添加<code>data-dismiss</code>属性，值为<code>modal</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;close&quot;</span> <span class="attr">data-dismiss</span>=<span class="string">&quot;modal&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="symbol">&amp;times;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><a name="FcP1y"></a></p>
+<h3 id="工具提示"><a href="#工具提示" class="headerlink" title="工具提示"></a>工具提示</h3><p>想要使用工具提示，我们就得去复制一段js代码。<br />把下的代码放在一个script标签，这个标签需要放在所有script标签的最下面</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  $(<span class="string">&#x27;[data-toggle=&quot;tooltip&quot;]&#x27;</span>).<span class="title function_">tooltip</span>()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-default&quot;</span> <span class="attr">data-toggle</span>=<span class="string">&quot;tooltip&quot;</span> <span class="attr">data-placement</span>=<span class="string">&quot;bottom&quot;</span> <span class="attr">title</span>=<span class="string">&quot;Tooltip on bottom&quot;</span>&gt;</span>Tooltip on bottom<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>title属性是提示的内容<br />data-toggle&#x3D;”tooltip”这个是必须要添加的<br />data-placement&#x3D;”” 控制提示方向的 top right bottom left</p>
+<p>注意，data-toggle的作用只是为了在js中方便我们选择，我们可以换用其它操作选择到我们对应的元素。如果不屑这个属性可以使用其他操作。比如 类名 或者其他属性<br />例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-default tool&quot;</span> <span class="attr">data-placement</span>=<span class="string">&quot;bottom&quot;</span> <span class="attr">title</span>=<span class="string">&quot;Tooltip on bottom&quot;</span>&gt;</span>Tooltip on bottom<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-default tool&quot;</span> <span class="attr">data-placement</span>=<span class="string">&quot;bottom&quot;</span> <span class="attr">title</span>=<span class="string">&quot;Tooltip on bottom&quot;</span>&gt;</span>Tooltip on bottom<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-default tool&quot;</span> <span class="attr">data-placement</span>=<span class="string">&quot;bottom&quot;</span> <span class="attr">title</span>=<span class="string">&quot;Tooltip on bottom&quot;</span>&gt;</span>Tooltip on bottom<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-default tool&quot;</span> <span class="attr">data-placement</span>=<span class="string">&quot;bottom&quot;</span> <span class="attr">title</span>=<span class="string">&quot;Tooltip on bottom&quot;</span>&gt;</span>Tooltip on bottom<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>js中就要进行对应的修改</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  $(<span class="string">&#x27;.tool&#x27;</span>).<span class="title function_">tooltip</span>()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>zjy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2022/03/05/27-BootStrap/">http://example.com/2022/03/05/27-BootStrap/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/03/18/28-Sass/">28.Sass</a>
+            
+            
+            <a class="next" rel="next" href="/2022/02/26/26-%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80/">26.响应式布局</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© zjy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
